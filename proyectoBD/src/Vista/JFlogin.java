@@ -1,6 +1,12 @@
 package Vista;
 
 import java.awt.Color;
+import ConexionSQL.SqlConection;
+import java.sql.Connection;
+import java.util.HashSet;
+import java.util.Set;
+import javax.swing.JOptionPane;
+
 
 public class JFlogin extends javax.swing.JFrame {
 
@@ -25,7 +31,6 @@ public class JFlogin extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTusuario = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
         jPcontraseña = new javax.swing.JPasswordField();
@@ -34,6 +39,7 @@ public class JFlogin extends javax.swing.JFrame {
         jLingresar = new javax.swing.JLabel();
         jPsalir = new javax.swing.JPanel();
         jLsalir = new javax.swing.JLabel();
+        jCBSede = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -56,17 +62,6 @@ public class JFlogin extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("USUARIO");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
-
-        jTusuario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTusuario.setForeground(new java.awt.Color(204, 204, 204));
-        jTusuario.setText("Ingrese su nombre de usuario");
-        jTusuario.setBorder(null);
-        jTusuario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jTusuarioMousePressed(evt);
-            }
-        });
-        jPanel1.add(jTusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 400, 40));
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 400, 20));
@@ -156,6 +151,12 @@ public class JFlogin extends javax.swing.JFrame {
 
         jPanel1.add(jPsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 400, 160, 40));
 
+        jCBSede.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jCBSede.setForeground(new java.awt.Color(62, 62, 62));
+        jCBSede.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ingrese su sede", "Sucursal Norte", "Sucursal Sur" }));
+        jCBSede.setBorder(null);
+        jPanel1.add(jCBSede, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 400, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -174,21 +175,6 @@ public class JFlogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTusuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTusuarioMousePressed
-
-        if(jTusuario.getText().equals("Ingrese su nombre de usuario")){
-            jTusuario.setText("");
-            jTusuario.setForeground(Color.black);
-
-        }
-
-        if(String.valueOf(jPcontraseña.getPassword()).isEmpty()){
-            jPcontraseña.setText("********");
-            jPcontraseña.setForeground(Color.gray);
-        }
-
-    }//GEN-LAST:event_jTusuarioMousePressed
-
     private void jPcontraseñaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPcontraseñaMousePressed
 
         if(String.valueOf(jPcontraseña.getPassword()).equals("********")){
@@ -196,36 +182,34 @@ public class JFlogin extends javax.swing.JFrame {
             jPcontraseña.setForeground(Color.black);
         }
 
-        if(jTusuario.getText().isEmpty()){
-            jTusuario.setText("Ingrese su nombre de usuario");
-            jTusuario.setForeground(Color.gray);
-        }
-
     }//GEN-LAST:event_jPcontraseñaMousePressed
 
     private void jPcontraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPcontraseñaActionPerformed
-
+ 
     }//GEN-LAST:event_jPcontraseñaActionPerformed
 
     private void jLingresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLingresarMouseClicked
-        String usuario = jTusuario.getText();
+        SqlConection conexionSQL = new SqlConection();
+        int indUsuario = jCBSede.getSelectedIndex();
         String password = new String(jPcontraseña.getPassword());
 
-        //        if(!usuario.equalsIgnoreCase("root") || !password.equals("Carbon2020")){
-            //            getToolkit().beep();
-            //            JOptionPane.showMessageDialog(null, "Credenciales incorrectas");
-            //        }else{
-            //            try{
-                //                cn= conexionsql.getConnection();
-                //                JOptionPane.showMessageDialog(null, "Conectado a la base de datos");
-                //                opciones.setVisible(true);
-                //                this.setVisible(false);
-                //            }
-            //            catch(Exception e){
-                //                getToolkit().beep();
-                //                JOptionPane.showMessageDialog(null, "Error" + e);
-                //            }
-            //        }
+        if (indUsuario == 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione una sede válida.");
+            return;
+        } else{
+            Connection conn = conexionSQL.getConexion(indUsuario, password);
+            if (conn != null) {
+                JOptionPane.showMessageDialog(this, "¡Conexión exitosa!");
+                JFpantallaInicio pantallaInicio = new JFpantallaInicio();
+                pantallaInicio.setVisible(true);
+                this.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al conectar con la base de datos.");
+                this.jPcontraseña.setText("");
+                ;
+                
+            }
+        }
     }//GEN-LAST:event_jLingresarMouseClicked
 
     private void jLsalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLsalirMouseClicked
@@ -269,6 +253,7 @@ public class JFlogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> jCBSede;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -281,7 +266,6 @@ public class JFlogin extends javax.swing.JFrame {
     private javax.swing.JPanel jPsalir;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTusuario;
     private javax.swing.JLabel logo;
     // End of variables declaration//GEN-END:variables
 }
