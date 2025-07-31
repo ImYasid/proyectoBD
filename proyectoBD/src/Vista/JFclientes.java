@@ -20,6 +20,8 @@ public class JFclientes extends javax.swing.JFrame {
         
     }
 
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -570,7 +572,11 @@ public class JFclientes extends javax.swing.JFrame {
                 "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
+        // Creamos la conexión usando los datos de sesión
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = sedeIndex;
+        conexionSQL.password = password;
+        
         // Obtener y validar los valores ingresados
         String cedulaStr = jTFcedulaREGISTRAR.getText().trim();
         String nombres = jTFnombresREGISTRAR.getText().trim();
@@ -594,10 +600,7 @@ public class JFclientes extends javax.swing.JFrame {
             return;
         }
 
-        // Creamos la conexión usando los datos de sesión
-        SqlConection conexionSQL = new SqlConection();
-        conexionSQL.index = sedeIndex;
-        conexionSQL.password = password;
+
 
         // Usamos el CRUD con la conexión configurada
         ClientesCRUD.crearCliente(cedula, nombres, direccion, telefono, correo, conexionSQL);
@@ -621,10 +624,17 @@ public class JFclientes extends javax.swing.JFrame {
     private void jLbuscarBUSCARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbuscarBUSCARMouseClicked
         
         try {
-        // Se asume que esta instancia ya viene del login
-        SqlConection conexionSQL = new SqlConection();
-        conexionSQL.index = 1; // El índice de la sede
-        conexionSQL.password = "miPassword123"; // Contraseña proporcionada
+        // Obtenemos los datos de sesión del SessionManager
+        SessionManager session = SessionManager.getInstance();
+        int sedeIndex = session.getSedeIndex();
+        String password = session.getPassword();
+        
+        // Validar que haya una sesión activa
+        if (sedeIndex == 0 || password == null || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay una sesión activa. Por favor, inicie sesión primero.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         // Obtener y validar los valores ingresados (cedula)
         String cedulaStr = jTFcedulaBUSCAR.getText().trim();
@@ -644,6 +654,10 @@ public class JFclientes extends javax.swing.JFrame {
             return;
         }
 
+        // Creamos la conexión usando los datos de sesión
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = sedeIndex;
+        conexionSQL.password = password;
         // Llamar al método para buscar el cliente sin necesidad de crear una nueva Connection
         ClientesCRUD crud = new ClientesCRUD();
         crud.buscarClientePorId(cedula, conexionSQL.getConexion(conexionSQL.index, conexionSQL.password), jTbuscar, this);
@@ -660,10 +674,21 @@ public class JFclientes extends javax.swing.JFrame {
     private void jLactualizarACTUALIZARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLactualizarACTUALIZARMouseClicked
        
         try {
-        // Se asume que esta instancia ya viene del login
+        // Obtenemos los datos de sesión del SessionManager
+        SessionManager session = SessionManager.getInstance();
+        int sedeIndex = session.getSedeIndex();
+        String password = session.getPassword();
+        
+        // Validar que haya una sesión activa
+        if (sedeIndex == 0 || password == null || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay una sesión activa. Por favor, inicie sesión primero.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // Creamos la conexión usando los datos de sesión
         SqlConection conexionSQL = new SqlConection();
-        conexionSQL.index = 1; // El índice de la sede
-        conexionSQL.password = "miPassword123"; // Contraseña proporcionada
+        conexionSQL.index = sedeIndex;
+        conexionSQL.password = password;
 
         // Obtener y validar los valores ingresados
         String cedulaStr = jTFcedulaACTUALIZAR.getText().trim();
@@ -707,10 +732,21 @@ public class JFclientes extends javax.swing.JFrame {
     private void jLeliminarELIMINARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLeliminarELIMINARMouseClicked
 
         try {
-        // Se asume que esta instancia ya viene del login
+        // Obtenemos los datos de sesión del SessionManager
+        SessionManager session = SessionManager.getInstance();
+        int sedeIndex = session.getSedeIndex();
+        String password = session.getPassword();
+        
+        // Validar que haya una sesión activa
+        if (sedeIndex == 0 || password == null || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay una sesión activa. Por favor, inicie sesión primero.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // Creamos la conexión usando los datos de sesión
         SqlConection conexionSQL = new SqlConection();
-        conexionSQL.index = 1; // El índice de la sede
-        conexionSQL.password = "miPassword123"; // Contraseña proporcionada
+        conexionSQL.index = sedeIndex;
+        conexionSQL.password = password;
 
         // Obtener y validar los valores ingresados (cedula)
         String cedulaStr = jTFcedulaELIMINAR.getText().trim();

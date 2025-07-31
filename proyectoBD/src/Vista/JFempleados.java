@@ -2,6 +2,7 @@ package Vista;
 
 import ConexionSQL.SqlConection;
 import CRUD.EmpleadosCRUD;
+import ConexionSQL.SessionManager;
 import javax.swing.JOptionPane;
 
 public class JFempleados extends javax.swing.JFrame {
@@ -545,6 +546,21 @@ public class JFempleados extends javax.swing.JFrame {
     private void jLguardarREGISTRARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLguardarREGISTRARMouseClicked
         
          try {
+        // Obtenemos los datos de sesión del SessionManager
+        SessionManager session = SessionManager.getInstance();
+        int sedeIndex = session.getSedeIndex();
+        String password = session.getPassword();
+        
+        // Validar que haya una sesión activa
+        if (sedeIndex == 0 || password == null || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay una sesión activa. Por favor, inicie sesión primero.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // Creamos la conexión usando los datos de sesión
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = sedeIndex;
+        conexionSQL.password = password;
         // Obtener los valores ingresados en los campos de texto
         String cedulaStr = jTFcedulaREGISTRAR.getText().trim(); // id_empleado
         String nombre = jTFnombreREGISTRAR.getText().trim(); // nombre
@@ -572,11 +588,6 @@ public class JFempleados extends javax.swing.JFrame {
                 "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        // Crear la conexión a la base de datos
-        SqlConection conexionSQL = new SqlConection();
-        conexionSQL.index = 1; // El índice de la sucursal
-        conexionSQL.password = "miPassword123"; // Contraseña de la base de datos
 
         // Llamar al método para crear el empleado
         EmpleadosCRUD.crearEmpleado(idEmpleado, nombre, cargo, horario, idSucursal, conexionSQL);
@@ -609,6 +620,21 @@ public class JFempleados extends javax.swing.JFrame {
     private void jLactualizarACTUALIZARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLactualizarACTUALIZARMouseClicked
        
         try {
+        // Obtenemos los datos de sesión del SessionManager
+        SessionManager session = SessionManager.getInstance();
+        int sedeIndex = session.getSedeIndex();
+        String password = session.getPassword();
+        
+        // Validar que haya una sesión activa
+        if (sedeIndex == 0 || password == null || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay una sesión activa. Por favor, inicie sesión primero.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // Creamos la conexión usando los datos de sesión
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = sedeIndex;
+        conexionSQL.password = password;
         // Obtener los valores ingresados en los campos de texto
         String idEmpleadoStr = jTFcedulaACTUALIZAR.getText().trim(); // id_empleado
         String nombre = jTFnombresACTUALIZAR.getText().trim(); // nombre
@@ -637,11 +663,6 @@ public class JFempleados extends javax.swing.JFrame {
             return;
         }
 
-        // Crear la conexión a la base de datos
-        SqlConection conexionSQL = new SqlConection();
-        conexionSQL.index = 1; // El índice de la sucursal
-        conexionSQL.password = "miPassword123"; // Contraseña de la base de datos
-
         // Llamar al método para actualizar el empleado
         EmpleadosCRUD.actualizarEmpleado(idEmpleado, nombre, cargo, horario, idSucursal, conexionSQL);
 
@@ -663,10 +684,21 @@ public class JFempleados extends javax.swing.JFrame {
     private void jLbuscarBUSCARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbuscarBUSCARMouseClicked
         
         try {
-        // Se asume que esta instancia ya viene del login
+        // Obtenemos los datos de sesión del SessionManager
+        SessionManager session = SessionManager.getInstance();
+        int sedeIndex = session.getSedeIndex();
+        String password = session.getPassword();
+        
+        // Validar que haya una sesión activa
+        if (sedeIndex == 0 || password == null || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay una sesión activa. Por favor, inicie sesión primero.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // Creamos la conexión usando los datos de sesión
         SqlConection conexionSQL = new SqlConection();
-        conexionSQL.index = 1; // El índice de la sede
-        conexionSQL.password = "miPassword123"; // Contraseña proporcionada
+        conexionSQL.index = sedeIndex;
+        conexionSQL.password = password;
 
         // Obtener y validar los valores ingresados (id_empleado)
         String idEmpleadoStr = jTFcedulaBUSCAR.getText().trim(); // Aquí se captura el valor de la cédula
@@ -705,6 +737,21 @@ public class JFempleados extends javax.swing.JFrame {
     private void jLeliminarELIMINARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLeliminarELIMINARMouseClicked
         
          try {
+        // Obtenemos los datos de sesión del SessionManager
+        SessionManager session = SessionManager.getInstance();
+        int sedeIndex = session.getSedeIndex();
+        String password = session.getPassword();
+        
+        // Validar que haya una sesión activa
+        if (sedeIndex == 0 || password == null || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay una sesión activa. Por favor, inicie sesión primero.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // Creamos la conexión usando los datos de sesión
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = sedeIndex;
+        conexionSQL.password = password;
         // Obtener el valor de la cédula (id_empleado) ingresada en el campo de texto
         String idEmpleadoStr = jTFcedulaELIMINAR.getText().trim(); // id_empleado
 
@@ -724,11 +771,6 @@ public class JFempleados extends javax.swing.JFrame {
                 "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        // Crear la conexión a la base de datos
-        SqlConection conexionSQL = new SqlConection();
-        conexionSQL.index = 1; // El índice de la sucursal
-        conexionSQL.password = "miPassword123"; // Contraseña de la base de datos
 
         // Llamar al método para eliminar el empleado
         EmpleadosCRUD.eliminarEmpleado(idEmpleado, conexionSQL);

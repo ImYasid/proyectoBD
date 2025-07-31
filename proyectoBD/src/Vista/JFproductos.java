@@ -2,6 +2,7 @@ package Vista;
 
 import ConexionSQL.SqlConection;
 import CRUD.ProductosCRUD;
+import ConexionSQL.SessionManager;
 import javax.swing.JOptionPane;
 
 public class JFproductos extends javax.swing.JFrame {
@@ -547,6 +548,21 @@ public class JFproductos extends javax.swing.JFrame {
     private void jLguardarREGISTRARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLguardarREGISTRARMouseClicked
         
         try {
+        // Obtenemos los datos de sesión del SessionManager
+        SessionManager session = SessionManager.getInstance();
+        int sedeIndex = session.getSedeIndex();
+        String password = session.getPassword();
+        
+        // Validar que haya una sesión activa
+        if (sedeIndex == 0 || password == null || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay una sesión activa. Por favor, inicie sesión primero.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // Creamos la conexión usando los datos de sesión
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = sedeIndex;
+        conexionSQL.password = password;
         // Obtener los valores ingresados en los campos de texto
         String idProductoStr = jTFidproductoREGISTRAR.getText().trim(); // id_producto
         String nombre = jTFnombresREGISTRAR.getText().trim(); // nombre
@@ -577,11 +593,6 @@ public class JFproductos extends javax.swing.JFrame {
             return;
         }
 
-        // Crear la conexión a la base de datos
-        SqlConection conexionSQL = new SqlConection();
-        conexionSQL.index = 1; // El índice de la sucursal
-        conexionSQL.password = "miPassword123"; // Contraseña de la base de datos
-
         // Llamar al método para crear el producto
         ProductosCRUD.crearProducto(idProducto, nombre, precio, stock, idSucursal, conexionSQL);
 
@@ -602,10 +613,21 @@ public class JFproductos extends javax.swing.JFrame {
     private void jLbuscarBUSCARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbuscarBUSCARMouseClicked
         
         try {
-        // Se asume que esta instancia ya viene del login
+        // Obtenemos los datos de sesión del SessionManager
+        SessionManager session = SessionManager.getInstance();
+        int sedeIndex = session.getSedeIndex();
+        String password = session.getPassword();
+        
+        // Validar que haya una sesión activa
+        if (sedeIndex == 0 || password == null || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay una sesión activa. Por favor, inicie sesión primero.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // Creamos la conexión usando los datos de sesión
         SqlConection conexionSQL = new SqlConection();
-        conexionSQL.index = 1; // El índice de la sede
-        conexionSQL.password = "miPassword123"; // Contraseña proporcionada
+        conexionSQL.index = sedeIndex;
+        conexionSQL.password = password;
 
         // Obtener y validar los valores ingresados (id_producto)
         String idProductoStr = jTFidproductoBUSCAR.getText().trim(); // Aquí se captura el valor de id_producto
@@ -653,6 +675,21 @@ public class JFproductos extends javax.swing.JFrame {
 
     private void jLactualizarACTUALIZARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLactualizarACTUALIZARMouseClicked
          try {
+        // Obtenemos los datos de sesión del SessionManager
+        SessionManager session = SessionManager.getInstance();
+        int sedeIndex = session.getSedeIndex();
+        String password = session.getPassword();
+        
+        // Validar que haya una sesión activa
+        if (sedeIndex == 0 || password == null || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay una sesión activa. Por favor, inicie sesión primero.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // Creamos la conexión usando los datos de sesión
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = sedeIndex;
+        conexionSQL.password = password;
         // Obtener los valores ingresados en los campos de texto
         String idProductoStr = jTFidproductoACTUALIZAR.getText().trim(); // id_producto
         String nombre = jTFnombreACTUALIZAR.getText().trim(); // nombre
@@ -683,10 +720,6 @@ public class JFproductos extends javax.swing.JFrame {
             return;
         }
 
-        // Crear la conexión a la base de datos
-        SqlConection conexionSQL = new SqlConection();
-        conexionSQL.index = 1; // El índice de la sucursal
-        conexionSQL.password = "miPassword123"; // Contraseña de la base de datos
 
         // Llamar al método para actualizar el producto
         ProductosCRUD.actualizarProducto(idProducto, nombre, precio, stock, idSucursal, conexionSQL);
@@ -707,6 +740,21 @@ public class JFproductos extends javax.swing.JFrame {
     private void jLeliminarELIMINARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLeliminarELIMINARMouseClicked
         
         try {
+        // Obtenemos los datos de sesión del SessionManager
+        SessionManager session = SessionManager.getInstance();
+        int sedeIndex = session.getSedeIndex();
+        String password = session.getPassword();
+        
+        // Validar que haya una sesión activa
+        if (sedeIndex == 0 || password == null || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay una sesión activa. Por favor, inicie sesión primero.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // Creamos la conexión usando los datos de sesión
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = sedeIndex;
+        conexionSQL.password = password;
         // Obtener el valor del ID del producto ingresado en el campo de texto
         String idProductoStr = jTFidproductoELIMINAR.getText().trim(); // id_producto
 
@@ -726,11 +774,6 @@ public class JFproductos extends javax.swing.JFrame {
                 "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        // Crear la conexión a la base de datos
-        SqlConection conexionSQL = new SqlConection();
-        conexionSQL.index = 1; // El índice de la sucursal
-        conexionSQL.password = "miPassword123"; // Contraseña de la base de datos
 
         // Llamar al método para eliminar el producto
         ProductosCRUD.eliminarProducto(idProducto, conexionSQL);
