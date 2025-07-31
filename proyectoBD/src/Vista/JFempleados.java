@@ -1,5 +1,9 @@
 package Vista;
 
+import ConexionSQL.SqlConection;
+import CRUD.EmpleadosCRUD;
+import javax.swing.JOptionPane;
+
 public class JFempleados extends javax.swing.JFrame {
 
     public JFempleados() {
@@ -32,10 +36,10 @@ public class JFempleados extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jTFcedulaREGISTRAR = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTFtelefonoREGISTRAR = new javax.swing.JTextField();
+        jTFnombreREGISTRAR = new javax.swing.JTextField();
         jTFcargoREGISTRAR = new javax.swing.JTextField();
-        jTFsucursalREGISTRAR = new javax.swing.JTextField();
         jTFhorarioREGISTRAR = new javax.swing.JTextField();
+        jTFsucursalREGISTRAR = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -124,23 +128,23 @@ public class JFempleados extends javax.swing.JFrame {
         jPregistrar.add(jTFcedulaREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 300, -1));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel11.setText("Sucursal");
+        jLabel11.setText("Horario");
         jPregistrar.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, 30));
 
-        jTFtelefonoREGISTRAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPregistrar.add(jTFtelefonoREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 300, -1));
+        jTFnombreREGISTRAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPregistrar.add(jTFnombreREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 300, -1));
 
         jTFcargoREGISTRAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jPregistrar.add(jTFcargoREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 300, -1));
 
-        jTFsucursalREGISTRAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPregistrar.add(jTFsucursalREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 300, -1));
-
         jTFhorarioREGISTRAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPregistrar.add(jTFhorarioREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 300, -1));
+        jPregistrar.add(jTFhorarioREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 300, -1));
+
+        jTFsucursalREGISTRAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPregistrar.add(jTFsucursalREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 300, -1));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel12.setText("Horario");
+        jLabel12.setText("Sucursal");
         jPregistrar.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, 30));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -148,13 +152,18 @@ public class JFempleados extends javax.swing.JFrame {
         jPregistrar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, 30));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel14.setText("Teléfono");
+        jLabel14.setText("Nombre");
         jPregistrar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, 30));
 
         jPguardarREGISTRAR.setBackground(new java.awt.Color(253, 239, 213));
 
         jLguardarREGISTRAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLguardarREGISTRAR.setText("GUARDAR");
+        jLguardarREGISTRAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLguardarREGISTRARMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPguardarREGISTRARLayout = new javax.swing.GroupLayout(jPguardarREGISTRAR);
         jPguardarREGISTRAR.setLayout(jPguardarREGISTRARLayout);
@@ -175,6 +184,11 @@ public class JFempleados extends javax.swing.JFrame {
 
         jLnuevoREGISTRAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLnuevoREGISTRAR.setText("NUEVO");
+        jLnuevoREGISTRAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLnuevoREGISTRARMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPnuevoREGISTRARLayout = new javax.swing.GroupLayout(jPnuevoREGISTRAR);
         jPnuevoREGISTRAR.setLayout(jPnuevoREGISTRARLayout);
@@ -199,7 +213,7 @@ public class JFempleados extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Cedula", "Nombres", "Cargo", "Sucursal", "Horario"
+                "id_empleado", "nombre", "cargo", "horario", "id_sucursal"
             }
         ) {
             Class[] types = new Class [] {
@@ -230,6 +244,11 @@ public class JFempleados extends javax.swing.JFrame {
 
         jLbuscarBUSCAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLbuscarBUSCAR.setText("BUSCAR");
+        jLbuscarBUSCAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLbuscarBUSCARMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPbuscarBUSCARLayout = new javax.swing.GroupLayout(jPbuscarBUSCAR);
         jPbuscarBUSCAR.setLayout(jPbuscarBUSCARLayout);
@@ -256,7 +275,7 @@ public class JFempleados extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Cedula", "Nombres", "Cargo", "Sucursal", "Horario"
+                "id_empleado", "nombre", "cargo", "horario", "id_sucursal"
             }
         ) {
             Class[] types = new Class [] {
@@ -328,6 +347,11 @@ public class JFempleados extends javax.swing.JFrame {
 
         jLactualizarACTUALIZAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLactualizarACTUALIZAR.setText("ACTUALIZAR");
+        jLactualizarACTUALIZAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLactualizarACTUALIZARMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPactualizarACTUALIZARLayout = new javax.swing.GroupLayout(jPactualizarACTUALIZAR);
         jPactualizarACTUALIZAR.setLayout(jPactualizarACTUALIZARLayout);
@@ -348,6 +372,11 @@ public class JFempleados extends javax.swing.JFrame {
 
         jLnuevoACTUALIZAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLnuevoACTUALIZAR.setText("NUEVO");
+        jLnuevoACTUALIZAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLnuevoACTUALIZARMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPnuevoACTUALIZARLayout = new javax.swing.GroupLayout(jPnuevoACTUALIZAR);
         jPnuevoACTUALIZAR.setLayout(jPnuevoACTUALIZARLayout);
@@ -372,7 +401,7 @@ public class JFempleados extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Cedula", "Nombres", "Cargo", "Sucursal", "Horario"
+                "id_empleado", "nombre", "cargo", "horario", "id_sucursal"
             }
         ) {
             Class[] types = new Class [] {
@@ -403,6 +432,11 @@ public class JFempleados extends javax.swing.JFrame {
 
         jLeliminarELIMINAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLeliminarELIMINAR.setText("ELIMINAR");
+        jLeliminarELIMINAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLeliminarELIMINARMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPeliminarELIMINARLayout = new javax.swing.GroupLayout(jPeliminarELIMINAR);
         jPeliminarELIMINAR.setLayout(jPeliminarELIMINARLayout);
@@ -429,7 +463,7 @@ public class JFempleados extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Cedula", "Nombres", "Cargo", "Sucursal", "Horario"
+                "id_empleado", "nombre", "cargo", "horario", "id_sucursal"
             }
         ) {
             Class[] types = new Class [] {
@@ -497,6 +531,217 @@ public class JFempleados extends javax.swing.JFrame {
     private void jBregresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBregresarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBregresarActionPerformed
+
+    private void jLnuevoREGISTRARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLnuevoREGISTRARMouseClicked
+        
+        jTFcedulaREGISTRAR.setText("");
+        jTFnombreREGISTRAR.setText("");
+        jTFcargoREGISTRAR.setText("");
+        jTFhorarioREGISTRAR.setText("");
+        jTFsucursalREGISTRAR.setText("");
+        
+    }//GEN-LAST:event_jLnuevoREGISTRARMouseClicked
+
+    private void jLguardarREGISTRARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLguardarREGISTRARMouseClicked
+        
+         try {
+        // Obtener los valores ingresados en los campos de texto
+        String cedulaStr = jTFcedulaREGISTRAR.getText().trim(); // id_empleado
+        String nombre = jTFnombreREGISTRAR.getText().trim(); // nombre
+        String cargo = jTFcargoREGISTRAR.getText().trim(); // cargo
+        String horario = jTFhorarioREGISTRAR.getText().trim(); // horario
+        String idSucursalStr = jTFsucursalREGISTRAR.getText().trim(); // id_sucursal
+
+        // Validar que todos los campos tengan valores
+        if (cedulaStr.isEmpty() || nombre.isEmpty() || cargo.isEmpty() ||
+            horario.isEmpty() || idSucursalStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Validar que la cédula y el id_sucursal sean números
+        int idEmpleado;
+        int idSucursal;
+
+        try {
+            idEmpleado = Integer.parseInt(cedulaStr); // Validar que sea un número
+            idSucursal = Integer.parseInt(idSucursalStr); // Validar que id_sucursal sea un número
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "La cédula y el id_sucursal deben ser números válidos.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Crear la conexión a la base de datos
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = 1; // El índice de la sucursal
+        conexionSQL.password = "miPassword123"; // Contraseña de la base de datos
+
+        // Llamar al método para crear el empleado
+        EmpleadosCRUD.crearEmpleado(idEmpleado, nombre, cargo, horario, idSucursal, conexionSQL);
+
+        // Limpiar los campos después de guardar
+        jTFcedulaREGISTRAR.setText("");
+        jTFnombreREGISTRAR.setText("");
+        jTFcargoREGISTRAR.setText("");
+        jTFhorarioREGISTRAR.setText("");
+        jTFsucursalREGISTRAR.setText("");
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al guardar empleado: " + e.getMessage(),
+            "Error", JOptionPane.ERROR_MESSAGE);
+    }
+        
+        
+    }//GEN-LAST:event_jLguardarREGISTRARMouseClicked
+
+    private void jLnuevoACTUALIZARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLnuevoACTUALIZARMouseClicked
+        
+        jTFcedulaACTUALIZAR.setText("");
+        jTFnombresACTUALIZAR.setText("");
+        jTFcargoACTUALIZAR.setText("");
+        jTFhorarioACTUALIZAR.setText("");
+        jTFsucursalACTUALIZAR.setText("");
+        
+    }//GEN-LAST:event_jLnuevoACTUALIZARMouseClicked
+
+    private void jLactualizarACTUALIZARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLactualizarACTUALIZARMouseClicked
+       
+        try {
+        // Obtener los valores ingresados en los campos de texto
+        String idEmpleadoStr = jTFcedulaACTUALIZAR.getText().trim(); // id_empleado
+        String nombre = jTFnombresACTUALIZAR.getText().trim(); // nombre
+        String cargo = jTFcargoACTUALIZAR.getText().trim(); // cargo
+        String horario = jTFhorarioACTUALIZAR.getText().trim(); // horario
+        String idSucursalStr = jTFsucursalACTUALIZAR.getText().trim(); // id_sucursal
+
+        // Validar que todos los campos tengan valores
+        if (idEmpleadoStr.isEmpty() || nombre.isEmpty() || cargo.isEmpty() ||
+            horario.isEmpty() || idSucursalStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Validar que el id_empleado y el id_sucursal sean números
+        int idEmpleado;
+        int idSucursal;
+
+        try {
+            idEmpleado = Integer.parseInt(idEmpleadoStr); // Validar que sea un número
+            idSucursal = Integer.parseInt(idSucursalStr); // Validar que id_sucursal sea un número
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El ID del empleado y el ID de la sucursal deben ser números válidos.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Crear la conexión a la base de datos
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = 1; // El índice de la sucursal
+        conexionSQL.password = "miPassword123"; // Contraseña de la base de datos
+
+        // Llamar al método para actualizar el empleado
+        EmpleadosCRUD.actualizarEmpleado(idEmpleado, nombre, cargo, horario, idSucursal, conexionSQL);
+
+        // Limpiar los campos después de actualizar
+        jTFcedulaACTUALIZAR.setText("");
+        jTFnombresACTUALIZAR.setText("");
+        jTFcargoACTUALIZAR.setText("");
+        jTFhorarioACTUALIZAR.setText("");
+        jTFsucursalACTUALIZAR.setText("");
+        
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al actualizar empleado: " + e.getMessage(),
+            "Error", JOptionPane.ERROR_MESSAGE);
+    }
+        
+    }//GEN-LAST:event_jLactualizarACTUALIZARMouseClicked
+
+    private void jLbuscarBUSCARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbuscarBUSCARMouseClicked
+        
+        try {
+        // Se asume que esta instancia ya viene del login
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = 1; // El índice de la sede
+        conexionSQL.password = "miPassword123"; // Contraseña proporcionada
+
+        // Obtener y validar los valores ingresados (id_empleado)
+        String idEmpleadoStr = jTFcedulaBUSCAR.getText().trim(); // Aquí se captura el valor de la cédula
+
+        // Validar que el campo no esté vacío
+        if (idEmpleadoStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor ingrese el ID del empleado para buscar.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Validar que la cédula sea un número
+        int idEmpleado;
+        try {
+            idEmpleado = Integer.parseInt(idEmpleadoStr); // Validar que el ID sea un número válido
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El ID del empleado debe ser un número válido.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Llamar al método para buscar el empleado sin necesidad de crear una nueva conexión
+        EmpleadosCRUD crud = new EmpleadosCRUD();
+        crud.buscarEmpleadoPorId(idEmpleado, conexionSQL, jTbuscar);  // Pasamos la conexión y la tabla
+
+        // Limpiar el campo de texto de búsqueda después de la búsqueda
+        jTFcedulaBUSCAR.setText("");  // Limpiamos el campo de búsqueda
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al realizar la búsqueda: " + e.getMessage(),
+            "Error", JOptionPane.ERROR_MESSAGE);  // Manejamos cualquier otro error
+    }
+        
+    }//GEN-LAST:event_jLbuscarBUSCARMouseClicked
+
+    private void jLeliminarELIMINARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLeliminarELIMINARMouseClicked
+        
+         try {
+        // Obtener el valor de la cédula (id_empleado) ingresada en el campo de texto
+        String idEmpleadoStr = jTFcedulaELIMINAR.getText().trim(); // id_empleado
+
+        // Validar que el campo no esté vacío
+        if (idEmpleadoStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor ingrese el ID del empleado para eliminar.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Validar que el ID del empleado sea un número
+        int idEmpleado;
+        try {
+            idEmpleado = Integer.parseInt(idEmpleadoStr); // Validar que sea un número
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El ID del empleado debe ser un número válido.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Crear la conexión a la base de datos
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = 1; // El índice de la sucursal
+        conexionSQL.password = "miPassword123"; // Contraseña de la base de datos
+
+        // Llamar al método para eliminar el empleado
+        EmpleadosCRUD.eliminarEmpleado(idEmpleado, conexionSQL);
+
+        // Limpiar el campo de texto de eliminación después de eliminar
+        jTFcedulaELIMINAR.setText("");
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al eliminar empleado: " + e.getMessage(),
+            "Error", JOptionPane.ERROR_MESSAGE);
+    }
+        
+    }//GEN-LAST:event_jLeliminarELIMINARMouseClicked
 
     /**
      * @param args the command line arguments
@@ -583,10 +828,10 @@ public class JFempleados extends javax.swing.JFrame {
     private javax.swing.JTextField jTFcedulaREGISTRAR;
     private javax.swing.JTextField jTFhorarioACTUALIZAR;
     private javax.swing.JTextField jTFhorarioREGISTRAR;
+    private javax.swing.JTextField jTFnombreREGISTRAR;
     private javax.swing.JTextField jTFnombresACTUALIZAR;
     private javax.swing.JTextField jTFsucursalACTUALIZAR;
     private javax.swing.JTextField jTFsucursalREGISTRAR;
-    private javax.swing.JTextField jTFtelefonoREGISTRAR;
     private javax.swing.JTabbedPane jTPregistrar;
     private javax.swing.JTable jTactualizar;
     private javax.swing.JTable jTbuscar;

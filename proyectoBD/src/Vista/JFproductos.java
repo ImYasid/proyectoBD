@@ -1,5 +1,9 @@
 package Vista;
 
+import ConexionSQL.SqlConection;
+import CRUD.ProductosCRUD;
+import javax.swing.JOptionPane;
+
 public class JFproductos extends javax.swing.JFrame {
 
     public JFproductos() {
@@ -155,6 +159,11 @@ public class JFproductos extends javax.swing.JFrame {
 
         jLguardarREGISTRAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLguardarREGISTRAR.setText("GUARDAR");
+        jLguardarREGISTRAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLguardarREGISTRARMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPguardarREGISTRARLayout = new javax.swing.GroupLayout(jPguardarREGISTRAR);
         jPguardarREGISTRAR.setLayout(jPguardarREGISTRARLayout);
@@ -175,6 +184,11 @@ public class JFproductos extends javax.swing.JFrame {
 
         jLnuevoREGISTRAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLnuevoREGISTRAR.setText("NUEVO");
+        jLnuevoREGISTRAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLnuevoREGISTRARMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPnuevoREGISTRARLayout = new javax.swing.GroupLayout(jPnuevoREGISTRAR);
         jPnuevoREGISTRAR.setLayout(jPnuevoREGISTRARLayout);
@@ -199,11 +213,11 @@ public class JFproductos extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "id_producto", "Nombre", "Stock", "Sucursal", "Precio"
+                "id_producto", "nombre", "precio", "stock", "id_sucursal"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
+                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -230,6 +244,11 @@ public class JFproductos extends javax.swing.JFrame {
 
         jLbuscarBUSCAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLbuscarBUSCAR.setText("BUSCAR");
+        jLbuscarBUSCAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLbuscarBUSCARMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPbuscarBUSCARLayout = new javax.swing.GroupLayout(jPbuscarBUSCAR);
         jPbuscarBUSCAR.setLayout(jPbuscarBUSCARLayout);
@@ -256,11 +275,11 @@ public class JFproductos extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "id_producto", "Nombre", "Stock", "Sucursal", "Precio"
+                "id_producto", "nombre", "precio", "stock", "id_sucursal"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
+                java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -328,6 +347,11 @@ public class JFproductos extends javax.swing.JFrame {
 
         jLactualizarACTUALIZAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLactualizarACTUALIZAR.setText("ACTUALIZAR");
+        jLactualizarACTUALIZAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLactualizarACTUALIZARMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPactualizarACTUALIZARLayout = new javax.swing.GroupLayout(jPactualizarACTUALIZAR);
         jPactualizarACTUALIZAR.setLayout(jPactualizarACTUALIZARLayout);
@@ -348,6 +372,11 @@ public class JFproductos extends javax.swing.JFrame {
 
         jLnuevoACTUALIZAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLnuevoACTUALIZAR.setText("NUEVO");
+        jLnuevoACTUALIZAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLnuevoACTUALIZARMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPnuevoACTUALIZARLayout = new javax.swing.GroupLayout(jPnuevoACTUALIZAR);
         jPnuevoACTUALIZAR.setLayout(jPnuevoACTUALIZARLayout);
@@ -372,11 +401,11 @@ public class JFproductos extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "id_producto", "Nombre", "Stock", "Sucursal", "Precio"
+                "id_producto", "nombre", "precio", "stock", "id_sucursal"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -403,6 +432,11 @@ public class JFproductos extends javax.swing.JFrame {
 
         jLeliminarELIMINAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLeliminarELIMINAR.setText("ELIMINAR");
+        jLeliminarELIMINAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLeliminarELIMINARMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPeliminarELIMINARLayout = new javax.swing.GroupLayout(jPeliminarELIMINAR);
         jPeliminarELIMINAR.setLayout(jPeliminarELIMINARLayout);
@@ -429,11 +463,11 @@ public class JFproductos extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "id_producto", "Nombre", "Stock", "Sucursal", "Precio"
+                "id_producto", "nombre", "precio", "stock", "id_sucursal"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -499,6 +533,217 @@ public class JFproductos extends javax.swing.JFrame {
         this.setVisible(false);
         
     }//GEN-LAST:event_jBregresarMouseClicked
+
+    private void jLnuevoREGISTRARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLnuevoREGISTRARMouseClicked
+        
+        jTFidproductoREGISTRAR.setText("");
+        jTFnombresREGISTRAR.setText("");
+        jTFprecioREGISTRAR.setText("");
+        jTFstockREGISTRAR.setText("");
+        jTFsucursalREGISTRAR.setText("");
+        
+    }//GEN-LAST:event_jLnuevoREGISTRARMouseClicked
+
+    private void jLguardarREGISTRARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLguardarREGISTRARMouseClicked
+        
+        try {
+        // Obtener los valores ingresados en los campos de texto
+        String idProductoStr = jTFidproductoREGISTRAR.getText().trim(); // id_producto
+        String nombre = jTFnombresREGISTRAR.getText().trim(); // nombre
+        String precioStr = jTFprecioREGISTRAR.getText().trim(); // precio
+        String stockStr = jTFstockREGISTRAR.getText().trim(); // stock
+        String idSucursalStr = jTFsucursalREGISTRAR.getText().trim(); // id_sucursal
+
+        // Validar que todos los campos tengan valores
+        if (idProductoStr.isEmpty() || nombre.isEmpty() || precioStr.isEmpty() ||
+            stockStr.isEmpty() || idSucursalStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Validar que el id, precio, stock y id_sucursal sean números válidos
+        int idProducto, stock, idSucursal;
+        double precio;
+
+        try {
+            idProducto = Integer.parseInt(idProductoStr); // Validar que id_producto sea un número
+            precio = Double.parseDouble(precioStr); // Validar que precio sea un número válido
+            stock = Integer.parseInt(stockStr); // Validar que stock sea un número válido
+            idSucursal = Integer.parseInt(idSucursalStr); // Validar que id_sucursal sea un número válido
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El ID, precio, stock y el ID de sucursal deben ser valores válidos.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Crear la conexión a la base de datos
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = 1; // El índice de la sucursal
+        conexionSQL.password = "miPassword123"; // Contraseña de la base de datos
+
+        // Llamar al método para crear el producto
+        ProductosCRUD.crearProducto(idProducto, nombre, precio, stock, idSucursal, conexionSQL);
+
+        // Limpiar los campos después de guardar
+        jTFidproductoREGISTRAR.setText("");
+        jTFnombresREGISTRAR.setText("");
+        jTFprecioREGISTRAR.setText("");
+        jTFstockREGISTRAR.setText("");
+        jTFsucursalREGISTRAR.setText("");
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al guardar producto: " + e.getMessage(),
+            "Error", JOptionPane.ERROR_MESSAGE);
+    }
+        
+    }//GEN-LAST:event_jLguardarREGISTRARMouseClicked
+
+    private void jLbuscarBUSCARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbuscarBUSCARMouseClicked
+        
+        try {
+        // Se asume que esta instancia ya viene del login
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = 1; // El índice de la sede
+        conexionSQL.password = "miPassword123"; // Contraseña proporcionada
+
+        // Obtener y validar los valores ingresados (id_producto)
+        String idProductoStr = jTFidproductoBUSCAR.getText().trim(); // Aquí se captura el valor de id_producto
+
+        // Validar que el campo no esté vacío
+        if (idProductoStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor ingrese el ID del producto para buscar.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Validar que el ID del producto sea un número
+        int idProducto;
+        try {
+            idProducto = Integer.parseInt(idProductoStr); // Validar que el ID sea un número válido
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El ID del producto debe ser un número válido.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Llamar al método para buscar el producto sin necesidad de crear una nueva conexión
+        ProductosCRUD crud = new ProductosCRUD();
+        crud.buscarProductoPorId(idProducto, conexionSQL, jTbuscar);  // Pasamos la conexión y la tabla
+
+        // Limpiar el campo de texto de búsqueda después de la búsqueda
+        jTFidproductoBUSCAR.setText("");  // Limpiamos el campo de búsqueda
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al realizar la búsqueda: " + e.getMessage(),
+            "Error", JOptionPane.ERROR_MESSAGE);  // Manejamos cualquier otro error
+    }
+        
+    }//GEN-LAST:event_jLbuscarBUSCARMouseClicked
+
+    private void jLnuevoACTUALIZARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLnuevoACTUALIZARMouseClicked
+        
+        jTFidproductoACTUALIZAR.setText("");
+        jTFnombreACTUALIZAR.setText("");
+        jTFprecioACTUALIZAR.setText("");
+        jTFstockACTUALIZAR.setText("");
+        jTFsucursalACTUALIZAR.setText("");
+        
+    }//GEN-LAST:event_jLnuevoACTUALIZARMouseClicked
+
+    private void jLactualizarACTUALIZARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLactualizarACTUALIZARMouseClicked
+         try {
+        // Obtener los valores ingresados en los campos de texto
+        String idProductoStr = jTFidproductoACTUALIZAR.getText().trim(); // id_producto
+        String nombre = jTFnombreACTUALIZAR.getText().trim(); // nombre
+        String precioStr = jTFprecioACTUALIZAR.getText().trim(); // precio
+        String stockStr = jTFstockACTUALIZAR.getText().trim(); // stock
+        String idSucursalStr = jTFstockACTUALIZAR.getText().trim(); // id_sucursal
+
+        // Validar que todos los campos tengan valores
+        if (idProductoStr.isEmpty() || nombre.isEmpty() || precioStr.isEmpty() ||
+            stockStr.isEmpty() || idSucursalStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Validar que el id, precio, stock y id_sucursal sean números válidos
+        int idProducto, stock, idSucursal;
+        double precio;
+
+        try {
+            idProducto = Integer.parseInt(idProductoStr); // Validar que id_producto sea un número
+            precio = Double.parseDouble(precioStr); // Validar que precio sea un número válido
+            stock = Integer.parseInt(stockStr); // Validar que stock sea un número válido
+            idSucursal = Integer.parseInt(idSucursalStr); // Validar que id_sucursal sea un número válido
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El ID, precio, stock y el ID de sucursal deben ser valores válidos.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Crear la conexión a la base de datos
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = 1; // El índice de la sucursal
+        conexionSQL.password = "miPassword123"; // Contraseña de la base de datos
+
+        // Llamar al método para actualizar el producto
+        ProductosCRUD.actualizarProducto(idProducto, nombre, precio, stock, idSucursal, conexionSQL);
+
+        // Limpiar los campos después de actualizar
+        jTFidproductoACTUALIZAR.setText("");
+        jTFnombreACTUALIZAR.setText("");
+        jTFprecioACTUALIZAR.setText("");
+        jTFstockACTUALIZAR.setText("");
+        jTFsucursalACTUALIZAR.setText("");
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al actualizar producto: " + e.getMessage(),
+            "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_jLactualizarACTUALIZARMouseClicked
+
+    private void jLeliminarELIMINARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLeliminarELIMINARMouseClicked
+        
+        try {
+        // Obtener el valor del ID del producto ingresado en el campo de texto
+        String idProductoStr = jTFidproductoELIMINAR.getText().trim(); // id_producto
+
+        // Validar que el campo no esté vacío
+        if (idProductoStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor ingrese el ID del producto para eliminar.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Validar que el ID del producto sea un número
+        int idProducto;
+        try {
+            idProducto = Integer.parseInt(idProductoStr); // Validar que el ID sea un número válido
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El ID del producto debe ser un número válido.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Crear la conexión a la base de datos
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = 1; // El índice de la sucursal
+        conexionSQL.password = "miPassword123"; // Contraseña de la base de datos
+
+        // Llamar al método para eliminar el producto
+        ProductosCRUD.eliminarProducto(idProducto, conexionSQL);
+
+        // Limpiar el campo de texto de eliminación después de eliminar
+        jTFidproductoELIMINAR.setText("");  // Limpiamos el campo de búsqueda
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al eliminar producto: " + e.getMessage(),
+            "Error", JOptionPane.ERROR_MESSAGE);  // Manejamos cualquier otro error
+    }
+        
+    }//GEN-LAST:event_jLeliminarELIMINARMouseClicked
 
     /**
      * @param args the command line arguments
