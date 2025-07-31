@@ -5,10 +5,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class SqlConection {
-
+    public int index;
+    public String password;
+    
     public Connection getConexion(int index, String password) {
         String connectionUrl = "";
-
+        this.index = index;
+        this.password = password; 
         switch (index) {
             case 1 -> {
                 connectionUrl = "jdbc:sqlserver://IV4SH:1433;"

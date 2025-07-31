@@ -1,5 +1,11 @@
 package Vista;
 
+import ConexionSQL.SqlConection;
+import CRUD.ClientesCRUD;
+import javax.swing.JOptionPane;
+
+
+
 public class JFclientes extends javax.swing.JFrame {
 
     public JFclientes() {
@@ -178,6 +184,11 @@ public class JFclientes extends javax.swing.JFrame {
 
         jLguardarREGISTRAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLguardarREGISTRAR.setText("GUARDAR");
+        jLguardarREGISTRAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLguardarREGISTRARMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPguardarREGISTRARLayout = new javax.swing.GroupLayout(jPguardarREGISTRAR);
         jPguardarREGISTRAR.setLayout(jPguardarREGISTRARLayout);
@@ -198,6 +209,11 @@ public class JFclientes extends javax.swing.JFrame {
 
         jLnuevoREGISTRAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLnuevoREGISTRAR.setText("NUEVO");
+        jLnuevoREGISTRAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLnuevoREGISTRARMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPnuevoREGISTRARLayout = new javax.swing.GroupLayout(jPnuevoREGISTRAR);
         jPnuevoREGISTRAR.setLayout(jPnuevoREGISTRARLayout);
@@ -253,6 +269,11 @@ public class JFclientes extends javax.swing.JFrame {
 
         jLbuscarBUSCAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLbuscarBUSCAR.setText("BUSCAR");
+        jLbuscarBUSCAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLbuscarBUSCARMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPbuscarBUSCARLayout = new javax.swing.GroupLayout(jPbuscarBUSCAR);
         jPbuscarBUSCAR.setLayout(jPbuscarBUSCARLayout);
@@ -351,6 +372,11 @@ public class JFclientes extends javax.swing.JFrame {
 
         jLactualizarACTUALIZAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLactualizarACTUALIZAR.setText("ACTUALIZAR");
+        jLactualizarACTUALIZAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLactualizarACTUALIZARMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPactualizarACTUALIZARLayout = new javax.swing.GroupLayout(jPactualizarACTUALIZAR);
         jPactualizarACTUALIZAR.setLayout(jPactualizarACTUALIZARLayout);
@@ -371,6 +397,11 @@ public class JFclientes extends javax.swing.JFrame {
 
         jLnuevoACTUALIZAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLnuevoACTUALIZAR.setText("NUEVO");
+        jLnuevoACTUALIZAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLnuevoACTUALIZARMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPnuevoACTUALIZARLayout = new javax.swing.GroupLayout(jPnuevoACTUALIZAR);
         jPnuevoACTUALIZAR.setLayout(jPnuevoACTUALIZARLayout);
@@ -426,6 +457,11 @@ public class JFclientes extends javax.swing.JFrame {
 
         jLeliminarELIMINAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLeliminarELIMINAR.setText("ELIMINAR");
+        jLeliminarELIMINAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLeliminarELIMINARMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPeliminarELIMINARLayout = new javax.swing.GroupLayout(jPeliminarELIMINAR);
         jPeliminarELIMINAR.setLayout(jPeliminarELIMINARLayout);
@@ -500,6 +536,202 @@ public class JFclientes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jBregresarActionPerformed
 
+    private void jLnuevoREGISTRARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLnuevoREGISTRARMouseClicked
+
+        jTFcedulaREGISTRAR.setText("");
+        jTFnombresREGISTRAR.setText("");
+        jTFdireccionREGISTRAR.setText("");
+        jTFtelefonoREGISTRAR.setText("");
+        jTFcorreoREGISTRAR.setText("");
+
+    }//GEN-LAST:event_jLnuevoREGISTRARMouseClicked
+
+    private void jLnuevoACTUALIZARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLnuevoACTUALIZARMouseClicked
+        
+        jTFcedulaACTUALIZAR.setText("");
+        jTFnombresACTUALIZAR.setText("");
+        jTFdireccionACTUALIZAR.setText("");
+        jTFtelefonoACTUALIZAR.setText("");
+        jTFcorreoACTUALIZAR.setText("");
+
+    }//GEN-LAST:event_jLnuevoACTUALIZARMouseClicked
+
+    private void jLguardarREGISTRARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLguardarREGISTRARMouseClicked
+        
+        try {
+        // Se asume que esta instancia ya viene del login
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = 1; // Debe haberse guardado desde el login
+        conexionSQL.password = "miPassword123"; // También del login
+
+        // Obtener y validar los valores ingresados
+        String cedulaStr = jTFcedulaREGISTRAR.getText().trim();
+        String nombres = jTFnombresREGISTRAR.getText().trim();
+        String direccion = jTFdireccionREGISTRAR.getText().trim();
+        String telefono = jTFtelefonoREGISTRAR.getText().trim();
+        String correo = jTFcorreoREGISTRAR.getText().trim();
+
+        if (cedulaStr.isEmpty() || nombres.isEmpty() || direccion.isEmpty() ||
+            telefono.isEmpty() || correo.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int cedula;
+        try {
+            cedula = Integer.parseInt(cedulaStr);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "La cédula debe ser un número válido",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // ⚠️ Aquí ya no se valida el index, lo hace el método crearCliente
+        ClientesCRUD.crearCliente(cedula, nombres, direccion, telefono, correo, conexionSQL);
+
+        // Limpiar campos después de guardar
+        jTFcedulaREGISTRAR.setText("");
+        jTFnombresREGISTRAR.setText("");
+        jTFdireccionREGISTRAR.setText("");
+        jTFtelefonoREGISTRAR.setText("");
+        jTFcorreoREGISTRAR.setText("");
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al guardar cliente: " + e.getMessage(),
+            "Error", JOptionPane.ERROR_MESSAGE);
+    }
+        
+    }//GEN-LAST:event_jLguardarREGISTRARMouseClicked
+
+    private void jLbuscarBUSCARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbuscarBUSCARMouseClicked
+        
+        try {
+        // Se asume que esta instancia ya viene del login
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = 1; // El índice de la sede
+        conexionSQL.password = "miPassword123"; // Contraseña proporcionada
+
+        // Obtener y validar los valores ingresados (cedula)
+        String cedulaStr = jTFcedulaBUSCAR.getText().trim();
+
+        if (cedulaStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor ingrese la cédula para buscar.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int cedula;
+        try {
+            cedula = Integer.parseInt(cedulaStr); // Validar que sea un número
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "La cédula debe ser un número válido.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Llamar al método para buscar el cliente sin necesidad de crear una nueva Connection
+        ClientesCRUD crud = new ClientesCRUD();
+        crud.buscarClientePorId(cedula, conexionSQL.getConexion(conexionSQL.index, conexionSQL.password), jTbuscar, this);
+
+        // Limpiar el campo de texto de búsqueda después de la búsqueda
+        jTFcedulaBUSCAR.setText("");
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al realizar la búsqueda: " + e.getMessage(),
+            "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_jLbuscarBUSCARMouseClicked
+
+    private void jLactualizarACTUALIZARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLactualizarACTUALIZARMouseClicked
+       
+        try {
+        // Se asume que esta instancia ya viene del login
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = 1; // El índice de la sede
+        conexionSQL.password = "miPassword123"; // Contraseña proporcionada
+
+        // Obtener y validar los valores ingresados
+        String cedulaStr = jTFcedulaACTUALIZAR.getText().trim();
+        String nombres = jTFnombresACTUALIZAR.getText().trim();
+        String direccion = jTFdireccionACTUALIZAR.getText().trim();
+        String telefono = jTFtelefonoACTUALIZAR.getText().trim();
+        String correo = jTFcorreoACTUALIZAR.getText().trim();
+
+        if (cedulaStr.isEmpty() || nombres.isEmpty() || direccion.isEmpty() ||
+            telefono.isEmpty() || correo.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int cedula;
+        try {
+            cedula = Integer.parseInt(cedulaStr); // Validar que la cédula sea un número
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "La cédula debe ser un número válido.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Llamar al método para actualizar el cliente sin necesidad de crear una nueva Connection
+        ClientesCRUD.actualizarCliente(cedula, nombres, direccion, telefono, correo, conexionSQL);
+
+        // Limpiar los campos después de actualizar
+        jTFcedulaACTUALIZAR.setText("");
+        jTFnombresACTUALIZAR.setText("");
+        jTFdireccionACTUALIZAR.setText("");
+        jTFtelefonoACTUALIZAR.setText("");
+        jTFcorreoACTUALIZAR.setText("");
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al actualizar cliente: " + e.getMessage(),
+            "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_jLactualizarACTUALIZARMouseClicked
+
+    private void jLeliminarELIMINARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLeliminarELIMINARMouseClicked
+
+        try {
+        // Se asume que esta instancia ya viene del login
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = 1; // El índice de la sede
+        conexionSQL.password = "miPassword123"; // Contraseña proporcionada
+
+        // Obtener y validar los valores ingresados (cedula)
+        String cedulaStr = jTFcedulaELIMINAR.getText().trim();
+
+        if (cedulaStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor ingrese la cédula para eliminar.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int cedula;
+        try {
+            cedula = Integer.parseInt(cedulaStr); // Validar que sea un número
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "La cédula debe ser un número válido.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Llamar al método para eliminar el cliente sin necesidad de crear una nueva Connection
+        ClientesCRUD.eliminarCliente(cedula, conexionSQL);
+
+        // Limpiar el campo de texto de eliminación después de la eliminación
+        jTFcedulaELIMINAR.setText("");
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al eliminar cliente: " + e.getMessage(),
+            "Error", JOptionPane.ERROR_MESSAGE);
+    }
+        
+    }//GEN-LAST:event_jLeliminarELIMINARMouseClicked
+
+    
+    
+    
     /**
      * @param args the command line arguments
      */
