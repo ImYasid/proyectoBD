@@ -5,12 +5,12 @@ public class JFclientes extends javax.swing.JFrame {
     public JFclientes() {
         initComponents();
         this.setLocationRelativeTo(this);
-        CambiosColorBoton.configurarCambiosColor(jLguardar, jPguardar);
-        CambiosColorBoton.configurarCambiosColor(jLnuevo, jPnuevo);
-        CambiosColorBoton.configurarCambiosColor(jLnuevo1, jPnuevo1);
-        CambiosColorBoton.configurarCambiosColor(jLbuscar, jPbuscar);
-        CambiosColorBoton.configurarCambiosColor(jLactualizar, jPactualizar1);
-        CambiosColorBoton.configurarCambiosColor(jLeliminar, jPeliminar1);
+        CambiosColorBoton.configurarCambiosColor(jLguardarREGISTRAR, jPguardarREGISTRAR);
+        CambiosColorBoton.configurarCambiosColor(jLnuevoREGISTRAR, jPnuevoREGISTRAR);
+        CambiosColorBoton.configurarCambiosColor(jLnuevoACTUALIZAR, jPnuevoACTUALIZAR);
+        CambiosColorBoton.configurarCambiosColor(jLbuscarBUSCAR, jPbuscarBUSCAR);
+        CambiosColorBoton.configurarCambiosColor(jLactualizarACTUALIZAR, jPactualizarACTUALIZAR);
+        CambiosColorBoton.configurarCambiosColor(jLeliminarELIMINAR, jPeliminarELIMINAR);
         
     }
 
@@ -30,54 +30,54 @@ public class JFclientes extends javax.swing.JFrame {
         jTPregistrar = new javax.swing.JTabbedPane();
         jPregistrar = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jTFcedula1 = new javax.swing.JTextField();
+        jTFcedulaREGISTRAR = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTFnombres1 = new javax.swing.JTextField();
-        jTFdireccion1 = new javax.swing.JTextField();
-        jTFtelefono1 = new javax.swing.JTextField();
-        jTFcorreo1 = new javax.swing.JTextField();
+        jTFnombresREGISTRAR = new javax.swing.JTextField();
+        jTFdireccionREGISTRAR = new javax.swing.JTextField();
+        jTFtelefonoREGISTRAR = new javax.swing.JTextField();
+        jTFcorreoREGISTRAR = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTregistrar = new javax.swing.JTable();
-        jPguardar = new javax.swing.JPanel();
-        jLguardar = new javax.swing.JLabel();
-        jPnuevo = new javax.swing.JPanel();
-        jLnuevo = new javax.swing.JLabel();
+        jPguardarREGISTRAR = new javax.swing.JPanel();
+        jLguardarREGISTRAR = new javax.swing.JLabel();
+        jPnuevoREGISTRAR = new javax.swing.JPanel();
+        jLnuevoREGISTRAR = new javax.swing.JLabel();
         jPbuscarr = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
-        jTFcedula2 = new javax.swing.JTextField();
+        jTFcedulaBUSCAR = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTbuscar = new javax.swing.JTable();
-        jPbuscar = new javax.swing.JPanel();
-        jLbuscar = new javax.swing.JLabel();
+        jPbuscarBUSCAR = new javax.swing.JPanel();
+        jLbuscarBUSCAR = new javax.swing.JLabel();
         jPactualizar = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
-        jTFcedula3 = new javax.swing.JTextField();
+        jTFcedulaACTUALIZAR = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
-        jTFnombres2 = new javax.swing.JTextField();
-        jTFdireccion2 = new javax.swing.JTextField();
-        jTFtelefono2 = new javax.swing.JTextField();
-        jTFcorreo2 = new javax.swing.JTextField();
+        jTFnombresACTUALIZAR = new javax.swing.JTextField();
+        jTFdireccionACTUALIZAR = new javax.swing.JTextField();
+        jTFtelefonoACTUALIZAR = new javax.swing.JTextField();
+        jTFcorreoACTUALIZAR = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTactualizar = new javax.swing.JTable();
-        jPactualizar1 = new javax.swing.JPanel();
-        jLactualizar = new javax.swing.JLabel();
-        jPnuevo1 = new javax.swing.JPanel();
-        jLnuevo1 = new javax.swing.JLabel();
+        jPactualizarACTUALIZAR = new javax.swing.JPanel();
+        jLactualizarACTUALIZAR = new javax.swing.JLabel();
+        jPnuevoACTUALIZAR = new javax.swing.JPanel();
+        jLnuevoACTUALIZAR = new javax.swing.JLabel();
         jPeliminar = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
-        jTFcedula4 = new javax.swing.JTextField();
+        jTFcedulaELIMINAR = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTeliminar = new javax.swing.JTable();
-        jPeliminar1 = new javax.swing.JPanel();
-        jLeliminar = new javax.swing.JLabel();
+        jPeliminarELIMINAR = new javax.swing.JPanel();
+        jLeliminarELIMINAR = new javax.swing.JLabel();
         jBregresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -120,24 +120,24 @@ public class JFclientes extends javax.swing.JFrame {
         jLabel10.setText("Cedula");
         jPregistrar.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 30));
 
-        jTFcedula1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPregistrar.add(jTFcedula1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 300, -1));
+        jTFcedulaREGISTRAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPregistrar.add(jTFcedulaREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 300, -1));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel11.setText("Nombres");
-        jPregistrar.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, 30));
+        jPregistrar.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, 30));
 
-        jTFnombres1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPregistrar.add(jTFnombres1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 300, -1));
+        jTFnombresREGISTRAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPregistrar.add(jTFnombresREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 300, -1));
 
-        jTFdireccion1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPregistrar.add(jTFdireccion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 300, -1));
+        jTFdireccionREGISTRAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPregistrar.add(jTFdireccionREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 300, -1));
 
-        jTFtelefono1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPregistrar.add(jTFtelefono1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 300, -1));
+        jTFtelefonoREGISTRAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPregistrar.add(jTFtelefonoREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 300, -1));
 
-        jTFcorreo1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPregistrar.add(jTFcorreo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 300, -1));
+        jTFcorreoREGISTRAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPregistrar.add(jTFcorreoREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 300, -1));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel12.setText("Correo");
@@ -149,7 +149,7 @@ public class JFclientes extends javax.swing.JFrame {
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel14.setText("Teléfono");
-        jPregistrar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, 30));
+        jPregistrar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, 30));
 
         jTregistrar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -174,53 +174,53 @@ public class JFclientes extends javax.swing.JFrame {
 
         jPregistrar.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 740, 260));
 
-        jPguardar.setBackground(new java.awt.Color(253, 239, 213));
+        jPguardarREGISTRAR.setBackground(new java.awt.Color(253, 239, 213));
 
-        jLguardar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLguardar.setText("GUARDAR");
+        jLguardarREGISTRAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLguardarREGISTRAR.setText("GUARDAR");
 
-        javax.swing.GroupLayout jPguardarLayout = new javax.swing.GroupLayout(jPguardar);
-        jPguardar.setLayout(jPguardarLayout);
-        jPguardarLayout.setHorizontalGroup(
-            jPguardarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLguardar, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPguardarREGISTRARLayout = new javax.swing.GroupLayout(jPguardarREGISTRAR);
+        jPguardarREGISTRAR.setLayout(jPguardarREGISTRARLayout);
+        jPguardarREGISTRARLayout.setHorizontalGroup(
+            jPguardarREGISTRARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLguardarREGISTRAR, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
         );
-        jPguardarLayout.setVerticalGroup(
-            jPguardarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPguardarLayout.createSequentialGroup()
+        jPguardarREGISTRARLayout.setVerticalGroup(
+            jPguardarREGISTRARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPguardarREGISTRARLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLguardarREGISTRAR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPregistrar.add(jPguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 200, 40));
+        jPregistrar.add(jPguardarREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 200, 40));
 
-        jPnuevo.setBackground(new java.awt.Color(253, 239, 213));
+        jPnuevoREGISTRAR.setBackground(new java.awt.Color(253, 239, 213));
 
-        jLnuevo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLnuevo.setText("NUEVO");
+        jLnuevoREGISTRAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLnuevoREGISTRAR.setText("NUEVO");
 
-        javax.swing.GroupLayout jPnuevoLayout = new javax.swing.GroupLayout(jPnuevo);
-        jPnuevo.setLayout(jPnuevoLayout);
-        jPnuevoLayout.setHorizontalGroup(
-            jPnuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLnuevo, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPnuevoREGISTRARLayout = new javax.swing.GroupLayout(jPnuevoREGISTRAR);
+        jPnuevoREGISTRAR.setLayout(jPnuevoREGISTRARLayout);
+        jPnuevoREGISTRARLayout.setHorizontalGroup(
+            jPnuevoREGISTRARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLnuevoREGISTRAR, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
         );
-        jPnuevoLayout.setVerticalGroup(
-            jPnuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPnuevoLayout.createSequentialGroup()
+        jPnuevoREGISTRARLayout.setVerticalGroup(
+            jPnuevoREGISTRARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPnuevoREGISTRARLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLnuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLnuevoREGISTRAR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPregistrar.add(jPnuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 230, 200, 40));
+        jPregistrar.add(jPnuevoREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 230, 200, 40));
 
         jTPregistrar.addTab("Registrar", jPregistrar);
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTFcedula2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel8.add(jTFcedula2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 300, -1));
+        jTFcedulaBUSCAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel8.add(jTFcedulaBUSCAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 300, -1));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel15.setText("Cedula");
@@ -249,27 +249,27 @@ public class JFclientes extends javax.swing.JFrame {
 
         jPanel8.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 740, 260));
 
-        jPbuscar.setBackground(new java.awt.Color(253, 239, 213));
+        jPbuscarBUSCAR.setBackground(new java.awt.Color(253, 239, 213));
 
-        jLbuscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLbuscar.setText("BUSCAR");
+        jLbuscarBUSCAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLbuscarBUSCAR.setText("BUSCAR");
 
-        javax.swing.GroupLayout jPbuscarLayout = new javax.swing.GroupLayout(jPbuscar);
-        jPbuscar.setLayout(jPbuscarLayout);
-        jPbuscarLayout.setHorizontalGroup(
-            jPbuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPbuscarLayout.createSequentialGroup()
-                .addComponent(jLbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout jPbuscarBUSCARLayout = new javax.swing.GroupLayout(jPbuscarBUSCAR);
+        jPbuscarBUSCAR.setLayout(jPbuscarBUSCARLayout);
+        jPbuscarBUSCARLayout.setHorizontalGroup(
+            jPbuscarBUSCARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPbuscarBUSCARLayout.createSequentialGroup()
+                .addComponent(jLbuscarBUSCAR, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 6, Short.MAX_VALUE))
         );
-        jPbuscarLayout.setVerticalGroup(
-            jPbuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPbuscarLayout.createSequentialGroup()
+        jPbuscarBUSCARLayout.setVerticalGroup(
+            jPbuscarBUSCARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPbuscarBUSCARLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLbuscarBUSCAR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel8.add(jPbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 450, 40));
+        jPanel8.add(jPbuscarBUSCAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 450, 40));
 
         javax.swing.GroupLayout jPbuscarrLayout = new javax.swing.GroupLayout(jPbuscarr);
         jPbuscarr.setLayout(jPbuscarrLayout);
@@ -293,24 +293,24 @@ public class JFclientes extends javax.swing.JFrame {
         jLabel16.setText("Cedula");
         jPactualizar.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 30));
 
-        jTFcedula3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPactualizar.add(jTFcedula3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 300, -1));
+        jTFcedulaACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPactualizar.add(jTFcedulaACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 300, -1));
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel17.setText("Nombres");
-        jPactualizar.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, 30));
+        jPactualizar.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, 30));
 
-        jTFnombres2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPactualizar.add(jTFnombres2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 300, -1));
+        jTFnombresACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPactualizar.add(jTFnombresACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 300, -1));
 
-        jTFdireccion2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPactualizar.add(jTFdireccion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 300, -1));
+        jTFdireccionACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPactualizar.add(jTFdireccionACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 300, -1));
 
-        jTFtelefono2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPactualizar.add(jTFtelefono2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 300, -1));
+        jTFtelefonoACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPactualizar.add(jTFtelefonoACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 300, -1));
 
-        jTFcorreo2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPactualizar.add(jTFcorreo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 300, -1));
+        jTFcorreoACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPactualizar.add(jTFcorreoACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 300, -1));
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel18.setText("Correo");
@@ -322,7 +322,7 @@ public class JFclientes extends javax.swing.JFrame {
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel20.setText("Teléfono");
-        jPactualizar.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, 30));
+        jPactualizar.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, 30));
 
         jTactualizar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -347,53 +347,53 @@ public class JFclientes extends javax.swing.JFrame {
 
         jPactualizar.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 740, 260));
 
-        jPactualizar1.setBackground(new java.awt.Color(253, 239, 213));
+        jPactualizarACTUALIZAR.setBackground(new java.awt.Color(253, 239, 213));
 
-        jLactualizar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLactualizar.setText("ACTUALIZAR");
+        jLactualizarACTUALIZAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLactualizarACTUALIZAR.setText("ACTUALIZAR");
 
-        javax.swing.GroupLayout jPactualizar1Layout = new javax.swing.GroupLayout(jPactualizar1);
-        jPactualizar1.setLayout(jPactualizar1Layout);
-        jPactualizar1Layout.setHorizontalGroup(
-            jPactualizar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLactualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPactualizarACTUALIZARLayout = new javax.swing.GroupLayout(jPactualizarACTUALIZAR);
+        jPactualizarACTUALIZAR.setLayout(jPactualizarACTUALIZARLayout);
+        jPactualizarACTUALIZARLayout.setHorizontalGroup(
+            jPactualizarACTUALIZARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLactualizarACTUALIZAR, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
         );
-        jPactualizar1Layout.setVerticalGroup(
-            jPactualizar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPactualizar1Layout.createSequentialGroup()
+        jPactualizarACTUALIZARLayout.setVerticalGroup(
+            jPactualizarACTUALIZARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPactualizarACTUALIZARLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLactualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLactualizarACTUALIZAR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPactualizar.add(jPactualizar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 200, 40));
+        jPactualizar.add(jPactualizarACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 200, 40));
 
-        jPnuevo1.setBackground(new java.awt.Color(253, 239, 213));
+        jPnuevoACTUALIZAR.setBackground(new java.awt.Color(253, 239, 213));
 
-        jLnuevo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLnuevo1.setText("NUEVO");
+        jLnuevoACTUALIZAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLnuevoACTUALIZAR.setText("NUEVO");
 
-        javax.swing.GroupLayout jPnuevo1Layout = new javax.swing.GroupLayout(jPnuevo1);
-        jPnuevo1.setLayout(jPnuevo1Layout);
-        jPnuevo1Layout.setHorizontalGroup(
-            jPnuevo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLnuevo1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPnuevoACTUALIZARLayout = new javax.swing.GroupLayout(jPnuevoACTUALIZAR);
+        jPnuevoACTUALIZAR.setLayout(jPnuevoACTUALIZARLayout);
+        jPnuevoACTUALIZARLayout.setHorizontalGroup(
+            jPnuevoACTUALIZARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLnuevoACTUALIZAR, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
         );
-        jPnuevo1Layout.setVerticalGroup(
-            jPnuevo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPnuevo1Layout.createSequentialGroup()
+        jPnuevoACTUALIZARLayout.setVerticalGroup(
+            jPnuevoACTUALIZARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPnuevoACTUALIZARLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLnuevo1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLnuevoACTUALIZAR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPactualizar.add(jPnuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 230, 200, 40));
+        jPactualizar.add(jPnuevoACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 230, 200, 40));
 
         jTPregistrar.addTab("Actualizar", jPactualizar);
 
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTFcedula4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel9.add(jTFcedula4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 300, -1));
+        jTFcedulaELIMINAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel9.add(jTFcedulaELIMINAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 300, -1));
 
         jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel21.setText("Cedula");
@@ -422,27 +422,27 @@ public class JFclientes extends javax.swing.JFrame {
 
         jPanel9.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 740, 260));
 
-        jPeliminar1.setBackground(new java.awt.Color(253, 239, 213));
+        jPeliminarELIMINAR.setBackground(new java.awt.Color(253, 239, 213));
 
-        jLeliminar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLeliminar.setText("ELIMINAR");
+        jLeliminarELIMINAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLeliminarELIMINAR.setText("ELIMINAR");
 
-        javax.swing.GroupLayout jPeliminar1Layout = new javax.swing.GroupLayout(jPeliminar1);
-        jPeliminar1.setLayout(jPeliminar1Layout);
-        jPeliminar1Layout.setHorizontalGroup(
-            jPeliminar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPeliminar1Layout.createSequentialGroup()
-                .addComponent(jLeliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout jPeliminarELIMINARLayout = new javax.swing.GroupLayout(jPeliminarELIMINAR);
+        jPeliminarELIMINAR.setLayout(jPeliminarELIMINARLayout);
+        jPeliminarELIMINARLayout.setHorizontalGroup(
+            jPeliminarELIMINARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPeliminarELIMINARLayout.createSequentialGroup()
+                .addComponent(jLeliminarELIMINAR, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPeliminar1Layout.setVerticalGroup(
-            jPeliminar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPeliminar1Layout.createSequentialGroup()
+        jPeliminarELIMINARLayout.setVerticalGroup(
+            jPeliminarELIMINARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPeliminarELIMINARLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLeliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLeliminarELIMINAR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel9.add(jPeliminar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 450, 40));
+        jPanel9.add(jPeliminarELIMINAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 450, 40));
 
         javax.swing.GroupLayout jPeliminarLayout = new javax.swing.GroupLayout(jPeliminar);
         jPeliminar.setLayout(jPeliminarLayout);
@@ -550,42 +550,42 @@ public class JFclientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLactualizar;
-    private javax.swing.JLabel jLbuscar;
-    private javax.swing.JLabel jLeliminar;
-    private javax.swing.JLabel jLguardar;
-    private javax.swing.JLabel jLnuevo;
-    private javax.swing.JLabel jLnuevo1;
+    private javax.swing.JLabel jLactualizarACTUALIZAR;
+    private javax.swing.JLabel jLbuscarBUSCAR;
+    private javax.swing.JLabel jLeliminarELIMINAR;
+    private javax.swing.JLabel jLguardarREGISTRAR;
+    private javax.swing.JLabel jLnuevoACTUALIZAR;
+    private javax.swing.JLabel jLnuevoREGISTRAR;
     private javax.swing.JPanel jPactualizar;
-    private javax.swing.JPanel jPactualizar1;
+    private javax.swing.JPanel jPactualizarACTUALIZAR;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JPanel jPbuscar;
+    private javax.swing.JPanel jPbuscarBUSCAR;
     private javax.swing.JPanel jPbuscarr;
     private javax.swing.JPanel jPeliminar;
-    private javax.swing.JPanel jPeliminar1;
-    private javax.swing.JPanel jPguardar;
-    private javax.swing.JPanel jPnuevo;
-    private javax.swing.JPanel jPnuevo1;
+    private javax.swing.JPanel jPeliminarELIMINAR;
+    private javax.swing.JPanel jPguardarREGISTRAR;
+    private javax.swing.JPanel jPnuevoACTUALIZAR;
+    private javax.swing.JPanel jPnuevoREGISTRAR;
     private javax.swing.JPanel jPregistrar;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTextField jTFcedula1;
-    private javax.swing.JTextField jTFcedula2;
-    private javax.swing.JTextField jTFcedula3;
-    private javax.swing.JTextField jTFcedula4;
-    private javax.swing.JTextField jTFcorreo1;
-    private javax.swing.JTextField jTFcorreo2;
-    private javax.swing.JTextField jTFdireccion1;
-    private javax.swing.JTextField jTFdireccion2;
-    private javax.swing.JTextField jTFnombres1;
-    private javax.swing.JTextField jTFnombres2;
-    private javax.swing.JTextField jTFtelefono1;
-    private javax.swing.JTextField jTFtelefono2;
+    private javax.swing.JTextField jTFcedulaACTUALIZAR;
+    private javax.swing.JTextField jTFcedulaBUSCAR;
+    private javax.swing.JTextField jTFcedulaELIMINAR;
+    private javax.swing.JTextField jTFcedulaREGISTRAR;
+    private javax.swing.JTextField jTFcorreoACTUALIZAR;
+    private javax.swing.JTextField jTFcorreoREGISTRAR;
+    private javax.swing.JTextField jTFdireccionACTUALIZAR;
+    private javax.swing.JTextField jTFdireccionREGISTRAR;
+    private javax.swing.JTextField jTFnombresACTUALIZAR;
+    private javax.swing.JTextField jTFnombresREGISTRAR;
+    private javax.swing.JTextField jTFtelefonoACTUALIZAR;
+    private javax.swing.JTextField jTFtelefonoREGISTRAR;
     private javax.swing.JTabbedPane jTPregistrar;
     private javax.swing.JTable jTactualizar;
     private javax.swing.JTable jTbuscar;

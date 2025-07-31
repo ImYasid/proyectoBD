@@ -142,7 +142,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTFcedula1">
+                <Component class="javax.swing.JTextField" name="jTFcedulaREGISTRAR">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="0"/>
@@ -163,11 +163,11 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="30" y="140" width="-1" height="30"/>
+                      <AbsoluteConstraints x="30" y="60" width="-1" height="30"/>
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTFnombres1">
+                <Component class="javax.swing.JTextField" name="jTFnombresREGISTRAR">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="0"/>
@@ -179,7 +179,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTFdireccion1">
+                <Component class="javax.swing.JTextField" name="jTFdireccionREGISTRAR">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="0"/>
@@ -191,7 +191,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTFtelefono1">
+                <Component class="javax.swing.JTextField" name="jTFtelefonoREGISTRAR">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="0"/>
@@ -203,7 +203,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTFcorreo1">
+                <Component class="javax.swing.JTextField" name="jTFcorreoREGISTRAR">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="0"/>
@@ -250,7 +250,7 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="30" y="60" width="-1" height="30"/>
+                      <AbsoluteConstraints x="30" y="140" width="-1" height="30"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -313,7 +313,7 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="jPguardar">
+                <Container class="javax.swing.JPanel" name="jPguardarREGISTRAR">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="d5" green="ef" red="fd" type="rgb"/>
@@ -328,20 +328,20 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLguardar" alignment="0" pref="200" max="32767" attributes="0"/>
+                          <Component id="jLguardarREGISTRAR" alignment="0" pref="200" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="jLguardar" min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="jLguardarREGISTRAR" min="-2" pref="40" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JLabel" name="jLguardar">
+                    <Component class="javax.swing.JLabel" name="jLguardarREGISTRAR">
                       <Properties>
                         <Property name="horizontalAlignment" type="int" value="0"/>
                         <Property name="text" type="java.lang.String" value="GUARDAR"/>
@@ -349,7 +349,7 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="jPnuevo">
+                <Container class="javax.swing.JPanel" name="jPnuevoREGISTRAR">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="d5" green="ef" red="fd" type="rgb"/>
@@ -364,20 +364,20 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLnuevo" alignment="0" pref="200" max="32767" attributes="0"/>
+                          <Component id="jLnuevoREGISTRAR" alignment="0" pref="200" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="jLnuevo" min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="jLnuevoREGISTRAR" min="-2" pref="40" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JLabel" name="jLnuevo">
+                    <Component class="javax.swing.JLabel" name="jLnuevoREGISTRAR">
                       <Properties>
                         <Property name="horizontalAlignment" type="int" value="0"/>
                         <Property name="text" type="java.lang.String" value="NUEVO"/>
@@ -423,7 +423,7 @@
                     <Property name="useNullLayout" type="boolean" value="false"/>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JTextField" name="jTFcedula2">
+                    <Component class="javax.swing.JTextField" name="jTFcedulaBUSCAR">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Segoe UI" size="18" style="0"/>
@@ -507,7 +507,7 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Container class="javax.swing.JPanel" name="jPbuscar">
+                    <Container class="javax.swing.JPanel" name="jPbuscarBUSCAR">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="d5" green="ef" red="fd" type="rgb"/>
@@ -523,7 +523,7 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLbuscar" min="-2" pref="449" max="-2" attributes="0"/>
+                                  <Component id="jLbuscarBUSCAR" min="-2" pref="449" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -532,13 +532,13 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="jLbuscar" min="-2" pref="40" max="-2" attributes="0"/>
+                                  <Component id="jLbuscarBUSCAR" min="-2" pref="40" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JLabel" name="jLbuscar">
+                        <Component class="javax.swing.JLabel" name="jLbuscarBUSCAR">
                           <Properties>
                             <Property name="horizontalAlignment" type="int" value="0"/>
                             <Property name="text" type="java.lang.String" value="BUSCAR"/>
@@ -581,7 +581,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTFcedula3">
+                <Component class="javax.swing.JTextField" name="jTFcedulaACTUALIZAR">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="0"/>
@@ -602,11 +602,11 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="30" y="140" width="-1" height="30"/>
+                      <AbsoluteConstraints x="30" y="60" width="-1" height="30"/>
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTFnombres2">
+                <Component class="javax.swing.JTextField" name="jTFnombresACTUALIZAR">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="0"/>
@@ -618,7 +618,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTFdireccion2">
+                <Component class="javax.swing.JTextField" name="jTFdireccionACTUALIZAR">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="0"/>
@@ -630,7 +630,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTFtelefono2">
+                <Component class="javax.swing.JTextField" name="jTFtelefonoACTUALIZAR">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="0"/>
@@ -642,7 +642,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTFcorreo2">
+                <Component class="javax.swing.JTextField" name="jTFcorreoACTUALIZAR">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="0"/>
@@ -689,7 +689,7 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="30" y="60" width="-1" height="30"/>
+                      <AbsoluteConstraints x="30" y="140" width="-1" height="30"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -752,7 +752,7 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="jPactualizar1">
+                <Container class="javax.swing.JPanel" name="jPactualizarACTUALIZAR">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="d5" green="ef" red="fd" type="rgb"/>
@@ -767,20 +767,20 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLactualizar" alignment="0" pref="200" max="32767" attributes="0"/>
+                          <Component id="jLactualizarACTUALIZAR" alignment="0" pref="200" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="jLactualizar" min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="jLactualizarACTUALIZAR" min="-2" pref="40" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JLabel" name="jLactualizar">
+                    <Component class="javax.swing.JLabel" name="jLactualizarACTUALIZAR">
                       <Properties>
                         <Property name="horizontalAlignment" type="int" value="0"/>
                         <Property name="text" type="java.lang.String" value="ACTUALIZAR"/>
@@ -788,7 +788,7 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="jPnuevo1">
+                <Container class="javax.swing.JPanel" name="jPnuevoACTUALIZAR">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="d5" green="ef" red="fd" type="rgb"/>
@@ -803,20 +803,20 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLnuevo1" alignment="0" pref="200" max="32767" attributes="0"/>
+                          <Component id="jLnuevoACTUALIZAR" alignment="0" pref="200" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="jLnuevo1" min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="jLnuevoACTUALIZAR" min="-2" pref="40" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JLabel" name="jLnuevo1">
+                    <Component class="javax.swing.JLabel" name="jLnuevoACTUALIZAR">
                       <Properties>
                         <Property name="horizontalAlignment" type="int" value="0"/>
                         <Property name="text" type="java.lang.String" value="NUEVO"/>
@@ -862,7 +862,7 @@
                     <Property name="useNullLayout" type="boolean" value="false"/>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JTextField" name="jTFcedula4">
+                    <Component class="javax.swing.JTextField" name="jTFcedulaELIMINAR">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Segoe UI" size="18" style="0"/>
@@ -946,7 +946,7 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Container class="javax.swing.JPanel" name="jPeliminar1">
+                    <Container class="javax.swing.JPanel" name="jPeliminarELIMINAR">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="d5" green="ef" red="fd" type="rgb"/>
@@ -962,7 +962,7 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLeliminar" min="-2" pref="449" max="-2" attributes="0"/>
+                                  <Component id="jLeliminarELIMINAR" min="-2" pref="449" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -971,13 +971,13 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="jLeliminar" min="-2" pref="40" max="-2" attributes="0"/>
+                                  <Component id="jLeliminarELIMINAR" min="-2" pref="40" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JLabel" name="jLeliminar">
+                        <Component class="javax.swing.JLabel" name="jLeliminarELIMINAR">
                           <Properties>
                             <Property name="horizontalAlignment" type="int" value="0"/>
                             <Property name="text" type="java.lang.String" value="ELIMINAR"/>
