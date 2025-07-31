@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.JOptionPane;
-
+import ConexionSQL.SessionManager;
 
 public class JFlogin extends javax.swing.JFrame {
 
@@ -188,28 +188,32 @@ public class JFlogin extends javax.swing.JFrame {
  
     }//GEN-LAST:event_jPcontraseñaActionPerformed
 
+    
     private void jLingresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLingresarMouseClicked
-        SqlConection conexionSQL = new SqlConection();
-        int indUsuario = jCBSede.getSelectedIndex();
-        String password = new String(jPcontraseña.getPassword());
+                                                
+    SqlConection conexionSQL = new SqlConection();
+    int indUsuario = jCBSede.getSelectedIndex();
+    String password = new String(jPcontraseña.getPassword());
 
-        if (indUsuario == 0) {
-            JOptionPane.showMessageDialog(this, "Seleccione una sede válida.");
-            return;
-        } else{
-            Connection conn = conexionSQL.getConexion(indUsuario, password);
-            if (conn != null) {
-                JOptionPane.showMessageDialog(this, "¡Conexión exitosa!");
-                JFpantallaInicio pantallaInicio = new JFpantallaInicio();
-                pantallaInicio.setVisible(true);
-                this.setVisible(false);
-            } else {
-                JOptionPane.showMessageDialog(this, "Error al conectar con la base de datos.");
-                this.jPcontraseña.setText("");
-                ;
-                
-            }
+    if (indUsuario == 0) {
+        JOptionPane.showMessageDialog(this, "Seleccione una sede válida.");
+        return;
+    } else {
+        Connection conn = conexionSQL.getConexion(indUsuario, password);
+        if (conn != null) {
+            // GUARDAMOS LOS DATOS DE SESIÓN
+            SessionManager.getInstance().setSessionData(indUsuario, password);
+            
+            JOptionPane.showMessageDialog(this, "¡Conexión exitosa!");
+            JFpantallaInicio pantallaInicio = new JFpantallaInicio();
+            pantallaInicio.setVisible(true);
+            this.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al conectar con la base de datos.");
+            jPcontraseña.setText("");
         }
+    }
+
     }//GEN-LAST:event_jLingresarMouseClicked
 
     private void jLsalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLsalirMouseClicked

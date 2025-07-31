@@ -3,7 +3,7 @@ package Vista;
 import ConexionSQL.SqlConection;
 import CRUD.ClientesCRUD;
 import javax.swing.JOptionPane;
-
+import ConexionSQL.SessionManager;
 
 
 public class JFclientes extends javax.swing.JFrame {
@@ -557,12 +557,19 @@ public class JFclientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jLnuevoACTUALIZARMouseClicked
 
     private void jLguardarREGISTRARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLguardarREGISTRARMouseClicked
+                                                        
+    try {
+        // Obtenemos los datos de sesión del SessionManager
+        SessionManager session = SessionManager.getInstance();
+        int sedeIndex = session.getSedeIndex();
+        String password = session.getPassword();
         
-        try {
-        // Se asume que esta instancia ya viene del login
-        SqlConection conexionSQL = new SqlConection();
-        conexionSQL.index = 1; // Debe haberse guardado desde el login
-        conexionSQL.password = "miPassword123"; // También del login
+        // Validar que haya una sesión activa
+        if (sedeIndex == 0 || password == null || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay una sesión activa. Por favor, inicie sesión primero.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         // Obtener y validar los valores ingresados
         String cedulaStr = jTFcedulaREGISTRAR.getText().trim();
@@ -587,7 +594,12 @@ public class JFclientes extends javax.swing.JFrame {
             return;
         }
 
-        // ⚠️ Aquí ya no se valida el index, lo hace el método crearCliente
+        // Creamos la conexión usando los datos de sesión
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = sedeIndex;
+        conexionSQL.password = password;
+
+        // Usamos el CRUD con la conexión configurada
         ClientesCRUD.crearCliente(cedula, nombres, direccion, telefono, correo, conexionSQL);
 
         // Limpiar campos después de guardar
@@ -597,11 +609,13 @@ public class JFclientes extends javax.swing.JFrame {
         jTFtelefonoREGISTRAR.setText("");
         jTFcorreoREGISTRAR.setText("");
 
+        // Mensaje de éxito
+        JOptionPane.showMessageDialog(this, "Operacion Exitosa");
+
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, "Error al guardar cliente: " + e.getMessage(),
             "Error", JOptionPane.ERROR_MESSAGE);
     }
-        
     }//GEN-LAST:event_jLguardarREGISTRARMouseClicked
 
     private void jLbuscarBUSCARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbuscarBUSCARMouseClicked
