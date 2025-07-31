@@ -165,11 +165,11 @@ public class JFclientes extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Cedula", "Nombres", "Direccion", "Telefono", "Correo"
+                "id_cliente", "nombres", "direccion", "telefono", "correo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -250,11 +250,11 @@ public class JFclientes extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Cedula", "Nombres", "Direccion", "Telefono", "Correo"
+                "id_cliente", "nombres", "direccion", "telefono", "correo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -353,11 +353,11 @@ public class JFclientes extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Cedula", "Nombres", "Direccion", "Telefono", "Correo"
+                "id_cliente", "nombres", "direccion", "telefono", "correo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -438,11 +438,11 @@ public class JFclientes extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Cedula", "Nombres", "Direccion", "Telefono", "Correo"
+                "id_cliente", "nombres", "direccion", "telefono", "correo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
