@@ -34,13 +34,10 @@ public class JFproductos extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jTPregistrar = new javax.swing.JTabbedPane();
         jPregistrar = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jTFidproductoREGISTRAR = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTFnombresREGISTRAR = new javax.swing.JTextField();
-        jTFstockREGISTRAR = new javax.swing.JTextField();
-        jTFsucursalREGISTRAR = new javax.swing.JTextField();
+        jTFnombreREGISTRAR = new javax.swing.JTextField();
         jTFprecioREGISTRAR = new javax.swing.JTextField();
+        jTFstockREGISTRAR = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -48,42 +45,38 @@ public class JFproductos extends javax.swing.JFrame {
         jLguardarREGISTRAR = new javax.swing.JLabel();
         jPnuevoREGISTRAR = new javax.swing.JPanel();
         jLnuevoREGISTRAR = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTregistrar = new javax.swing.JTable();
+        jCBsucursalREGISTRAR = new javax.swing.JComboBox<>();
         jPbuscarr = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jTFidproductoBUSCAR = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jPbuscarBUSCAR = new javax.swing.JPanel();
         jLbuscarBUSCAR = new javax.swing.JLabel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTbuscar = new javax.swing.JTable();
         jPactualizar = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jTFidproductoACTUALIZAR = new javax.swing.JTextField();
-        jLabel17 = new javax.swing.JLabel();
-        jTFnombreACTUALIZAR = new javax.swing.JTextField();
-        jTFstockACTUALIZAR = new javax.swing.JTextField();
-        jTFsucursalACTUALIZAR = new javax.swing.JTextField();
-        jTFprecioACTUALIZAR = new javax.swing.JTextField();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
         jPactualizarACTUALIZAR = new javax.swing.JPanel();
         jLactualizarACTUALIZAR = new javax.swing.JLabel();
         jPnuevoACTUALIZAR = new javax.swing.JPanel();
         jLnuevoACTUALIZAR = new javax.swing.JLabel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        jTactualizar = new javax.swing.JTable();
+        jLabel22 = new javax.swing.JLabel();
+        jTFnombreREGISTRAR1 = new javax.swing.JTextField();
+        jTFprecioREGISTRAR1 = new javax.swing.JTextField();
+        jTFstockREGISTRAR1 = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jCBsucursalREGISTRAR1 = new javax.swing.JComboBox<>();
         jPeliminar = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jTFidproductoELIMINAR = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         jPeliminarELIMINAR = new javax.swing.JPanel();
         jLeliminarELIMINAR = new javax.swing.JLabel();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        jTeliminar = new javax.swing.JTable();
-        jBregresar = new javax.swing.JButton();
+        jPregresar = new javax.swing.JPanel();
+        jLregresar = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,7 +85,7 @@ public class JFproductos extends javax.swing.JFrame {
 
         logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo1.jpg"))); // NOI18N
-        jPanel1.add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 0, 290, 390));
+        jPanel1.add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 0, 290, 410));
 
         jPanel3.setBackground(new java.awt.Color(255, 51, 0));
 
@@ -116,45 +109,35 @@ public class JFproductos extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 510, 50));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 510, 50));
 
         jPregistrar.setBackground(new java.awt.Color(255, 255, 255));
         jPregistrar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel10.setText("id_producto");
-        jPregistrar.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 30));
-
-        jTFidproductoREGISTRAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPregistrar.add(jTFidproductoREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 300, -1));
-
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel11.setText("Sucursal");
-        jPregistrar.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, 30));
+        jLabel11.setText("Stock");
+        jPregistrar.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, 30));
 
-        jTFnombresREGISTRAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPregistrar.add(jTFnombresREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 300, -1));
-
-        jTFstockREGISTRAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPregistrar.add(jTFstockREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 300, -1));
-
-        jTFsucursalREGISTRAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPregistrar.add(jTFsucursalREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 300, -1));
+        jTFnombreREGISTRAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPregistrar.add(jTFnombreREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 290, -1));
 
         jTFprecioREGISTRAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPregistrar.add(jTFprecioREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 300, -1));
+        jPregistrar.add(jTFprecioREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 290, -1));
+
+        jTFstockREGISTRAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPregistrar.add(jTFstockREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 290, -1));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel12.setText("Precio");
-        jPregistrar.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, 30));
+        jLabel12.setText("Sucursal");
+        jPregistrar.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, 30));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel13.setText("Stock");
-        jPregistrar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, 30));
+        jLabel13.setText("Precio");
+        jPregistrar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, 30));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel14.setText("Nombre");
-        jPregistrar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, 30));
+        jLabel14.setText("Nombre comercial");
+        jPregistrar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 30));
 
         jPguardarREGISTRAR.setBackground(new java.awt.Color(253, 239, 213));
 
@@ -206,28 +189,8 @@ public class JFproductos extends javax.swing.JFrame {
 
         jPregistrar.add(jPnuevoREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 230, 200, 40));
 
-        jTregistrar.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "id_producto", "nombre", "precio", "stock", "id_sucursal"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTregistrar);
-
-        jPregistrar.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 740, 250));
+        jCBsucursalREGISTRAR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Sucursal Norte", "Sucursal Sur" }));
+        jPregistrar.add(jCBsucursalREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 290, 30));
 
         jTPregistrar.addTab("Registrar", jPregistrar);
 
@@ -268,29 +231,6 @@ public class JFproductos extends javax.swing.JFrame {
 
         jPanel8.add(jPbuscarBUSCAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 450, 40));
 
-        jTbuscar.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "id_producto", "nombre", "precio", "stock", "id_sucursal"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane6.setViewportView(jTbuscar);
-
-        jPanel8.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 740, 250));
-
         javax.swing.GroupLayout jPbuscarrLayout = new javax.swing.GroupLayout(jPbuscarr);
         jPbuscarr.setLayout(jPbuscarrLayout);
         jPbuscarrLayout.setHorizontalGroup(
@@ -299,9 +239,7 @@ public class JFproductos extends javax.swing.JFrame {
         );
         jPbuscarrLayout.setVerticalGroup(
             jPbuscarrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPbuscarrLayout.createSequentialGroup()
-                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
         );
 
         jTPregistrar.addTab("Buscar", jPbuscarr);
@@ -314,35 +252,7 @@ public class JFproductos extends javax.swing.JFrame {
         jPactualizar.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 30));
 
         jTFidproductoACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPactualizar.add(jTFidproductoACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 300, -1));
-
-        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel17.setText("Sucursal");
-        jPactualizar.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, 30));
-
-        jTFnombreACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPactualizar.add(jTFnombreACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 300, -1));
-
-        jTFstockACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPactualizar.add(jTFstockACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 300, -1));
-
-        jTFsucursalACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPactualizar.add(jTFsucursalACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 300, -1));
-
-        jTFprecioACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPactualizar.add(jTFprecioACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 300, -1));
-
-        jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel18.setText("Precio");
-        jPactualizar.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, 30));
-
-        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel19.setText("Stock");
-        jPactualizar.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, 30));
-
-        jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel20.setText("Nombre");
-        jPactualizar.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, 30));
+        jPactualizar.add(jTFidproductoACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 290, -1));
 
         jPactualizarACTUALIZAR.setBackground(new java.awt.Color(253, 239, 213));
 
@@ -394,28 +304,41 @@ public class JFproductos extends javax.swing.JFrame {
 
         jPactualizar.add(jPnuevoACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 230, 200, 40));
 
-        jTactualizar.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "id_producto", "nombre", "precio", "stock", "id_sucursal"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
+        jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel22.setText("Stock");
+        jPactualizar.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, 30));
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+        jTFnombreREGISTRAR1.setEditable(false);
+        jTFnombreREGISTRAR1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPactualizar.add(jTFnombreREGISTRAR1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 290, -1));
+
+        jTFprecioREGISTRAR1.setEditable(false);
+        jTFprecioREGISTRAR1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPactualizar.add(jTFprecioREGISTRAR1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 290, -1));
+
+        jTFstockREGISTRAR1.setEditable(false);
+        jTFstockREGISTRAR1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPactualizar.add(jTFstockREGISTRAR1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 290, -1));
+
+        jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel23.setText("Sucursal");
+        jPactualizar.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, 30));
+
+        jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel24.setText("Precio");
+        jPactualizar.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, 30));
+
+        jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel25.setText("Nombre comercial");
+        jPactualizar.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, 30));
+
+        jCBsucursalREGISTRAR1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Sucursal Norte", "Sucursal Sur" }));
+        jCBsucursalREGISTRAR1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBsucursalREGISTRAR1ActionPerformed(evt);
             }
         });
-        jScrollPane7.setViewportView(jTactualizar);
-
-        jPactualizar.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 740, 250));
+        jPactualizar.add(jCBsucursalREGISTRAR1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 290, 30));
 
         jTPregistrar.addTab("Actualizar", jPactualizar);
 
@@ -456,29 +379,6 @@ public class JFproductos extends javax.swing.JFrame {
 
         jPanel9.add(jPeliminarELIMINAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 450, 40));
 
-        jTeliminar.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "id_producto", "nombre", "precio", "stock", "id_sucursal"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane8.setViewportView(jTeliminar);
-
-        jPanel9.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 740, 250));
-
         javax.swing.GroupLayout jPeliminarLayout = new javax.swing.GroupLayout(jPeliminar);
         jPeliminar.setLayout(jPeliminarLayout);
         jPeliminarLayout.setHorizontalGroup(
@@ -487,27 +387,49 @@ public class JFproductos extends javax.swing.JFrame {
         );
         jPeliminarLayout.setVerticalGroup(
             jPeliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPeliminarLayout.createSequentialGroup()
-                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
         );
 
         jTPregistrar.addTab("Eliminar", jPeliminar);
 
-        jPanel1.add(jTPregistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 800, 620));
+        jPanel1.add(jTPregistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 800, 320));
 
-        jBregresar.setText("REGRESAR");
-        jBregresar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jBregresarMouseClicked(evt);
+        jPregresar.setBackground(new java.awt.Color(253, 239, 213));
+
+        jLregresar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLregresar.setText("REGRESAR");
+
+        javax.swing.GroupLayout jPregresarLayout = new javax.swing.GroupLayout(jPregresar);
+        jPregresar.setLayout(jPregresarLayout);
+        jPregresarLayout.setHorizontalGroup(
+            jPregresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPregresarLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLregresar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPregresarLayout.setVerticalGroup(
+            jPregresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPregresarLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLregresar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jPanel1.add(jPregresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, -1, 30));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        });
-        jBregresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBregresarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jBregresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 0, -1, -1));
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 760, 250));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -517,31 +439,19 @@ public class JFproductos extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBregresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBregresarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBregresarActionPerformed
-
-    private void jBregresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBregresarMouseClicked
-        
-        JFpantallaInicio pantallaInicio = new JFpantallaInicio();
-        pantallaInicio.setVisible(true);
-        this.setVisible(false);
-        
-    }//GEN-LAST:event_jBregresarMouseClicked
-
     private void jLnuevoREGISTRARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLnuevoREGISTRARMouseClicked
         
         jTFidproductoREGISTRAR.setText("");
-        jTFnombresREGISTRAR.setText("");
+        jTFnombreREGISTRAR.setText("");
+        jTFprecioREGISTRAR.setText("");
         jTFprecioREGISTRAR.setText("");
         jTFstockREGISTRAR.setText("");
-        jTFsucursalREGISTRAR.setText("");
         
     }//GEN-LAST:event_jLnuevoREGISTRARMouseClicked
 
@@ -565,10 +475,10 @@ public class JFproductos extends javax.swing.JFrame {
         conexionSQL.password = password;
         // Obtener los valores ingresados en los campos de texto
         String idProductoStr = jTFidproductoREGISTRAR.getText().trim(); // id_producto
-        String nombre = jTFnombresREGISTRAR.getText().trim(); // nombre
+        String nombre = jTFnombreREGISTRAR.getText().trim(); // nombre
         String precioStr = jTFprecioREGISTRAR.getText().trim(); // precio
-        String stockStr = jTFstockREGISTRAR.getText().trim(); // stock
-        String idSucursalStr = jTFsucursalREGISTRAR.getText().trim(); // id_sucursal
+        String stockStr = jTFprecioREGISTRAR.getText().trim(); // stock
+        String idSucursalStr = jTFstockREGISTRAR.getText().trim(); // id_sucursal
 
         // Validar que todos los campos tengan valores
         if (idProductoStr.isEmpty() || nombre.isEmpty() || precioStr.isEmpty() ||
@@ -598,10 +508,10 @@ public class JFproductos extends javax.swing.JFrame {
 
         // Limpiar los campos después de guardar
         jTFidproductoREGISTRAR.setText("");
-        jTFnombresREGISTRAR.setText("");
+        jTFnombreREGISTRAR.setText("");
+        jTFprecioREGISTRAR.setText("");
         jTFprecioREGISTRAR.setText("");
         jTFstockREGISTRAR.setText("");
-        jTFsucursalREGISTRAR.setText("");
 
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, "Error al guardar producto: " + e.getMessage(),
@@ -788,6 +698,10 @@ public class JFproductos extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jLeliminarELIMINARMouseClicked
 
+    private void jCBsucursalREGISTRAR1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBsucursalREGISTRAR1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBsucursalREGISTRAR1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -827,26 +741,27 @@ public class JFproductos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBregresar;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JComboBox<String> jCBsucursalREGISTRAR;
+    private javax.swing.JComboBox<String> jCBsucursalREGISTRAR1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLactualizarACTUALIZAR;
     private javax.swing.JLabel jLbuscarBUSCAR;
     private javax.swing.JLabel jLeliminarELIMINAR;
     private javax.swing.JLabel jLguardarREGISTRAR;
     private javax.swing.JLabel jLnuevoACTUALIZAR;
     private javax.swing.JLabel jLnuevoREGISTRAR;
+    private javax.swing.JLabel jLregresar;
     private javax.swing.JPanel jPactualizar;
     private javax.swing.JPanel jPactualizarACTUALIZAR;
     private javax.swing.JPanel jPanel1;
@@ -861,27 +776,19 @@ public class JFproductos extends javax.swing.JFrame {
     private javax.swing.JPanel jPnuevoACTUALIZAR;
     private javax.swing.JPanel jPnuevoREGISTRAR;
     private javax.swing.JPanel jPregistrar;
+    private javax.swing.JPanel jPregresar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTextField jTFidproductoACTUALIZAR;
     private javax.swing.JTextField jTFidproductoBUSCAR;
     private javax.swing.JTextField jTFidproductoELIMINAR;
-    private javax.swing.JTextField jTFidproductoREGISTRAR;
-    private javax.swing.JTextField jTFnombreACTUALIZAR;
-    private javax.swing.JTextField jTFnombresREGISTRAR;
-    private javax.swing.JTextField jTFprecioACTUALIZAR;
+    private javax.swing.JTextField jTFnombreREGISTRAR;
+    private javax.swing.JTextField jTFnombreREGISTRAR1;
     private javax.swing.JTextField jTFprecioREGISTRAR;
-    private javax.swing.JTextField jTFstockACTUALIZAR;
+    private javax.swing.JTextField jTFprecioREGISTRAR1;
     private javax.swing.JTextField jTFstockREGISTRAR;
-    private javax.swing.JTextField jTFsucursalACTUALIZAR;
-    private javax.swing.JTextField jTFsucursalREGISTRAR;
+    private javax.swing.JTextField jTFstockREGISTRAR1;
     private javax.swing.JTabbedPane jTPregistrar;
-    private javax.swing.JTable jTactualizar;
-    private javax.swing.JTable jTbuscar;
-    private javax.swing.JTable jTeliminar;
-    private javax.swing.JTable jTregistrar;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel logo;
     // End of variables declaration//GEN-END:variables
 }

@@ -42,8 +42,6 @@ public class JFventas extends javax.swing.JFrame {
         jLactualizar = new javax.swing.JLabel();
         jPeliminar = new javax.swing.JPanel();
         jLeliminar = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jBregresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -186,29 +184,6 @@ public class JFventas extends javax.swing.JFrame {
 
         jPanel1.add(jPeliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 320, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "id_producto", "Nombre", "Stock", "Sucursal", "Precio"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 760, 250));
-
         jBregresar.setText("REGRESAR");
         jBregresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -308,13 +283,11 @@ public class JFventas extends javax.swing.JFrame {
     private javax.swing.JPanel jPbuscar;
     private javax.swing.JPanel jPcreate;
     private javax.swing.JPanel jPeliminar;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFidproducto;
     private javax.swing.JTextField jTFnombre;
     private javax.swing.JTextField jTFprecio;
     private javax.swing.JTextField jTFstock;
     private javax.swing.JTextField jTFsucursal;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel logo;
     // End of variables declaration//GEN-END:variables
 }

@@ -17,6 +17,7 @@ public class JFclientes extends javax.swing.JFrame {
         CambiosColorBoton.configurarCambiosColor(jLbuscarBUSCAR, jPbuscarBUSCAR);
         CambiosColorBoton.configurarCambiosColor(jLactualizarACTUALIZAR, jPactualizarACTUALIZAR);
         CambiosColorBoton.configurarCambiosColor(jLeliminarELIMINAR, jPeliminarELIMINAR);
+        CambiosColorBoton.configurarCambiosColor(jLregresar, jPregresar);
         
     }
 
@@ -43,50 +44,45 @@ public class JFclientes extends javax.swing.JFrame {
         jTFnombresREGISTRAR = new javax.swing.JTextField();
         jTFdireccionREGISTRAR = new javax.swing.JTextField();
         jTFtelefonoREGISTRAR = new javax.swing.JTextField();
-        jTFcorreoREGISTRAR = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTregistrar = new javax.swing.JTable();
         jPguardarREGISTRAR = new javax.swing.JPanel();
         jLguardarREGISTRAR = new javax.swing.JLabel();
         jPnuevoREGISTRAR = new javax.swing.JPanel();
         jLnuevoREGISTRAR = new javax.swing.JLabel();
+        jCBsucursalREGISTRAR = new javax.swing.JComboBox<>();
         jPbuscarr = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jTFcedulaBUSCAR = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTbuscar = new javax.swing.JTable();
         jPbuscarBUSCAR = new javax.swing.JPanel();
         jLbuscarBUSCAR = new javax.swing.JLabel();
         jPactualizar = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
-        jTFcedulaACTUALIZAR = new javax.swing.JTextField();
-        jLabel17 = new javax.swing.JLabel();
-        jTFnombresACTUALIZAR = new javax.swing.JTextField();
-        jTFdireccionACTUALIZAR = new javax.swing.JTextField();
-        jTFtelefonoACTUALIZAR = new javax.swing.JTextField();
-        jTFcorreoACTUALIZAR = new javax.swing.JTextField();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTactualizar = new javax.swing.JTable();
         jPactualizarACTUALIZAR = new javax.swing.JPanel();
         jLactualizarACTUALIZAR = new javax.swing.JLabel();
         jPnuevoACTUALIZAR = new javax.swing.JPanel();
         jLnuevoACTUALIZAR = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jTFcedulaACTUALIZAR = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        jTFnombresACTUALIZAR = new javax.swing.JTextField();
+        jTFdireccionACTUALIZAR = new javax.swing.JTextField();
+        jTFtelefonoACTUALIZAR = new javax.swing.JTextField();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jCBsucursalACTUALIZAR = new javax.swing.JComboBox<>();
         jPeliminar = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jTFcedulaELIMINAR = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTeliminar = new javax.swing.JTable();
         jPeliminarELIMINAR = new javax.swing.JPanel();
         jLeliminarELIMINAR = new javax.swing.JLabel();
-        jBregresar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jPregresar = new javax.swing.JPanel();
+        jLregresar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,7 +91,7 @@ public class JFclientes extends javax.swing.JFrame {
 
         logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo1.jpg"))); // NOI18N
-        jPanel1.add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 0, 290, 390));
+        jPanel1.add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 0, 290, 420));
 
         jPanel3.setBackground(new java.awt.Color(255, 51, 0));
 
@@ -119,13 +115,13 @@ public class JFclientes extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 510, 50));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 510, 50));
 
         jPregistrar.setBackground(new java.awt.Color(255, 255, 255));
         jPregistrar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel10.setText("Cedula");
+        jLabel10.setText("Cédula");
         jPregistrar.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 30));
 
         jTFcedulaREGISTRAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -144,11 +140,8 @@ public class JFclientes extends javax.swing.JFrame {
         jTFtelefonoREGISTRAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jPregistrar.add(jTFtelefonoREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 300, -1));
 
-        jTFcorreoREGISTRAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPregistrar.add(jTFcorreoREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 300, -1));
-
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel12.setText("Correo");
+        jLabel12.setText("Sucursal");
         jPregistrar.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, 30));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -158,29 +151,6 @@ public class JFclientes extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel14.setText("Teléfono");
         jPregistrar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, 30));
-
-        jTregistrar.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "id_cliente", "nombres", "direccion", "telefono", "correo"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(jTregistrar);
-
-        jPregistrar.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 740, 260));
 
         jPguardarREGISTRAR.setBackground(new java.awt.Color(253, 239, 213));
 
@@ -232,6 +202,14 @@ public class JFclientes extends javax.swing.JFrame {
 
         jPregistrar.add(jPnuevoREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 230, 200, 40));
 
+        jCBsucursalREGISTRAR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Sucursal Norte", "Sucursal Sur" }));
+        jCBsucursalREGISTRAR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBsucursalREGISTRARActionPerformed(evt);
+            }
+        });
+        jPregistrar.add(jCBsucursalREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 300, 30));
+
         jTPregistrar.addTab("Registrar", jPregistrar);
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
@@ -241,31 +219,8 @@ public class JFclientes extends javax.swing.JFrame {
         jPanel8.add(jTFcedulaBUSCAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 300, -1));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel15.setText("Cedula");
+        jLabel15.setText("Cédula");
         jPanel8.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, 30));
-
-        jTbuscar.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "id_cliente", "nombres", "direccion", "telefono", "correo"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane3.setViewportView(jTbuscar);
-
-        jPanel8.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 740, 260));
 
         jPbuscarBUSCAR.setBackground(new java.awt.Color(253, 239, 213));
 
@@ -302,73 +257,13 @@ public class JFclientes extends javax.swing.JFrame {
         );
         jPbuscarrLayout.setVerticalGroup(
             jPbuscarrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPbuscarrLayout.createSequentialGroup()
-                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
         );
 
         jTPregistrar.addTab("Buscar", jPbuscarr);
 
         jPactualizar.setBackground(new java.awt.Color(255, 255, 255));
         jPactualizar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel16.setText("Cedula");
-        jPactualizar.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 30));
-
-        jTFcedulaACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPactualizar.add(jTFcedulaACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 300, -1));
-
-        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel17.setText("Nombres");
-        jPactualizar.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, 30));
-
-        jTFnombresACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPactualizar.add(jTFnombresACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 300, -1));
-
-        jTFdireccionACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPactualizar.add(jTFdireccionACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 300, -1));
-
-        jTFtelefonoACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPactualizar.add(jTFtelefonoACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 300, -1));
-
-        jTFcorreoACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPactualizar.add(jTFcorreoACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 300, -1));
-
-        jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel18.setText("Correo");
-        jPactualizar.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, 30));
-
-        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel19.setText("Dirección");
-        jPactualizar.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, 30));
-
-        jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel20.setText("Teléfono");
-        jPactualizar.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, 30));
-
-        jTactualizar.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "id_cliente", "nombres", "direccion", "telefono", "correo"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane4.setViewportView(jTactualizar);
-
-        jPactualizar.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 740, 260));
 
         jPactualizarACTUALIZAR.setBackground(new java.awt.Color(253, 239, 213));
 
@@ -420,6 +315,46 @@ public class JFclientes extends javax.swing.JFrame {
 
         jPactualizar.add(jPnuevoACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 230, 200, 40));
 
+        jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel22.setText("Cédula");
+        jPactualizar.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 30));
+
+        jTFcedulaACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPactualizar.add(jTFcedulaACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 300, -1));
+
+        jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel23.setText("Nombres");
+        jPactualizar.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, 30));
+
+        jTFnombresACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPactualizar.add(jTFnombresACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 300, -1));
+
+        jTFdireccionACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPactualizar.add(jTFdireccionACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 300, -1));
+
+        jTFtelefonoACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPactualizar.add(jTFtelefonoACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 300, -1));
+
+        jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel24.setText("Sucursal");
+        jPactualizar.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, 30));
+
+        jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel25.setText("Dirección");
+        jPactualizar.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, 30));
+
+        jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel26.setText("Teléfono");
+        jPactualizar.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, 30));
+
+        jCBsucursalACTUALIZAR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Sucursal Norte", "Sucursal Sur" }));
+        jCBsucursalACTUALIZAR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBsucursalACTUALIZARActionPerformed(evt);
+            }
+        });
+        jPactualizar.add(jCBsucursalACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 300, 30));
+
         jTPregistrar.addTab("Actualizar", jPactualizar);
 
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
@@ -429,31 +364,8 @@ public class JFclientes extends javax.swing.JFrame {
         jPanel9.add(jTFcedulaELIMINAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 300, -1));
 
         jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel21.setText("Cedula");
+        jLabel21.setText("Cédula");
         jPanel9.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, 30));
-
-        jTeliminar.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "id_cliente", "nombres", "direccion", "telefono", "correo"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane5.setViewportView(jTeliminar);
-
-        jPanel9.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 740, 260));
 
         jPeliminarELIMINAR.setBackground(new java.awt.Color(253, 239, 213));
 
@@ -491,26 +403,50 @@ public class JFclientes extends javax.swing.JFrame {
         jPeliminarLayout.setVerticalGroup(
             jPeliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPeliminarLayout.createSequentialGroup()
-                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jTPregistrar.addTab("Eliminar", jPeliminar);
 
-        jPanel1.add(jTPregistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 800, 620));
+        jPanel1.add(jTPregistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 800, 330));
 
-        jBregresar.setText("REGRESAR");
-        jBregresar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jBregresarMouseClicked(evt);
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        });
-        jBregresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBregresarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jBregresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 0, -1, -1));
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 760, 270));
+
+        jPregresar.setBackground(new java.awt.Color(253, 239, 213));
+
+        jLregresar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLregresar.setText("REGRESAR");
+
+        javax.swing.GroupLayout jPregresarLayout = new javax.swing.GroupLayout(jPregresar);
+        jPregresar.setLayout(jPregresarLayout);
+        jPregresarLayout.setHorizontalGroup(
+            jPregresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPregresarLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLregresar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPregresarLayout.setVerticalGroup(
+            jPregresarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPregresarLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLregresar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jPanel1.add(jPregresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, -1, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -520,23 +456,13 @@ public class JFclientes extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 728, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jBregresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBregresarMouseClicked
-
-        JFpantallaInicio pantallaInicio = new JFpantallaInicio();
-        pantallaInicio.setVisible(true);
-        this.setVisible(false);
-
-    }//GEN-LAST:event_jBregresarMouseClicked
-
-    private void jBregresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBregresarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBregresarActionPerformed
 
     private void jLnuevoREGISTRARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLnuevoREGISTRARMouseClicked
 
@@ -779,6 +705,14 @@ public class JFclientes extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jLeliminarELIMINARMouseClicked
 
+    private void jCBsucursalREGISTRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBsucursalREGISTRARActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBsucursalREGISTRARActionPerformed
+
+    private void jCBsucursalACTUALIZARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBsucursalACTUALIZARActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBsucursalACTUALIZARActionPerformed
+
     
     
     
@@ -818,26 +752,28 @@ public class JFclientes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBregresar;
+    private javax.swing.JComboBox<String> jCBsucursalACTUALIZAR;
+    private javax.swing.JComboBox<String> jCBsucursalREGISTRAR;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLactualizarACTUALIZAR;
     private javax.swing.JLabel jLbuscarBUSCAR;
     private javax.swing.JLabel jLeliminarELIMINAR;
     private javax.swing.JLabel jLguardarREGISTRAR;
     private javax.swing.JLabel jLnuevoACTUALIZAR;
     private javax.swing.JLabel jLnuevoREGISTRAR;
+    private javax.swing.JLabel jLregresar;
     private javax.swing.JPanel jPactualizar;
     private javax.swing.JPanel jPactualizarACTUALIZAR;
     private javax.swing.JPanel jPanel1;
@@ -852,16 +788,12 @@ public class JFclientes extends javax.swing.JFrame {
     private javax.swing.JPanel jPnuevoACTUALIZAR;
     private javax.swing.JPanel jPnuevoREGISTRAR;
     private javax.swing.JPanel jPregistrar;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JPanel jPregresar;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFcedulaACTUALIZAR;
     private javax.swing.JTextField jTFcedulaBUSCAR;
     private javax.swing.JTextField jTFcedulaELIMINAR;
     private javax.swing.JTextField jTFcedulaREGISTRAR;
-    private javax.swing.JTextField jTFcorreoACTUALIZAR;
-    private javax.swing.JTextField jTFcorreoREGISTRAR;
     private javax.swing.JTextField jTFdireccionACTUALIZAR;
     private javax.swing.JTextField jTFdireccionREGISTRAR;
     private javax.swing.JTextField jTFnombresACTUALIZAR;
@@ -869,10 +801,7 @@ public class JFclientes extends javax.swing.JFrame {
     private javax.swing.JTextField jTFtelefonoACTUALIZAR;
     private javax.swing.JTextField jTFtelefonoREGISTRAR;
     private javax.swing.JTabbedPane jTPregistrar;
-    private javax.swing.JTable jTactualizar;
-    private javax.swing.JTable jTbuscar;
-    private javax.swing.JTable jTeliminar;
-    private javax.swing.JTable jTregistrar;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel logo;
     // End of variables declaration//GEN-END:variables
 }
