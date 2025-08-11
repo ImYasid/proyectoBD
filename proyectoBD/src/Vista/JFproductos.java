@@ -4,6 +4,7 @@ import ConexionSQL.SqlConection;
 import CRUD.ProductosCRUD;
 import ConexionSQL.SessionManager;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 public class JFproductos extends javax.swing.JFrame {
 
@@ -12,10 +13,15 @@ public class JFproductos extends javax.swing.JFrame {
         this.setLocationRelativeTo(this);
         CambiosColorBoton.configurarCambiosColor(jLguardarREGISTRAR, jPguardarREGISTRAR);
         CambiosColorBoton.configurarCambiosColor(jLnuevoREGISTRAR, jPnuevoREGISTRAR);
-        CambiosColorBoton.configurarCambiosColor(jLnuevoACTUALIZAR, jPnuevoACTUALIZAR);
+        CambiosColorBoton.configurarCambiosColor(jLbuscarACTUALIZAR, jPbuscarACTUALIZAR);
         CambiosColorBoton.configurarCambiosColor(jLbuscarBUSCAR, jPbuscarBUSCAR);
         CambiosColorBoton.configurarCambiosColor(jLactualizarACTUALIZAR, jPactualizarACTUALIZAR);
         CambiosColorBoton.configurarCambiosColor(jLeliminarELIMINAR, jPeliminarELIMINAR);
+        CambiosColorBoton.configurarCambiosColor(jLregresar, jPregresar);
+        jCBsucursalACTUALIZAR.setEnabled(false);
+        jTFnombreACTUALIZAR.setEnabled(false);
+        jTFprecioACTUALIZAR.setEnabled(false);
+        jTFstockACTUALIZAR.setEnabled(false);
         
     }
 
@@ -57,16 +63,16 @@ public class JFproductos extends javax.swing.JFrame {
         jTFidproductoACTUALIZAR = new javax.swing.JTextField();
         jPactualizarACTUALIZAR = new javax.swing.JPanel();
         jLactualizarACTUALIZAR = new javax.swing.JLabel();
-        jPnuevoACTUALIZAR = new javax.swing.JPanel();
-        jLnuevoACTUALIZAR = new javax.swing.JLabel();
+        jPbuscarACTUALIZAR = new javax.swing.JPanel();
+        jLbuscarACTUALIZAR = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        jTFnombreREGISTRAR1 = new javax.swing.JTextField();
-        jTFprecioREGISTRAR1 = new javax.swing.JTextField();
-        jTFstockREGISTRAR1 = new javax.swing.JTextField();
+        jTFnombreACTUALIZAR = new javax.swing.JTextField();
+        jTFprecioACTUALIZAR = new javax.swing.JTextField();
+        jTFstockACTUALIZAR = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        jCBsucursalREGISTRAR1 = new javax.swing.JComboBox<>();
+        jCBsucursalACTUALIZAR = new javax.swing.JComboBox<>();
         jPeliminar = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jTFidproductoELIMINAR = new javax.swing.JTextField();
@@ -122,9 +128,19 @@ public class JFproductos extends javax.swing.JFrame {
         jPregistrar.add(jTFnombreREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 290, -1));
 
         jTFprecioREGISTRAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTFprecioREGISTRAR.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFprecioREGISTRARKeyTyped(evt);
+            }
+        });
         jPregistrar.add(jTFprecioREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 290, -1));
 
         jTFstockREGISTRAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTFstockREGISTRAR.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFstockREGISTRARKeyTyped(evt);
+            }
+        });
         jPregistrar.add(jTFstockREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 290, -1));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -198,6 +214,11 @@ public class JFproductos extends javax.swing.JFrame {
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTFidproductoBUSCAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTFidproductoBUSCAR.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFidproductoBUSCARKeyTyped(evt);
+            }
+        });
         jPanel8.add(jTFidproductoBUSCAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 300, -1));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -279,46 +300,56 @@ public class JFproductos extends javax.swing.JFrame {
 
         jPactualizar.add(jPactualizarACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 200, 40));
 
-        jPnuevoACTUALIZAR.setBackground(new java.awt.Color(253, 239, 213));
+        jPbuscarACTUALIZAR.setBackground(new java.awt.Color(253, 239, 213));
 
-        jLnuevoACTUALIZAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLnuevoACTUALIZAR.setText("NUEVO");
-        jLnuevoACTUALIZAR.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLbuscarACTUALIZAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLbuscarACTUALIZAR.setText("BUSCAR");
+        jLbuscarACTUALIZAR.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLnuevoACTUALIZARMouseClicked(evt);
+                jLbuscarACTUALIZARMouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout jPnuevoACTUALIZARLayout = new javax.swing.GroupLayout(jPnuevoACTUALIZAR);
-        jPnuevoACTUALIZAR.setLayout(jPnuevoACTUALIZARLayout);
-        jPnuevoACTUALIZARLayout.setHorizontalGroup(
-            jPnuevoACTUALIZARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLnuevoACTUALIZAR, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPbuscarACTUALIZARLayout = new javax.swing.GroupLayout(jPbuscarACTUALIZAR);
+        jPbuscarACTUALIZAR.setLayout(jPbuscarACTUALIZARLayout);
+        jPbuscarACTUALIZARLayout.setHorizontalGroup(
+            jPbuscarACTUALIZARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLbuscarACTUALIZAR, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
         );
-        jPnuevoACTUALIZARLayout.setVerticalGroup(
-            jPnuevoACTUALIZARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPnuevoACTUALIZARLayout.createSequentialGroup()
+        jPbuscarACTUALIZARLayout.setVerticalGroup(
+            jPbuscarACTUALIZARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPbuscarACTUALIZARLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLnuevoACTUALIZAR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLbuscarACTUALIZAR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPactualizar.add(jPnuevoACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 230, 200, 40));
+        jPactualizar.add(jPbuscarACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 230, 200, 40));
 
         jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel22.setText("Stock");
         jPactualizar.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, 30));
 
-        jTFnombreREGISTRAR1.setEditable(false);
-        jTFnombreREGISTRAR1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPactualizar.add(jTFnombreREGISTRAR1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 290, -1));
+        jTFnombreACTUALIZAR.setEditable(false);
+        jTFnombreACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPactualizar.add(jTFnombreACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 290, -1));
 
-        jTFprecioREGISTRAR1.setEditable(false);
-        jTFprecioREGISTRAR1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPactualizar.add(jTFprecioREGISTRAR1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 290, -1));
+        jTFprecioACTUALIZAR.setEditable(false);
+        jTFprecioACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTFprecioACTUALIZAR.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFprecioACTUALIZARKeyTyped(evt);
+            }
+        });
+        jPactualizar.add(jTFprecioACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 290, -1));
 
-        jTFstockREGISTRAR1.setEditable(false);
-        jTFstockREGISTRAR1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPactualizar.add(jTFstockREGISTRAR1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 290, -1));
+        jTFstockACTUALIZAR.setEditable(false);
+        jTFstockACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTFstockACTUALIZAR.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFstockACTUALIZARKeyTyped(evt);
+            }
+        });
+        jPactualizar.add(jTFstockACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 290, -1));
 
         jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel23.setText("Sucursal");
@@ -332,13 +363,13 @@ public class JFproductos extends javax.swing.JFrame {
         jLabel25.setText("Nombre comercial");
         jPactualizar.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, 30));
 
-        jCBsucursalREGISTRAR1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Sucursal Norte", "Sucursal Sur" }));
-        jCBsucursalREGISTRAR1.addActionListener(new java.awt.event.ActionListener() {
+        jCBsucursalACTUALIZAR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Sucursal Norte", "Sucursal Sur" }));
+        jCBsucursalACTUALIZAR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBsucursalREGISTRAR1ActionPerformed(evt);
+                jCBsucursalACTUALIZARActionPerformed(evt);
             }
         });
-        jPactualizar.add(jCBsucursalREGISTRAR1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 290, 30));
+        jPactualizar.add(jCBsucursalACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 290, 30));
 
         jTPregistrar.addTab("Actualizar", jPactualizar);
 
@@ -346,6 +377,11 @@ public class JFproductos extends javax.swing.JFrame {
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTFidproductoELIMINAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTFidproductoELIMINAR.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFidproductoELIMINARKeyTyped(evt);
+            }
+        });
         jPanel9.add(jTFidproductoELIMINAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 300, -1));
 
         jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -398,6 +434,12 @@ public class JFproductos extends javax.swing.JFrame {
 
         jLregresar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLregresar.setText("REGRESAR");
+        jLregresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLregresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLregresarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPregresarLayout = new javax.swing.GroupLayout(jPregresar);
         jPregresar.setLayout(jPregresarLayout);
@@ -447,260 +489,105 @@ public class JFproductos extends javax.swing.JFrame {
 
     private void jLnuevoREGISTRARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLnuevoREGISTRARMouseClicked
         
-        jTFidproductoREGISTRAR.setText("");
         jTFnombreREGISTRAR.setText("");
         jTFprecioREGISTRAR.setText("");
-        jTFprecioREGISTRAR.setText("");
         jTFstockREGISTRAR.setText("");
+        jCBsucursalREGISTRAR.setSelectedIndex(0);
         
     }//GEN-LAST:event_jLnuevoREGISTRARMouseClicked
 
     private void jLguardarREGISTRARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLguardarREGISTRARMouseClicked
         
-        try {
-        // Obtenemos los datos de sesión del SessionManager
-        SessionManager session = SessionManager.getInstance();
-        int sedeIndex = session.getSedeIndex();
-        String password = session.getPassword();
-        
-        // Validar que haya una sesión activa
-        if (sedeIndex == 0 || password == null || password.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No hay una sesión activa. Por favor, inicie sesión primero.",
-                "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        // Creamos la conexión usando los datos de sesión
-        SqlConection conexionSQL = new SqlConection();
-        conexionSQL.index = sedeIndex;
-        conexionSQL.password = password;
-        // Obtener los valores ingresados en los campos de texto
-        String idProductoStr = jTFidproductoREGISTRAR.getText().trim(); // id_producto
-        String nombre = jTFnombreREGISTRAR.getText().trim(); // nombre
-        String precioStr = jTFprecioREGISTRAR.getText().trim(); // precio
-        String stockStr = jTFprecioREGISTRAR.getText().trim(); // stock
-        String idSucursalStr = jTFstockREGISTRAR.getText().trim(); // id_sucursal
-
-        // Validar que todos los campos tengan valores
-        if (idProductoStr.isEmpty() || nombre.isEmpty() || precioStr.isEmpty() ||
-            stockStr.isEmpty() || idSucursalStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios",
-                "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Validar que el id, precio, stock y id_sucursal sean números válidos
-        int idProducto, stock, idSucursal;
-        double precio;
-
-        try {
-            idProducto = Integer.parseInt(idProductoStr); // Validar que id_producto sea un número
-            precio = Double.parseDouble(precioStr); // Validar que precio sea un número válido
-            stock = Integer.parseInt(stockStr); // Validar que stock sea un número válido
-            idSucursal = Integer.parseInt(idSucursalStr); // Validar que id_sucursal sea un número válido
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "El ID, precio, stock y el ID de sucursal deben ser valores válidos.",
-                "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Llamar al método para crear el producto
-        ProductosCRUD.crearProducto(idProducto, nombre, precio, stock, idSucursal, conexionSQL);
-
         // Limpiar los campos después de guardar
-        jTFidproductoREGISTRAR.setText("");
         jTFnombreREGISTRAR.setText("");
         jTFprecioREGISTRAR.setText("");
-        jTFprecioREGISTRAR.setText("");
         jTFstockREGISTRAR.setText("");
-
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error al guardar producto: " + e.getMessage(),
-            "Error", JOptionPane.ERROR_MESSAGE);
-    }
-        
+        jCBsucursalREGISTRAR.setSelectedIndex(0);
+   
     }//GEN-LAST:event_jLguardarREGISTRARMouseClicked
 
     private void jLbuscarBUSCARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbuscarBUSCARMouseClicked
         
-        try {
-        // Obtenemos los datos de sesión del SessionManager
-        SessionManager session = SessionManager.getInstance();
-        int sedeIndex = session.getSedeIndex();
-        String password = session.getPassword();
-        
-        // Validar que haya una sesión activa
-        if (sedeIndex == 0 || password == null || password.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No hay una sesión activa. Por favor, inicie sesión primero.",
-                "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        // Creamos la conexión usando los datos de sesión
-        SqlConection conexionSQL = new SqlConection();
-        conexionSQL.index = sedeIndex;
-        conexionSQL.password = password;
-
-        // Obtener y validar los valores ingresados (id_producto)
-        String idProductoStr = jTFidproductoBUSCAR.getText().trim(); // Aquí se captura el valor de id_producto
-
-        // Validar que el campo no esté vacío
-        if (idProductoStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor ingrese el ID del producto para buscar.",
-                "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Validar que el ID del producto sea un número
-        int idProducto;
-        try {
-            idProducto = Integer.parseInt(idProductoStr); // Validar que el ID sea un número válido
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "El ID del producto debe ser un número válido.",
-                "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Llamar al método para buscar el producto sin necesidad de crear una nueva conexión
-        ProductosCRUD crud = new ProductosCRUD();
-        crud.buscarProductoPorId(idProducto, conexionSQL, jTbuscar);  // Pasamos la conexión y la tabla
-
-        // Limpiar el campo de texto de búsqueda después de la búsqueda
-        jTFidproductoBUSCAR.setText("");  // Limpiamos el campo de búsqueda
-
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error al realizar la búsqueda: " + e.getMessage(),
-            "Error", JOptionPane.ERROR_MESSAGE);  // Manejamos cualquier otro error
-    }
-        
     }//GEN-LAST:event_jLbuscarBUSCARMouseClicked
 
-    private void jLnuevoACTUALIZARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLnuevoACTUALIZARMouseClicked
+    private void jLbuscarACTUALIZARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbuscarACTUALIZARMouseClicked
         
-        jTFidproductoACTUALIZAR.setText("");
-        jTFnombreACTUALIZAR.setText("");
-        jTFprecioACTUALIZAR.setText("");
-        jTFstockACTUALIZAR.setText("");
-        jTFsucursalACTUALIZAR.setText("");
+        jCBsucursalACTUALIZAR.setEnabled(true);
+        jTFnombreACTUALIZAR.setEnabled(true);
+        jTFprecioACTUALIZAR.setEnabled(true);
+        jTFstockACTUALIZAR.setEnabled(true);
         
-    }//GEN-LAST:event_jLnuevoACTUALIZARMouseClicked
+        jTFnombreACTUALIZAR.setEditable(true);
+        jTFprecioACTUALIZAR.setEditable(true);
+        jTFstockACTUALIZAR.setEditable(true);
+        
+        
+        
+    }//GEN-LAST:event_jLbuscarACTUALIZARMouseClicked
 
     private void jLactualizarACTUALIZARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLactualizarACTUALIZARMouseClicked
-         try {
-        // Obtenemos los datos de sesión del SessionManager
-        SessionManager session = SessionManager.getInstance();
-        int sedeIndex = session.getSedeIndex();
-        String password = session.getPassword();
-        
-        // Validar que haya una sesión activa
-        if (sedeIndex == 0 || password == null || password.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No hay una sesión activa. Por favor, inicie sesión primero.",
-                "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        // Creamos la conexión usando los datos de sesión
-        SqlConection conexionSQL = new SqlConection();
-        conexionSQL.index = sedeIndex;
-        conexionSQL.password = password;
-        // Obtener los valores ingresados en los campos de texto
-        String idProductoStr = jTFidproductoACTUALIZAR.getText().trim(); // id_producto
-        String nombre = jTFnombreACTUALIZAR.getText().trim(); // nombre
-        String precioStr = jTFprecioACTUALIZAR.getText().trim(); // precio
-        String stockStr = jTFstockACTUALIZAR.getText().trim(); // stock
-        String idSucursalStr = jTFstockACTUALIZAR.getText().trim(); // id_sucursal
-
-        // Validar que todos los campos tengan valores
-        if (idProductoStr.isEmpty() || nombre.isEmpty() || precioStr.isEmpty() ||
-            stockStr.isEmpty() || idSucursalStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios",
-                "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Validar que el id, precio, stock y id_sucursal sean números válidos
-        int idProducto, stock, idSucursal;
-        double precio;
-
-        try {
-            idProducto = Integer.parseInt(idProductoStr); // Validar que id_producto sea un número
-            precio = Double.parseDouble(precioStr); // Validar que precio sea un número válido
-            stock = Integer.parseInt(stockStr); // Validar que stock sea un número válido
-            idSucursal = Integer.parseInt(idSucursalStr); // Validar que id_sucursal sea un número válido
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "El ID, precio, stock y el ID de sucursal deben ser valores válidos.",
-                "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-
-        // Llamar al método para actualizar el producto
-        ProductosCRUD.actualizarProducto(idProducto, nombre, precio, stock, idSucursal, conexionSQL);
 
         // Limpiar los campos después de actualizar
         jTFidproductoACTUALIZAR.setText("");
-        jTFnombreACTUALIZAR.setText("");
-        jTFprecioACTUALIZAR.setText("");
-        jTFstockACTUALIZAR.setText("");
-        jTFsucursalACTUALIZAR.setText("");
+        jTFnombreREGISTRAR.setText("");
+        jTFprecioREGISTRAR.setText("");
+        jTFstockREGISTRAR.setText("");
+        jCBsucursalREGISTRAR.setSelectedIndex(0);
 
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error al actualizar producto: " + e.getMessage(),
-            "Error", JOptionPane.ERROR_MESSAGE);
-    }
     }//GEN-LAST:event_jLactualizarACTUALIZARMouseClicked
 
     private void jLeliminarELIMINARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLeliminarELIMINARMouseClicked
-        
-        try {
-        // Obtenemos los datos de sesión del SessionManager
-        SessionManager session = SessionManager.getInstance();
-        int sedeIndex = session.getSedeIndex();
-        String password = session.getPassword();
-        
-        // Validar que haya una sesión activa
-        if (sedeIndex == 0 || password == null || password.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No hay una sesión activa. Por favor, inicie sesión primero.",
-                "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        // Creamos la conexión usando los datos de sesión
-        SqlConection conexionSQL = new SqlConection();
-        conexionSQL.index = sedeIndex;
-        conexionSQL.password = password;
-        // Obtener el valor del ID del producto ingresado en el campo de texto
-        String idProductoStr = jTFidproductoELIMINAR.getText().trim(); // id_producto
 
-        // Validar que el campo no esté vacío
-        if (idProductoStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor ingrese el ID del producto para eliminar.",
-                "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Validar que el ID del producto sea un número
-        int idProducto;
-        try {
-            idProducto = Integer.parseInt(idProductoStr); // Validar que el ID sea un número válido
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "El ID del producto debe ser un número válido.",
-                "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Llamar al método para eliminar el producto
-        ProductosCRUD.eliminarProducto(idProducto, conexionSQL);
-
-        // Limpiar el campo de texto de eliminación después de eliminar
-        jTFidproductoELIMINAR.setText("");  // Limpiamos el campo de búsqueda
-
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error al eliminar producto: " + e.getMessage(),
-            "Error", JOptionPane.ERROR_MESSAGE);  // Manejamos cualquier otro error
-    }
         
     }//GEN-LAST:event_jLeliminarELIMINARMouseClicked
 
-    private void jCBsucursalREGISTRAR1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBsucursalREGISTRAR1ActionPerformed
+    private void jCBsucursalACTUALIZARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBsucursalACTUALIZARActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCBsucursalREGISTRAR1ActionPerformed
+    }//GEN-LAST:event_jCBsucursalACTUALIZARActionPerformed
+
+    private void jTFprecioREGISTRARKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFprecioREGISTRARKeyTyped
+  
+         soloNumeros(evt, jTFprecioREGISTRAR, 10);
+        
+    }//GEN-LAST:event_jTFprecioREGISTRARKeyTyped
+
+    private void jTFstockREGISTRARKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFstockREGISTRARKeyTyped
+        
+         soloNumeros(evt, jTFstockREGISTRAR, 10);
+         
+    }//GEN-LAST:event_jTFstockREGISTRARKeyTyped
+
+    private void jTFidproductoBUSCARKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFidproductoBUSCARKeyTyped
+        
+         soloNumeros(evt, jTFidproductoBUSCAR, 10);
+         
+    }//GEN-LAST:event_jTFidproductoBUSCARKeyTyped
+
+    private void jTFprecioACTUALIZARKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFprecioACTUALIZARKeyTyped
+       
+        soloNumeros(evt, jTFprecioACTUALIZAR, 10);
+        
+    }//GEN-LAST:event_jTFprecioACTUALIZARKeyTyped
+
+    private void jTFstockACTUALIZARKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFstockACTUALIZARKeyTyped
+        
+        soloNumeros(evt, jTFstockACTUALIZAR, 10);
+        
+    }//GEN-LAST:event_jTFstockACTUALIZARKeyTyped
+
+    private void jTFidproductoELIMINARKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFidproductoELIMINARKeyTyped
+     
+        soloNumeros(evt, jTFidproductoELIMINAR, 10);
+        
+    }//GEN-LAST:event_jTFidproductoELIMINARKeyTyped
+
+    private void jLregresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLregresarMouseClicked
+        
+        JFpantallaInicio inicio = new JFpantallaInicio();
+        inicio.setVisible(true);
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_jLregresarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -740,9 +627,36 @@ public class JFproductos extends javax.swing.JFrame {
         });
     }
 
+    private void soloNumeros(java.awt.event.KeyEvent evt, JTextField campo, int maxDigitos) {
+    char c = evt.getKeyChar();
+
+    // Limitar longitud
+    if (campo.getText().length() >= maxDigitos) {
+        evt.consume();
+        JOptionPane.showMessageDialog(
+            this,
+            "No se permiten más de " + maxDigitos + " dígitos",
+            "Error de entrada",
+            JOptionPane.ERROR_MESSAGE
+        );
+        return;
+    }
+
+    // Solo números y backspace
+    if (!Character.isDigit(c) && c != '\b') {
+        evt.consume();
+        JOptionPane.showMessageDialog(
+            this,
+            "Solo se permiten números",
+            "Error de entrada",
+            JOptionPane.ERROR_MESSAGE
+        );
+    }
+}
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> jCBsucursalACTUALIZAR;
     private javax.swing.JComboBox<String> jCBsucursalREGISTRAR;
-    private javax.swing.JComboBox<String> jCBsucursalREGISTRAR1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -756,10 +670,10 @@ public class JFproductos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLactualizarACTUALIZAR;
+    private javax.swing.JLabel jLbuscarACTUALIZAR;
     private javax.swing.JLabel jLbuscarBUSCAR;
     private javax.swing.JLabel jLeliminarELIMINAR;
     private javax.swing.JLabel jLguardarREGISTRAR;
-    private javax.swing.JLabel jLnuevoACTUALIZAR;
     private javax.swing.JLabel jLnuevoREGISTRAR;
     private javax.swing.JLabel jLregresar;
     private javax.swing.JPanel jPactualizar;
@@ -768,12 +682,12 @@ public class JFproductos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel jPbuscarACTUALIZAR;
     private javax.swing.JPanel jPbuscarBUSCAR;
     private javax.swing.JPanel jPbuscarr;
     private javax.swing.JPanel jPeliminar;
     private javax.swing.JPanel jPeliminarELIMINAR;
     private javax.swing.JPanel jPguardarREGISTRAR;
-    private javax.swing.JPanel jPnuevoACTUALIZAR;
     private javax.swing.JPanel jPnuevoREGISTRAR;
     private javax.swing.JPanel jPregistrar;
     private javax.swing.JPanel jPregresar;
@@ -781,12 +695,12 @@ public class JFproductos extends javax.swing.JFrame {
     private javax.swing.JTextField jTFidproductoACTUALIZAR;
     private javax.swing.JTextField jTFidproductoBUSCAR;
     private javax.swing.JTextField jTFidproductoELIMINAR;
+    private javax.swing.JTextField jTFnombreACTUALIZAR;
     private javax.swing.JTextField jTFnombreREGISTRAR;
-    private javax.swing.JTextField jTFnombreREGISTRAR1;
+    private javax.swing.JTextField jTFprecioACTUALIZAR;
     private javax.swing.JTextField jTFprecioREGISTRAR;
-    private javax.swing.JTextField jTFprecioREGISTRAR1;
+    private javax.swing.JTextField jTFstockACTUALIZAR;
     private javax.swing.JTextField jTFstockREGISTRAR;
-    private javax.swing.JTextField jTFstockREGISTRAR1;
     private javax.swing.JTabbedPane jTPregistrar;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel logo;

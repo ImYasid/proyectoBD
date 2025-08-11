@@ -4,6 +4,7 @@ import ConexionSQL.SqlConection;
 import CRUD.EmpleadosCRUD;
 import ConexionSQL.SessionManager;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 public class JFempleados extends javax.swing.JFrame {
 
@@ -12,11 +13,18 @@ public class JFempleados extends javax.swing.JFrame {
         this.setLocationRelativeTo(this);
         CambiosColorBoton.configurarCambiosColor(jLguardarREGISTRAR, jPguardarREGISTRAR);
         CambiosColorBoton.configurarCambiosColor(jLnuevoREGISTRAR, jPnuevoREGISTRAR);
-        CambiosColorBoton.configurarCambiosColor(jLnuevoACTUALIZAR, jPnuevoACTUALIZAR);
+        CambiosColorBoton.configurarCambiosColor(jLbuscarACTUALIZAR, jPbuscarACTUALIZAR);
         CambiosColorBoton.configurarCambiosColor(jLbuscarBUSCAR, jPbuscarBUSCAR);
         CambiosColorBoton.configurarCambiosColor(jLactualizarACTUALIZAR, jPactualizarACTUALIZAR);
         CambiosColorBoton.configurarCambiosColor(jLeliminarELIMINAR, jPeliminarELIMINAR);
         CambiosColorBoton.configurarCambiosColor(jLregresar, jPregresar);
+        jCBcargoACTUALIZAR.setEnabled(false);
+        jCBhorarioACTUALIZAR.setEnabled(false);
+        jCBsursalACTUALIZAR.setEnabled(false);
+        jTFnombreACTUALIZAR.setEnabled(false);
+        jTFtelefonoACTUALIZAR.setEnabled(false);
+        jTFcorreoACTUALIZAR.setEnabled(false);
+        jTFdireccionACTUALIZAR.setEnabled(false);
         
     }
 
@@ -64,8 +72,8 @@ public class JFempleados extends javax.swing.JFrame {
         jPactualizar = new javax.swing.JPanel();
         jPactualizarACTUALIZAR = new javax.swing.JPanel();
         jLactualizarACTUALIZAR = new javax.swing.JLabel();
-        jPnuevoACTUALIZAR = new javax.swing.JPanel();
-        jLnuevoACTUALIZAR = new javax.swing.JLabel();
+        jPbuscarACTUALIZAR = new javax.swing.JPanel();
+        jLbuscarACTUALIZAR = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jTFcedulaACTUALIZAR = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
@@ -134,6 +142,11 @@ public class JFempleados extends javax.swing.JFrame {
         jPregistrar.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 30));
 
         jTFcedulaREGISTRAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTFcedulaREGISTRAR.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFcedulaREGISTRARKeyTyped(evt);
+            }
+        });
         jPregistrar.add(jTFcedulaREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 300, -1));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -152,7 +165,7 @@ public class JFempleados extends javax.swing.JFrame {
         jPregistrar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, 30));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel14.setText("Nombre");
+        jLabel14.setText("Nombres");
         jPregistrar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, 30));
 
         jPguardarREGISTRAR.setBackground(new java.awt.Color(253, 239, 213));
@@ -206,6 +219,11 @@ public class JFempleados extends javax.swing.JFrame {
         jPregistrar.add(jPnuevoREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, 200, 40));
 
         jTFtelefonoREGISTRAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTFtelefonoREGISTRAR.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFtelefonoREGISTRARKeyTyped(evt);
+            }
+        });
         jPregistrar.add(jTFtelefonoREGISTRAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 300, -1));
 
         jTFcorreoREGISTRAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -241,6 +259,11 @@ public class JFempleados extends javax.swing.JFrame {
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTFcedulaBUSCAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTFcedulaBUSCAR.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFcedulaBUSCARKeyTyped(evt);
+            }
+        });
         jPanel8.add(jTFcedulaBUSCAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 300, -1));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -315,42 +338,48 @@ public class JFempleados extends javax.swing.JFrame {
 
         jPactualizar.add(jPactualizarACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 200, 40));
 
-        jPnuevoACTUALIZAR.setBackground(new java.awt.Color(253, 239, 213));
+        jPbuscarACTUALIZAR.setBackground(new java.awt.Color(253, 239, 213));
 
-        jLnuevoACTUALIZAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLnuevoACTUALIZAR.setText("NUEVO");
-        jLnuevoACTUALIZAR.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLbuscarACTUALIZAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLbuscarACTUALIZAR.setText("BUSCAR");
+        jLbuscarACTUALIZAR.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLnuevoACTUALIZARMouseClicked(evt);
+                jLbuscarACTUALIZARMouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout jPnuevoACTUALIZARLayout = new javax.swing.GroupLayout(jPnuevoACTUALIZAR);
-        jPnuevoACTUALIZAR.setLayout(jPnuevoACTUALIZARLayout);
-        jPnuevoACTUALIZARLayout.setHorizontalGroup(
-            jPnuevoACTUALIZARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLnuevoACTUALIZAR, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPbuscarACTUALIZARLayout = new javax.swing.GroupLayout(jPbuscarACTUALIZAR);
+        jPbuscarACTUALIZAR.setLayout(jPbuscarACTUALIZARLayout);
+        jPbuscarACTUALIZARLayout.setHorizontalGroup(
+            jPbuscarACTUALIZARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLbuscarACTUALIZAR, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
         );
-        jPnuevoACTUALIZARLayout.setVerticalGroup(
-            jPnuevoACTUALIZARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPnuevoACTUALIZARLayout.createSequentialGroup()
+        jPbuscarACTUALIZARLayout.setVerticalGroup(
+            jPbuscarACTUALIZARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPbuscarACTUALIZARLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLnuevoACTUALIZAR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLbuscarACTUALIZAR, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPactualizar.add(jPnuevoACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, 200, 40));
+        jPactualizar.add(jPbuscarACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, 200, 40));
 
         jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel25.setText("Cédula");
         jPactualizar.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 30));
 
         jTFcedulaACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTFcedulaACTUALIZAR.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFcedulaACTUALIZARKeyTyped(evt);
+            }
+        });
         jPactualizar.add(jTFcedulaACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 300, -1));
 
         jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel26.setText("Horario");
         jPactualizar.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, 30));
 
+        jTFnombreACTUALIZAR.setEditable(false);
         jTFnombreACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jPactualizar.add(jTFnombreACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 300, -1));
 
@@ -363,15 +392,23 @@ public class JFempleados extends javax.swing.JFrame {
         jPactualizar.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, 30));
 
         jLabel29.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel29.setText("Nombre");
+        jLabel29.setText("Nombres");
         jPactualizar.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, 30));
 
+        jTFtelefonoACTUALIZAR.setEditable(false);
         jTFtelefonoACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTFtelefonoACTUALIZAR.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFtelefonoACTUALIZARKeyTyped(evt);
+            }
+        });
         jPactualizar.add(jTFtelefonoACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 300, -1));
 
+        jTFcorreoACTUALIZAR.setEditable(false);
         jTFcorreoACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jPactualizar.add(jTFcorreoACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 300, -1));
 
+        jTFdireccionACTUALIZAR.setEditable(false);
         jTFdireccionACTUALIZAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jPactualizar.add(jTFdireccionACTUALIZAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, 300, -1));
 
@@ -402,6 +439,11 @@ public class JFempleados extends javax.swing.JFrame {
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTFcedulaELIMINAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTFcedulaELIMINAR.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFcedulaELIMINARKeyTyped(evt);
+            }
+        });
         jPanel9.add(jTFcedulaELIMINAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 300, -1));
 
         jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -454,6 +496,12 @@ public class JFempleados extends javax.swing.JFrame {
 
         jLregresar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLregresar.setText("REGRESAR");
+        jLregresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLregresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLregresarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPregresarLayout = new javax.swing.GroupLayout(jPregresar);
         jPregresar.setLayout(jPregresarLayout);
@@ -474,13 +522,13 @@ public class JFempleados extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "id_empleado", "nombres", "cargo", "horario", "telefono", "correo", "direccion", "id_sucursal"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -507,253 +555,116 @@ public class JFempleados extends javax.swing.JFrame {
         
         jTFcedulaREGISTRAR.setText("");
         jTFnombreREGISTRAR.setText("");
-        jTFcargoREGISTRAR.setText("");
-        jTFhorarioREGISTRAR.setText("");
-        jTFsucursalREGISTRAR.setText("");
+        jCBcargoREGISTRAR.setSelectedIndex(0);
+        jCBhorarioREGISTRAR.setSelectedIndex(0);
+        jTFtelefonoREGISTRAR.setText("");
+        jTFcorreoREGISTRAR.setText("");
+        jTFdireccionREGISTRAR.setText("");
+        jCBsursalREGISTRAR.setSelectedIndex(0);
         
     }//GEN-LAST:event_jLnuevoREGISTRARMouseClicked
 
     private void jLguardarREGISTRARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLguardarREGISTRARMouseClicked
         
-         try {
-        // Obtenemos los datos de sesión del SessionManager
-        SessionManager session = SessionManager.getInstance();
-        int sedeIndex = session.getSedeIndex();
-        String password = session.getPassword();
         
-        // Validar que haya una sesión activa
-        if (sedeIndex == 0 || password == null || password.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No hay una sesión activa. Por favor, inicie sesión primero.",
-                "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        // Creamos la conexión usando los datos de sesión
-        SqlConection conexionSQL = new SqlConection();
-        conexionSQL.index = sedeIndex;
-        conexionSQL.password = password;
-        // Obtener los valores ingresados en los campos de texto
-        String cedulaStr = jTFcedulaREGISTRAR.getText().trim(); // id_empleado
-        String nombre = jTFnombreREGISTRAR.getText().trim(); // nombre
-        String cargo = jTFcargoREGISTRAR.getText().trim(); // cargo
-        String horario = jTFhorarioREGISTRAR.getText().trim(); // horario
-        String idSucursalStr = jTFsucursalREGISTRAR.getText().trim(); // id_sucursal
-
-        // Validar que todos los campos tengan valores
-        if (cedulaStr.isEmpty() || nombre.isEmpty() || cargo.isEmpty() ||
-            horario.isEmpty() || idSucursalStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios",
-                "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Validar que la cédula y el id_sucursal sean números
-        int idEmpleado;
-        int idSucursal;
-
-        try {
-            idEmpleado = Integer.parseInt(cedulaStr); // Validar que sea un número
-            idSucursal = Integer.parseInt(idSucursalStr); // Validar que id_sucursal sea un número
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "La cédula y el id_sucursal deben ser números válidos.",
-                "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Llamar al método para crear el empleado
-        EmpleadosCRUD.crearEmpleado(idEmpleado, nombre, cargo, horario, idSucursal, conexionSQL);
-
         // Limpiar los campos después de guardar
         jTFcedulaREGISTRAR.setText("");
         jTFnombreREGISTRAR.setText("");
-        jTFcargoREGISTRAR.setText("");
-        jTFhorarioREGISTRAR.setText("");
-        jTFsucursalREGISTRAR.setText("");
-
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error al guardar empleado: " + e.getMessage(),
-            "Error", JOptionPane.ERROR_MESSAGE);
-    }
-        
-        
+        jCBcargoREGISTRAR.setSelectedIndex(0);
+        jCBhorarioREGISTRAR.setSelectedIndex(0);
+        jTFtelefonoREGISTRAR.setText("");
+        jTFcorreoREGISTRAR.setText("");
+        jTFdireccionREGISTRAR.setText("");
+        jCBsursalREGISTRAR.setSelectedIndex(0);
+ 
     }//GEN-LAST:event_jLguardarREGISTRARMouseClicked
 
-    private void jLnuevoACTUALIZARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLnuevoACTUALIZARMouseClicked
+    private void jLbuscarACTUALIZARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbuscarACTUALIZARMouseClicked
+
+        jCBcargoACTUALIZAR.setEnabled(true);
+        jCBhorarioACTUALIZAR.setEnabled(true);
+        jCBsursalACTUALIZAR.setEnabled(true);
+        jTFnombreACTUALIZAR.setEnabled(true);
+        jTFtelefonoACTUALIZAR.setEnabled(true);
+        jTFcorreoACTUALIZAR.setEnabled(true);
+        jTFdireccionACTUALIZAR.setEnabled(true);
         
-        jTFcedulaACTUALIZAR.setText("");
-        jTFnombresACTUALIZAR.setText("");
-        jTFcargoACTUALIZAR.setText("");
-        jTFhorarioACTUALIZAR.setText("");
-        jTFsucursalACTUALIZAR.setText("");
         
-    }//GEN-LAST:event_jLnuevoACTUALIZARMouseClicked
+        jTFnombreACTUALIZAR.setEditable(true);
+        jTFtelefonoACTUALIZAR.setEditable(true);
+        jTFcorreoACTUALIZAR.setEditable(true);
+        jTFdireccionACTUALIZAR.setEditable(true);
+        
+          
+    }//GEN-LAST:event_jLbuscarACTUALIZARMouseClicked
 
     private void jLactualizarACTUALIZARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLactualizarACTUALIZARMouseClicked
        
-        try {
-        // Obtenemos los datos de sesión del SessionManager
-        SessionManager session = SessionManager.getInstance();
-        int sedeIndex = session.getSedeIndex();
-        String password = session.getPassword();
         
-        // Validar que haya una sesión activa
-        if (sedeIndex == 0 || password == null || password.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No hay una sesión activa. Por favor, inicie sesión primero.",
-                "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        // Creamos la conexión usando los datos de sesión
-        SqlConection conexionSQL = new SqlConection();
-        conexionSQL.index = sedeIndex;
-        conexionSQL.password = password;
-        // Obtener los valores ingresados en los campos de texto
-        String idEmpleadoStr = jTFcedulaACTUALIZAR.getText().trim(); // id_empleado
-        String nombre = jTFnombresACTUALIZAR.getText().trim(); // nombre
-        String cargo = jTFcargoACTUALIZAR.getText().trim(); // cargo
-        String horario = jTFhorarioACTUALIZAR.getText().trim(); // horario
-        String idSucursalStr = jTFsucursalACTUALIZAR.getText().trim(); // id_sucursal
-
-        // Validar que todos los campos tengan valores
-        if (idEmpleadoStr.isEmpty() || nombre.isEmpty() || cargo.isEmpty() ||
-            horario.isEmpty() || idSucursalStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios",
-                "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Validar que el id_empleado y el id_sucursal sean números
-        int idEmpleado;
-        int idSucursal;
-
-        try {
-            idEmpleado = Integer.parseInt(idEmpleadoStr); // Validar que sea un número
-            idSucursal = Integer.parseInt(idSucursalStr); // Validar que id_sucursal sea un número
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "El ID del empleado y el ID de la sucursal deben ser números válidos.",
-                "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Llamar al método para actualizar el empleado
-        EmpleadosCRUD.actualizarEmpleado(idEmpleado, nombre, cargo, horario, idSucursal, conexionSQL);
-
         // Limpiar los campos después de actualizar
-        jTFcedulaACTUALIZAR.setText("");
-        jTFnombresACTUALIZAR.setText("");
-        jTFcargoACTUALIZAR.setText("");
-        jTFhorarioACTUALIZAR.setText("");
-        jTFsucursalACTUALIZAR.setText("");
-        
-
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error al actualizar empleado: " + e.getMessage(),
-            "Error", JOptionPane.ERROR_MESSAGE);
-    }
+        jTFcedulaREGISTRAR.setText("");
+        jTFnombreREGISTRAR.setText("");
+        jCBcargoREGISTRAR.setSelectedIndex(0);
+        jCBhorarioREGISTRAR.setSelectedIndex(0);
+        jTFtelefonoREGISTRAR.setText("");
+        jTFcorreoREGISTRAR.setText("");
+        jTFdireccionREGISTRAR.setText("");
+        jCBsursalREGISTRAR.setSelectedIndex(0);
+   
         
     }//GEN-LAST:event_jLactualizarACTUALIZARMouseClicked
 
     private void jLbuscarBUSCARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbuscarBUSCARMouseClicked
         
-        try {
-        // Obtenemos los datos de sesión del SessionManager
-        SessionManager session = SessionManager.getInstance();
-        int sedeIndex = session.getSedeIndex();
-        String password = session.getPassword();
-        
-        // Validar que haya una sesión activa
-        if (sedeIndex == 0 || password == null || password.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No hay una sesión activa. Por favor, inicie sesión primero.",
-                "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        // Creamos la conexión usando los datos de sesión
-        SqlConection conexionSQL = new SqlConection();
-        conexionSQL.index = sedeIndex;
-        conexionSQL.password = password;
-
-        // Obtener y validar los valores ingresados (id_empleado)
-        String idEmpleadoStr = jTFcedulaBUSCAR.getText().trim(); // Aquí se captura el valor de la cédula
-
-        // Validar que el campo no esté vacío
-        if (idEmpleadoStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor ingrese el ID del empleado para buscar.",
-                "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Validar que la cédula sea un número
-        int idEmpleado;
-        try {
-            idEmpleado = Integer.parseInt(idEmpleadoStr); // Validar que el ID sea un número válido
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "El ID del empleado debe ser un número válido.",
-                "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Llamar al método para buscar el empleado sin necesidad de crear una nueva conexión
-        EmpleadosCRUD crud = new EmpleadosCRUD();
-        crud.buscarEmpleadoPorId(idEmpleado, conexionSQL, jTbuscar);  // Pasamos la conexión y la tabla
-
-        // Limpiar el campo de texto de búsqueda después de la búsqueda
-        jTFcedulaBUSCAR.setText("");  // Limpiamos el campo de búsqueda
-
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error al realizar la búsqueda: " + e.getMessage(),
-            "Error", JOptionPane.ERROR_MESSAGE);  // Manejamos cualquier otro error
-    }
-        
     }//GEN-LAST:event_jLbuscarBUSCARMouseClicked
 
     private void jLeliminarELIMINARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLeliminarELIMINARMouseClicked
         
-         try {
-        // Obtenemos los datos de sesión del SessionManager
-        SessionManager session = SessionManager.getInstance();
-        int sedeIndex = session.getSedeIndex();
-        String password = session.getPassword();
-        
-        // Validar que haya una sesión activa
-        if (sedeIndex == 0 || password == null || password.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No hay una sesión activa. Por favor, inicie sesión primero.",
-                "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        // Creamos la conexión usando los datos de sesión
-        SqlConection conexionSQL = new SqlConection();
-        conexionSQL.index = sedeIndex;
-        conexionSQL.password = password;
-        // Obtener el valor de la cédula (id_empleado) ingresada en el campo de texto
-        String idEmpleadoStr = jTFcedulaELIMINAR.getText().trim(); // id_empleado
-
-        // Validar que el campo no esté vacío
-        if (idEmpleadoStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor ingrese el ID del empleado para eliminar.",
-                "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Validar que el ID del empleado sea un número
-        int idEmpleado;
-        try {
-            idEmpleado = Integer.parseInt(idEmpleadoStr); // Validar que sea un número
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "El ID del empleado debe ser un número válido.",
-                "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Llamar al método para eliminar el empleado
-        EmpleadosCRUD.eliminarEmpleado(idEmpleado, conexionSQL);
-
-        // Limpiar el campo de texto de eliminación después de eliminar
-        jTFcedulaELIMINAR.setText("");
-
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error al eliminar empleado: " + e.getMessage(),
-            "Error", JOptionPane.ERROR_MESSAGE);
-    }
-        
     }//GEN-LAST:event_jLeliminarELIMINARMouseClicked
+
+    private void jTFcedulaREGISTRARKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFcedulaREGISTRARKeyTyped
+        
+        soloNumeros(evt, jTFcedulaREGISTRAR, 10);
+        
+    }//GEN-LAST:event_jTFcedulaREGISTRARKeyTyped
+
+    private void jTFtelefonoREGISTRARKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFtelefonoREGISTRARKeyTyped
+       
+        soloNumeros(evt, jTFtelefonoREGISTRAR, 10);
+        
+    }//GEN-LAST:event_jTFtelefonoREGISTRARKeyTyped
+
+    private void jTFcedulaBUSCARKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFcedulaBUSCARKeyTyped
+        
+        soloNumeros(evt, jTFcedulaBUSCAR, 10);
+        
+    }//GEN-LAST:event_jTFcedulaBUSCARKeyTyped
+
+    private void jTFcedulaACTUALIZARKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFcedulaACTUALIZARKeyTyped
+        
+        soloNumeros(evt, jTFcedulaACTUALIZAR, 10);
+        
+    }//GEN-LAST:event_jTFcedulaACTUALIZARKeyTyped
+
+    private void jTFtelefonoACTUALIZARKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFtelefonoACTUALIZARKeyTyped
+    
+        soloNumeros(evt, jTFtelefonoACTUALIZAR, 10);
+        
+    }//GEN-LAST:event_jTFtelefonoACTUALIZARKeyTyped
+
+    private void jTFcedulaELIMINARKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFcedulaELIMINARKeyTyped
+        
+        soloNumeros(evt, jTFcedulaELIMINAR, 10);
+        
+    }//GEN-LAST:event_jTFcedulaELIMINARKeyTyped
+
+    private void jLregresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLregresarMouseClicked
+       
+        JFpantallaInicio inicio = new JFpantallaInicio();
+        inicio.setVisible(true);
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_jLregresarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -793,6 +704,34 @@ public class JFempleados extends javax.swing.JFrame {
         });
     }
 
+    private void soloNumeros(java.awt.event.KeyEvent evt, JTextField campo, int maxDigitos) {
+    char c = evt.getKeyChar();
+
+    // Limitar longitud
+    if (campo.getText().length() >= maxDigitos) {
+        evt.consume();
+        JOptionPane.showMessageDialog(
+            this,
+            "No se permiten más de " + maxDigitos + " dígitos",
+            "Error de entrada",
+            JOptionPane.ERROR_MESSAGE
+        );
+        return;
+    }
+
+    // Solo números y backspace
+    if (!Character.isDigit(c) && c != '\b') {
+        evt.consume();
+        JOptionPane.showMessageDialog(
+            this,
+            "Solo se permiten números",
+            "Error de entrada",
+            JOptionPane.ERROR_MESSAGE
+        );
+    }
+}
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jCBcargoACTUALIZAR;
     private javax.swing.JComboBox<String> jCBcargoREGISTRAR;
@@ -820,10 +759,10 @@ public class JFempleados extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLactualizarACTUALIZAR;
+    private javax.swing.JLabel jLbuscarACTUALIZAR;
     private javax.swing.JLabel jLbuscarBUSCAR;
     private javax.swing.JLabel jLeliminarELIMINAR;
     private javax.swing.JLabel jLguardarREGISTRAR;
-    private javax.swing.JLabel jLnuevoACTUALIZAR;
     private javax.swing.JLabel jLnuevoREGISTRAR;
     private javax.swing.JLabel jLregresar;
     private javax.swing.JPanel jPactualizar;
@@ -832,12 +771,12 @@ public class JFempleados extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel jPbuscarACTUALIZAR;
     private javax.swing.JPanel jPbuscarBUSCAR;
     private javax.swing.JPanel jPbuscarr;
     private javax.swing.JPanel jPeliminar;
     private javax.swing.JPanel jPeliminarELIMINAR;
     private javax.swing.JPanel jPguardarREGISTRAR;
-    private javax.swing.JPanel jPnuevoACTUALIZAR;
     private javax.swing.JPanel jPnuevoREGISTRAR;
     private javax.swing.JPanel jPregistrar;
     private javax.swing.JPanel jPregresar;

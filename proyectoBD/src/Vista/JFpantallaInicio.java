@@ -9,6 +9,7 @@ public class JFpantallaInicio extends javax.swing.JFrame {
         CambiosColorBoton.configurarCambiosColor(jLclientes, jPclientes);
         CambiosColorBoton.configurarCambiosColor(jLproductos, jPproductos);
         CambiosColorBoton.configurarCambiosColor(jLempleados, jPempleados);
+        CambiosColorBoton.configurarCambiosColor(jLcerrarSesion, jPcerrarSesion);
     }
 
     /**
@@ -32,6 +33,8 @@ public class JFpantallaInicio extends javax.swing.JFrame {
         jLempleados = new javax.swing.JLabel();
         jPclientes = new javax.swing.JPanel();
         jLclientes = new javax.swing.JLabel();
+        jPcerrarSesion = new javax.swing.JPanel();
+        jLcerrarSesion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,10 +89,12 @@ public class JFpantallaInicio extends javax.swing.JFrame {
         );
         jPventasLayout.setVerticalGroup(
             jPventasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLventas, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+            .addGroup(jPventasLayout.createSequentialGroup()
+                .addComponent(jLventas, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPventas, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, 190, -1));
+        jPanel1.add(jPventas, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, 190, 70));
 
         jPproductos.setBackground(new java.awt.Color(253, 239, 213));
 
@@ -111,10 +116,12 @@ public class JFpantallaInicio extends javax.swing.JFrame {
         );
         jPproductosLayout.setVerticalGroup(
             jPproductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLproductos, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+            .addGroup(jPproductosLayout.createSequentialGroup()
+                .addComponent(jLproductos, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPproductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, 400, -1));
+        jPanel1.add(jPproductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, 400, 70));
 
         jPempleados.setBackground(new java.awt.Color(253, 239, 213));
 
@@ -132,14 +139,18 @@ public class JFpantallaInicio extends javax.swing.JFrame {
         jPempleados.setLayout(jPempleadosLayout);
         jPempleadosLayout.setHorizontalGroup(
             jPempleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLempleados, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(jPempleadosLayout.createSequentialGroup()
+                .addComponent(jLempleados, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPempleadosLayout.setVerticalGroup(
             jPempleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLempleados, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+            .addGroup(jPempleadosLayout.createSequentialGroup()
+                .addComponent(jLempleados, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPempleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 350, 400, -1));
+        jPanel1.add(jPempleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, 400, 70));
 
         jPclientes.setBackground(new java.awt.Color(253, 239, 213));
 
@@ -161,10 +172,41 @@ public class JFpantallaInicio extends javax.swing.JFrame {
         );
         jPclientesLayout.setVerticalGroup(
             jPclientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLclientes, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+            .addGroup(jPclientesLayout.createSequentialGroup()
+                .addComponent(jLclientes, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, -1, -1));
+        jPanel1.add(jPclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, -1, 70));
+
+        jPcerrarSesion.setBackground(new java.awt.Color(253, 239, 213));
+
+        jLcerrarSesion.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        jLcerrarSesion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLcerrarSesion.setText("CERRAR SESIÓN");
+        jLcerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLcerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLcerrarSesionMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPcerrarSesionLayout = new javax.swing.GroupLayout(jPcerrarSesion);
+        jPcerrarSesion.setLayout(jPcerrarSesionLayout);
+        jPcerrarSesionLayout.setHorizontalGroup(
+            jPcerrarSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPcerrarSesionLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLcerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPcerrarSesionLayout.setVerticalGroup(
+            jPcerrarSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPcerrarSesionLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLcerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jPanel1.add(jPcerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 380, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -203,6 +245,14 @@ public class JFpantallaInicio extends javax.swing.JFrame {
         this.setVisible(false);
         
     }//GEN-LAST:event_jLproductosMouseClicked
+
+    private void jLcerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLcerrarSesionMouseClicked
+        
+        JFlogin login = new JFlogin();
+        login.setVisible(true);
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_jLcerrarSesionMouseClicked
 
     private void jLempleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLempleadosMouseClicked
         
@@ -250,12 +300,14 @@ public class JFpantallaInicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLcerrarSesion;
     private javax.swing.JLabel jLclientes;
     private javax.swing.JLabel jLempleados;
     private javax.swing.JLabel jLproductos;
     private javax.swing.JLabel jLventas;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPcerrarSesion;
     private javax.swing.JPanel jPclientes;
     private javax.swing.JPanel jPempleados;
     private javax.swing.JPanel jPproductos;
