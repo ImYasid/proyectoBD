@@ -9,45 +9,71 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ClientesCRUD {
-    public static void crearCliente(int id, String nombres, String direccion, String telefono, String correo, SqlConection conexionSQL) {
-    if (conexionSQL.index != 1) {
-        JOptionPane.showMessageDialog(null,
-            "No se permite registrar clientes desde esta sucursal (replicación unidireccional).",
-            "Acceso restringido", JOptionPane.WARNING_MESSAGE);
-        return;
+public static void crearCliente(String id_cliente, String nombres, String direccion, String telefono, int id_sucursal, SqlConection conexionSQL) {
+    // Elegir tabla según la sede
+    String tablaClienteInfo = "";
+    String tablaClienteId = "Cliente_id"; // Si esta tabla no está fragmentada, la dejamos igual
+    if (conexionSQL.index == 1) {
+        tablaClienteInfo = "Cliente_informacion_norte";
+    } else if (conexionSQL.index == 2) {
+        tablaClienteInfo = "Cliente_Info_Sur";
     }
 
     try (Connection con = conexionSQL.getConexion(conexionSQL.index, conexionSQL.password)) {
-        String sql = "INSERT INTO Cliente (id_cliente, nombres, direccion, telefono, correo) VALUES (?, ?, ?, ?, ?)";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, id);
-        ps.setString(2, nombres);
-        ps.setString(3, direccion);
-        ps.setString(4, telefono);
-        ps.setString(5, correo);
-        ps.executeUpdate();
-        JOptionPane.showMessageDialog(null, "Cliente creado correctamente.");
+        // Insertar en Cliente_id (si aplica)
+        String sqlClienteId = "INSERT INTO " + tablaClienteId + " (id_cliente) VALUES (?)";
+        try (PreparedStatement psClienteId = con.prepareStatement(sqlClienteId)) {
+            psClienteId.setString(1, id_cliente);
+            psClienteId.executeUpdate();
+        }
+
+        // Insertar en tabla fragmentada según sede
+        String sql = "INSERT INTO " + tablaClienteInfo + " (id_cliente, nombres, direccion, telefono, id_sucursal) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, id_cliente);
+            ps.setString(2, nombres);
+            ps.setString(3, direccion);
+            ps.setString(4, telefono);
+            ps.setInt(5, id_sucursal);
+            ps.executeUpdate();
+        }
+
+        JOptionPane.showMessageDialog(null, "Cliente creado correctamente en " + tablaClienteInfo);
+
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(null, "Error al crear cliente: " + e.getMessage());
     }
 }
-    
-    public void buscarClientePorId(int id, Connection con, javax.swing.JTable tablaClientes, java.awt.Component parent) {
-    String sql = "SELECT id_cliente, nombres, direccion, telefono, correo FROM Cliente WHERE id_cliente = ?";
 
-    try (PreparedStatement ps = con.prepareStatement(sql)) {
-        ps.setInt(1, id);
+    
+    public void buscarClientePorId(String id_cliente, SqlConection conexionSQL, javax.swing.JTable tablaClientes, java.awt.Component parent) {
+    // Definir la tabla según el índice de sede
+    String tablaClienteInfo;
+    if (conexionSQL.index == 1) {
+        tablaClienteInfo = "Cliente_informacion_norte";
+    } else if (conexionSQL.index == 2) {
+        tablaClienteInfo = "Cliente_Info_Sur";
+    } else {
+        JOptionPane.showMessageDialog(parent, "Índice de sede no válido");
+        return;
+    }
+
+    String sql = "SELECT id_cliente, nombres, direccion, telefono, id_sucursal FROM " + tablaClienteInfo + " WHERE id_cliente = ?";
+
+    try (Connection con = conexionSQL.getConexion(conexionSQL.index, conexionSQL.password);
+         PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setString(1, id_cliente);
         try (ResultSet rs = ps.executeQuery()) {
             DefaultTableModel modelo = (DefaultTableModel) tablaClientes.getModel();
             modelo.setRowCount(0); // Limpiar tabla
 
             while (rs.next()) {
                 Object[] fila = new Object[5];
-                fila[0] = rs.getInt("id_cliente");
+                fila[0] = rs.getString("id_cliente");  // Mejor usar getString para id_cliente
                 fila[1] = rs.getString("nombres");
                 fila[2] = rs.getString("direccion");
                 fila[3] = rs.getString("telefono");
-                fila[4] = rs.getString("correo");
+                fila[4] = rs.getInt("id_sucursal");
                 modelo.addRow(fila);
             }
 
@@ -59,54 +85,68 @@ public class ClientesCRUD {
         JOptionPane.showMessageDialog(parent, "Error al buscar cliente: " + e.getMessage());
     }
 }
-    
-    public static void actualizarCliente(int id, String nombres, String direccion, String telefono, String correo, SqlConection conexionSQL) {
-        if (conexionSQL.index != 1) {
-            JOptionPane.showMessageDialog(null,
-                "No se permite actualizar clientes desde esta sucursal (replicación unidireccional).",
-                "Acceso restringido", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
 
-        String sql = "UPDATE Cliente SET nombres = ?, direccion = ?, telefono = ?, correo = ? WHERE id_cliente = ?";
-        try (Connection con = conexionSQL.getConexion(conexionSQL.index, conexionSQL.password);
-             PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setString(1, nombres);
-            ps.setString(2, direccion);
-            ps.setString(3, telefono);
-            ps.setString(4, correo);
-            ps.setInt(5, id);
-            int filas = ps.executeUpdate();
-            if (filas > 0) {
-                JOptionPane.showMessageDialog(null, "Cliente actualizado correctamente.");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontró cliente con ese ID.");
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al actualizar cliente: " + e.getMessage());
-        }
+    
+    public static void actualizarCliente(String id_cliente, String nombres, String direccion, String telefono, int id_sucursal, SqlConection conexionSQL) {
+    // Elegir tabla según la sede
+    String tablaClienteInfo = "";
+    if (conexionSQL.index == 1) {
+        tablaClienteInfo = "Cliente_informacion_norte";
+    } else if (conexionSQL.index == 2) {
+        tablaClienteInfo = "Cliente_Info_Sur";
     }
-    
-    public static void eliminarCliente(int id, SqlConection conexionSQL) {
-        if (conexionSQL.index != 1) {
-            JOptionPane.showMessageDialog(null,
-                "No se permite eliminar clientes desde esta sucursal (replicación unidireccional).",
-                "Acceso restringido", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
 
-        String sql = "DELETE FROM Cliente WHERE id_cliente = ?";
-        try (Connection con = conexionSQL.getConexion(conexionSQL.index, conexionSQL.password);
-             PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setInt(1, id);
-            int filas = ps.executeUpdate();
-            if (filas > 0) {
-                JOptionPane.showMessageDialog(null, "Cliente eliminado correctamente.");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontró cliente con ese ID.");
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al eliminar cliente: " + e.getMessage());
+    String sql = "UPDATE " + tablaClienteInfo + " SET nombres = ?, direccion = ?, telefono = ?, id_sucursal = ? WHERE id_cliente = ?";
+
+    try (Connection con = conexionSQL.getConexion(conexionSQL.index, conexionSQL.password);
+         PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setString(1, nombres);
+        ps.setString(2, direccion);
+        ps.setString(3, telefono);
+        ps.setInt(4, id_sucursal);
+        ps.setString(5, id_cliente);
+
+        int filas = ps.executeUpdate();
+
+        if (filas > 0) {
+            JOptionPane.showMessageDialog(null, "Cliente actualizado correctamente.");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró cliente con ese ID.");
         }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al actualizar cliente: " + e.getMessage());
     }
 }
+
+    
+    
+    
+    public static void eliminarCliente(String id_cliente, SqlConection conexionSQL) {
+    // Seleccionar tabla según la sede
+    String tablaClienteInfo = "";
+    if (conexionSQL.index == 1) {
+        tablaClienteInfo = "Cliente_informacion_norte";
+    } else if (conexionSQL.index == 2) {
+        tablaClienteInfo = "Cliente_Info_Sur";
+    }
+
+    String sql = "DELETE FROM " + tablaClienteInfo + " WHERE id_cliente = ?";
+
+    try (Connection con = conexionSQL.getConexion(conexionSQL.index, conexionSQL.password);
+         PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setString(1, id_cliente);
+
+        int filas = ps.executeUpdate();
+
+        if (filas > 0) {
+            JOptionPane.showMessageDialog(null, "Cliente eliminado correctamente.");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró cliente con ese ID.");
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al eliminar cliente: " + e.getMessage());
+    }
+    }
+}
+    
+

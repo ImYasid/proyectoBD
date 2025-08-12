@@ -8,11 +8,11 @@ import javax.swing.table.DefaultTableModel;
 
 public class ProductosCRUD {
     
-    public static void crearProducto(int id, String nombre, double precio, int stock, int idSucursal, SqlConection conexionSQL) {
+    public static void crearProducto(int id_producto, String nombre, double precio, int stock, int idSucursal, SqlConection conexionSQL) {
         try (Connection con = conexionSQL.getConexion(conexionSQL.index, conexionSQL.password)) {
             String sql = "INSERT INTO Vista_Producto (id_producto, nombre, precio, stock, id_sucursal, rowguid) VALUES (?, ?, ?, ?, ?, NEWID())";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setInt(1, id_producto);
             ps.setString(2, nombre);
             ps.setDouble(3, precio);
             ps.setInt(4, stock);

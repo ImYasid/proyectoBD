@@ -23,9 +23,9 @@ public class SqlConection {
                               + "encrypt=true;trustServerCertificate=true";
             }
             case 2 -> {
-                connectionUrl = "jdbc:sqlserver://MEREKETENGUE:1433;"
-                              + "database=Sucursal_Sursh;"
-                              + "user=sag;"
+                connectionUrl = "jdbc:sqlserver://localhost\\MSSQLSERVER3;"
+                              + "database=Quito_Sur;"
+                              + "user=sedeSur;"
                               + "password=" + password + ";"
                               + "timeout=30;"
                               + "encrypt=true;trustServerCertificate=true";

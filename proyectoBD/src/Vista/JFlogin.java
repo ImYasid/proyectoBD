@@ -79,11 +79,6 @@ public class JFlogin extends javax.swing.JFrame {
                 jPcontraseñaMousePressed(evt);
             }
         });
-        jPcontraseña.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPcontraseñaActionPerformed(evt);
-            }
-        });
         jPanel1.add(jPcontraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 400, 40));
 
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
@@ -153,7 +148,7 @@ public class JFlogin extends javax.swing.JFrame {
 
         jCBSede.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jCBSede.setForeground(new java.awt.Color(62, 62, 62));
-        jCBSede.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ingrese su sede", "Sucursal Norte", "Sucursal Sur" }));
+        jCBSede.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Sucursal Norte", "Sucursal Sur" }));
         jCBSede.setBorder(null);
         jPanel1.add(jCBSede, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 400, 40));
 
@@ -183,10 +178,6 @@ public class JFlogin extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jPcontraseñaMousePressed
-
-    private void jPcontraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPcontraseñaActionPerformed
- 
-    }//GEN-LAST:event_jPcontraseñaActionPerformed
 
     
     private void jLingresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLingresarMouseClicked

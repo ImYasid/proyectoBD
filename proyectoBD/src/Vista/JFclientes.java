@@ -5,6 +5,12 @@ import CRUD.ClientesCRUD;
 import javax.swing.JOptionPane;
 import ConexionSQL.SessionManager;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 
 
 
@@ -83,7 +89,7 @@ public class JFclientes extends javax.swing.JFrame {
         jPeliminarELIMINAR = new javax.swing.JPanel();
         jLeliminarELIMINAR = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTcliente = new javax.swing.JTable();
         jPregresar = new javax.swing.JPanel();
         jLregresar = new javax.swing.JLabel();
 
@@ -438,7 +444,7 @@ public class JFclientes extends javax.swing.JFrame {
 
         jPanel1.add(jTPregistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 800, 330));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTcliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -457,7 +463,7 @@ public class JFclientes extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTcliente);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 760, 270));
 
@@ -521,6 +527,7 @@ public class JFclientes extends javax.swing.JFrame {
         jTFdireccionACTUALIZAR.setEnabled(true);
         jTFtelefonoACTUALIZAR.setEnabled(true);
         jTFnombresACTUALIZAR.setEnabled(true);
+        jTFcedulaACTUALIZAR.setEnabled(false);
         
         jTFnombresACTUALIZAR.setEditable(true);
         jTFdireccionACTUALIZAR.setEditable(true);
@@ -529,30 +536,155 @@ public class JFclientes extends javax.swing.JFrame {
         
         jCBsucursalACTUALIZAR.setEnabled(true);
         
+        String id = jTFcedulaACTUALIZAR.getText().trim();
+        if (id.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese una cédula para buscar");
+        } else {
+            buscarClientePorIdYCargarCampos(id);
+        }
+        
     }//GEN-LAST:event_jLbuscarACTUALIZARMouseClicked
 
     private void jLguardarREGISTRARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLguardarREGISTRARMouseClicked
-                                                        
+                             
+        try {
+        // Obtenemos los datos de sesión del SessionManager
+        SessionManager session = SessionManager.getInstance();
+        int sedeIndex = session.getSedeIndex();
+        String password = session.getPassword();
+        
+        // Validar que haya una sesión activa
+        if (sedeIndex == 0 || password == null || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay una sesión activa. Por favor, inicie sesión primero.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // Creamos la conexión usando los datos de sesión
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = sedeIndex;
+        conexionSQL.password = password;
+        
+        // Obtener y validar los valores ingresados
+        String id_cliente = jTFcedulaREGISTRAR.getText().trim();
+        String nombres = jTFnombresREGISTRAR.getText().trim();
+        String direccion = jTFdireccionREGISTRAR.getText().trim();
+        String telefono = jTFtelefonoREGISTRAR.getText().trim();
+        int id_sucursal = jCBsucursalREGISTRAR.getSelectedIndex();
+
+        if (id_cliente.isEmpty() || nombres.isEmpty() || direccion.isEmpty() ||
+            telefono.isEmpty() || id_sucursal == -1) {
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        // Usamos el CRUD con la conexión configurada
+        ClientesCRUD.crearCliente(id_cliente, nombres, direccion, telefono, id_sucursal, conexionSQL);
+
+        // Mensaje de éxito
+        JOptionPane.showMessageDialog(this, "Operacion Exitosa");
+        
+        // Recargar tabla
+        cargarClientesEnTabla(conexionSQL);
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al guardar cliente: " + e.getMessage(),
+            "Error", JOptionPane.ERROR_MESSAGE);
+    }
+        
     }//GEN-LAST:event_jLguardarREGISTRARMouseClicked
 
     private void jLbuscarBUSCARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbuscarBUSCARMouseClicked
+
+           String id = jTFcedulaBUSCAR.getText().trim();
+    if (id.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Ingrese una cédula para buscar");
+        return;
+    }
+
+    try {
+        SessionManager session = SessionManager.getInstance();
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = session.getSedeIndex();
+        conexionSQL.password = session.getPassword();
+
+        // No necesitas obtener Connection aquí, lo hace el método buscarClientePorId
+        ClientesCRUD crud = new ClientesCRUD();
+        crud.buscarClientePorId(id, conexionSQL, jTcliente, this);
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+    }
         
     }//GEN-LAST:event_jLbuscarBUSCARMouseClicked
 
     private void jLactualizarACTUALIZARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLactualizarACTUALIZARMouseClicked
        
+        String id_cliente = jTFcedulaACTUALIZAR.getText().trim();
+        String nombres = jTFnombresACTUALIZAR.getText().trim();
+        String direccion = jTFdireccionACTUALIZAR.getText().trim();
+        String telefono = jTFtelefonoACTUALIZAR.getText().trim();
+        int id_sucursal = jCBsucursalACTUALIZAR.getSelectedIndex();
+
+        if (id_cliente.isEmpty() || nombres.isEmpty() || direccion.isEmpty() || telefono.isEmpty() || id_sucursal == -1) {
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            SessionManager session = SessionManager.getInstance();
+            SqlConection conexionSQL = new SqlConection();
+            conexionSQL.index = session.getSedeIndex();
+            conexionSQL.password = session.getPassword();
+
+            ClientesCRUD.actualizarCliente(id_cliente, nombres, direccion, telefono, id_sucursal, conexionSQL);
+
+            // Si quieres, recarga la tabla para que muestre los datos actualizados
+            cargarClientesEnTabla(conexionSQL);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al actualizar cliente: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
        
         // Limpiar los campos después de actualizar
-        jTFcedulaREGISTRAR.setText("");
-        jTFnombresREGISTRAR.setText("");
-        jTFdireccionREGISTRAR.setText("");
-        jTFtelefonoREGISTRAR.setText("");
-        jCBsucursalREGISTRAR.setSelectedIndex(0);
+        jTFcedulaACTUALIZAR.setText("");
+        jTFnombresACTUALIZAR.setText("");
+        jTFdireccionACTUALIZAR.setText("");
+        jTFtelefonoACTUALIZAR.setText("");
+        jCBsucursalACTUALIZAR.setSelectedIndex(0);
 
     }//GEN-LAST:event_jLactualizarACTUALIZARMouseClicked
 
     private void jLeliminarELIMINARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLeliminarELIMINARMouseClicked
 
+        String id_cliente = jTFcedulaELIMINAR.getText().trim(); 
+
+    if (id_cliente.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Ingrese la cédula del cliente a eliminar.");
+        return;
+    }
+
+    int confirm = JOptionPane.showConfirmDialog(this,
+        "¿Está seguro de eliminar al cliente con cédula: " + id_cliente + "?",
+        "Confirmar eliminación",
+        JOptionPane.YES_NO_OPTION);
+
+    if (confirm == JOptionPane.YES_OPTION) {
+        try {
+            SessionManager session = SessionManager.getInstance();
+            SqlConection conexionSQL = new SqlConection();
+            conexionSQL.index = session.getSedeIndex();
+            conexionSQL.password = session.getPassword();
+
+            ClientesCRUD.eliminarCliente(id_cliente, conexionSQL);
+
+            // Recarga la tabla para mostrar los cambios
+            cargarClientesEnTabla(conexionSQL);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al eliminar cliente: " + e.getMessage());
+        }
+    }
         
     }//GEN-LAST:event_jLeliminarELIMINARMouseClicked
 
@@ -638,6 +770,86 @@ public class JFclientes extends javax.swing.JFrame {
         });
     }
     
+    
+    private void buscarClientePorIdYCargarCampos(String id_cliente) {
+    try {
+        SessionManager session = SessionManager.getInstance();
+        SqlConection conexionSQL = new SqlConection();
+        Connection con = conexionSQL.getConexion(session.getSedeIndex(), session.getPassword());
+
+        if (con == null) {
+            JOptionPane.showMessageDialog(this, "No se pudo conectar a la base de datos");
+            return;
+        }
+
+        String sql;
+        if (session.getSedeIndex() == 1) {
+            sql = "SELECT id_cliente, nombres, direccion, telefono, id_sucursal FROM Cliente_Info_Norte WHERE id_cliente = ?";
+        } else {
+            sql = "SELECT id_cliente, nombres, direccion, telefono, id_sucursal FROM Cliente_Info_Sur WHERE id_cliente = ?";
+        }
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, id_cliente);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    // Llenar la tabla (opcional)
+                    DefaultTableModel modelo = (DefaultTableModel) jTcliente.getModel();
+                    modelo.setRowCount(0);
+                    modelo.addRow(new Object[]{
+                        rs.getString("id_cliente"),
+                        rs.getString("nombres"),
+                        rs.getString("direccion"),
+                        rs.getString("telefono"),
+                        rs.getInt("id_sucursal")
+                    });
+
+                    // Llenar campos de texto y combo
+                    jTFcedulaACTUALIZAR.setText(rs.getString("id_cliente"));
+                    jTFnombresACTUALIZAR.setText(rs.getString("nombres"));
+                    jTFdireccionACTUALIZAR.setText(rs.getString("direccion"));
+                    jTFtelefonoACTUALIZAR.setText(rs.getString("telefono"));
+                    jCBsucursalACTUALIZAR.setSelectedIndex(rs.getInt("id_sucursal"));
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se encontró cliente con esa cédula");
+                }
+            }
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error al buscar cliente: " + e.getMessage());
+    }
+}
+
+    
+    private void cargarClientesEnTabla(SqlConection conexionSQL) {
+    try (Connection conn = conexionSQL.getConexion(conexionSQL.index, conexionSQL.password)) {
+        DefaultTableModel model = (DefaultTableModel) jTcliente.getModel();
+        model.setRowCount(0); // limpiar tabla
+
+        String sql = "SELECT id_cliente, nombres, direccion, telefono, id_sucursal FROM Cliente_Info_Sur";
+        try (PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    rs.getString("id_cliente"),
+                    rs.getString("nombres"),
+                    rs.getString("direccion"),
+                    rs.getString("telefono"),
+                    rs.getInt("id_sucursal")
+                });
+            }
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error al cargar clientes: " + e.getMessage(),
+            "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+    
+    
 private void soloNumeros(java.awt.event.KeyEvent evt, JTextField campo, int maxDigitos) {
     char c = evt.getKeyChar();
 
@@ -664,7 +876,6 @@ private void soloNumeros(java.awt.event.KeyEvent evt, JTextField campo, int maxD
         );
     }
 }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jCBsucursalACTUALIZAR;
@@ -716,7 +927,7 @@ private void soloNumeros(java.awt.event.KeyEvent evt, JTextField campo, int maxD
     private javax.swing.JTextField jTFtelefonoACTUALIZAR;
     private javax.swing.JTextField jTFtelefonoREGISTRAR;
     private javax.swing.JTabbedPane jTPregistrar;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTcliente;
     private javax.swing.JLabel logo;
     // End of variables declaration//GEN-END:variables
 }
