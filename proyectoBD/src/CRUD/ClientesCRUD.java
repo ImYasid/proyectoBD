@@ -10,25 +10,17 @@ import javax.swing.table.DefaultTableModel;
 
 public class ClientesCRUD {
 public static void crearCliente(String id_cliente, String nombres, String direccion, String telefono, int id_sucursal, SqlConection conexionSQL) {
-    // Elegir tabla según la sede
-    String tablaClienteInfo = "";
-    String tablaClienteId = "Cliente_id"; // Si esta tabla no está fragmentada, la dejamos igual
-    if (conexionSQL.index == 1) {
-        tablaClienteInfo = "Cliente_informacion_norte";
-    } else if (conexionSQL.index == 2) {
-        tablaClienteInfo = "Cliente_Info_Sur";
-    }
 
     try (Connection con = conexionSQL.getConexion(conexionSQL.index, conexionSQL.password)) {
         // Insertar en Cliente_id (si aplica)
-        String sqlClienteId = "INSERT INTO " + tablaClienteId + " (id_cliente) VALUES (?)";
+        String sqlClienteId = "SET XACT_ABORT ON; INSERT INTO " + "Cliente_id" + " (id_cliente) VALUES (?)";
         try (PreparedStatement psClienteId = con.prepareStatement(sqlClienteId)) {
             psClienteId.setString(1, id_cliente);
             psClienteId.executeUpdate();
         }
 
         // Insertar en tabla fragmentada según sede
-        String sql = "INSERT INTO " + tablaClienteInfo + " (id_cliente, nombres, direccion, telefono, id_sucursal) VALUES (?, ?, ?, ?, ?)";
+        String sql = "SET XACT_ABORT ON; INSERT INTO " + "Cliente_Info" + " (id_cliente, nombres, direccion, telefono, id_sucursal) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, id_cliente);
             ps.setString(2, nombres);
@@ -37,8 +29,15 @@ public static void crearCliente(String id_cliente, String nombres, String direcc
             ps.setInt(5, id_sucursal);
             ps.executeUpdate();
         }
+        
+        String tablafin = "";
+        if (id_sucursal == 1){
+            tablafin = "Cliente_informacion_norte";
+        } else if(id_sucursal == 2){
+            tablafin = "Cliente_Info_Sur";
+        }
 
-        JOptionPane.showMessageDialog(null, "Cliente creado correctamente en " + tablaClienteInfo);
+        JOptionPane.showMessageDialog(null, "Cliente creado correctamente en " + tablafin);
 
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(null, "Error al crear cliente: " + e.getMessage());
@@ -47,18 +46,7 @@ public static void crearCliente(String id_cliente, String nombres, String direcc
 
     
     public void buscarClientePorId(String id_cliente, SqlConection conexionSQL, javax.swing.JTable tablaClientes, java.awt.Component parent) {
-    // Definir la tabla según el índice de sede
-    String tablaClienteInfo;
-    if (conexionSQL.index == 1) {
-        tablaClienteInfo = "Cliente_informacion_norte";
-    } else if (conexionSQL.index == 2) {
-        tablaClienteInfo = "Cliente_Info_Sur";
-    } else {
-        JOptionPane.showMessageDialog(parent, "Índice de sede no válido");
-        return;
-    }
-
-    String sql = "SELECT id_cliente, nombres, direccion, telefono, id_sucursal FROM " + tablaClienteInfo + " WHERE id_cliente = ?";
+    String sql = "SELECT id_cliente, nombres, direccion, telefono, id_sucursal FROM " + "Cliente_Info" + " WHERE id_cliente = ?";
 
     try (Connection con = conexionSQL.getConexion(conexionSQL.index, conexionSQL.password);
          PreparedStatement ps = con.prepareStatement(sql)) {
@@ -88,15 +76,7 @@ public static void crearCliente(String id_cliente, String nombres, String direcc
 
     
     public static void actualizarCliente(String id_cliente, String nombres, String direccion, String telefono, int id_sucursal, SqlConection conexionSQL) {
-    // Elegir tabla según la sede
-    String tablaClienteInfo = "";
-    if (conexionSQL.index == 1) {
-        tablaClienteInfo = "Cliente_informacion_norte";
-    } else if (conexionSQL.index == 2) {
-        tablaClienteInfo = "Cliente_Info_Sur";
-    }
-
-    String sql = "UPDATE " + tablaClienteInfo + " SET nombres = ?, direccion = ?, telefono = ?, id_sucursal = ? WHERE id_cliente = ?";
+    String sql = "SET XACT_ABORT ON; UPDATE " + "Cliente_Info" + " SET nombres = ?, direccion = ?, telefono = ?, id_sucursal = ? WHERE id_cliente = ?";
 
     try (Connection con = conexionSQL.getConexion(conexionSQL.index, conexionSQL.password);
          PreparedStatement ps = con.prepareStatement(sql)) {
@@ -119,33 +99,34 @@ public static void crearCliente(String id_cliente, String nombres, String direcc
 }
 
     
-    
-    
     public static void eliminarCliente(String id_cliente, SqlConection conexionSQL) {
-    // Seleccionar tabla según la sede
-    String tablaClienteInfo = "";
-    if (conexionSQL.index == 1) {
-        tablaClienteInfo = "Cliente_informacion_norte";
-    } else if (conexionSQL.index == 2) {
-        tablaClienteInfo = "Cliente_Info_Sur";
-    }
 
-    String sql = "DELETE FROM " + tablaClienteInfo + " WHERE id_cliente = ?";
+        String sql = "SET XACT_ABORT ON; DELETE FROM " + "Cliente_Info" + " WHERE id_cliente = ?";
 
-    try (Connection con = conexionSQL.getConexion(conexionSQL.index, conexionSQL.password);
-         PreparedStatement ps = con.prepareStatement(sql)) {
-        ps.setString(1, id_cliente);
+        try (Connection con = conexionSQL.getConexion(conexionSQL.index, conexionSQL.password);
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, id_cliente);
 
-        int filas = ps.executeUpdate();
+            int filas = ps.executeUpdate();
 
-        if (filas > 0) {
-            JOptionPane.showMessageDialog(null, "Cliente eliminado correctamente.");
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontró cliente con ese ID.");
+            if (filas > 0) {
+                JOptionPane.showMessageDialog(null, "Cliente eliminado correctamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró cliente con ese ID.");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al eliminar cliente Vista: " + e.getMessage());
         }
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, "Error al eliminar cliente: " + e.getMessage());
-    }
+
+        String sqlClienteID = "SET XACT_ABORT ON; DELETE FROM " + "Cliente_id" + " WHERE id_cliente = ?";
+
+        try (Connection con = conexionSQL.getConexion(conexionSQL.index, conexionSQL.password);
+             PreparedStatement ps = con.prepareStatement(sqlClienteID)) {
+            ps.setString(1, id_cliente);
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al eliminar cliente De Cliente_id: " + e.getMessage());
+        }
     }
 }
     

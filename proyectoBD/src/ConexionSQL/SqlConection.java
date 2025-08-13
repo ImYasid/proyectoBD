@@ -16,14 +16,14 @@ public class SqlConection {
         switch (index) {
             case 1 -> {
                 connectionUrl = "jdbc:sqlserver://IV4SH:1433;"
-                              + "database=Sucursal_Nortesh;"
+                              + "database=Quito_Norte;"
                               + "user=sa;"
                               + "password=" + password + ";"
                               + "timeout=30;"
                               + "encrypt=true;trustServerCertificate=true";
             }
             case 2 -> {
-                connectionUrl = "jdbc:sqlserver://localhost\\MSSQLSERVER3;"
+                connectionUrl = "jdbc:sqlserver://MEREKETENGUE\\MSSQLSERVER3;"
                               + "database=Quito_Sur;"
                               + "user=sedeSur;"
                               + "password=" + password + ";"

@@ -30,6 +30,14 @@ public class JFclientes extends javax.swing.JFrame {
         jTFdireccionACTUALIZAR.setEnabled(false);
         jTFtelefonoACTUALIZAR.setEnabled(false);
         jCBsucursalACTUALIZAR.setEnabled(false);
+        
+        SessionManager session = SessionManager.getInstance();
+        int sedeIndex = session.getSedeIndex();
+        String password = session.getPassword();
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = sedeIndex; // o el índice válido de la sede
+        conexionSQL.password = password;
+        cargarClientesEnTabla(conexionSQL);
     }
 
     /**
@@ -784,7 +792,7 @@ public class JFclientes extends javax.swing.JFrame {
 
         String sql;
         if (session.getSedeIndex() == 1) {
-            sql = "SELECT id_cliente, nombres, direccion, telefono, id_sucursal FROM Cliente_Info_Norte WHERE id_cliente = ?";
+            sql = "SELECT id_cliente, nombres, direccion, telefono, id_sucursal FROM Cliente_informacion_norte WHERE id_cliente = ?";
         } else {
             sql = "SELECT id_cliente, nombres, direccion, telefono, id_sucursal FROM Cliente_Info_Sur WHERE id_cliente = ?";
         }
@@ -828,7 +836,7 @@ public class JFclientes extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTcliente.getModel();
         model.setRowCount(0); // limpiar tabla
 
-        String sql = "SELECT id_cliente, nombres, direccion, telefono, id_sucursal FROM Cliente_Info_Sur";
+        String sql = "SELECT id_cliente, nombres, direccion, telefono, id_sucursal FROM Cliente_Info";
         try (PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 

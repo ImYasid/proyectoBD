@@ -3,8 +3,13 @@ package Vista;
 import ConexionSQL.SqlConection;
 import CRUD.ProductosCRUD;
 import ConexionSQL.SessionManager;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 public class JFproductos extends javax.swing.JFrame {
 
@@ -22,6 +27,14 @@ public class JFproductos extends javax.swing.JFrame {
         jTFnombreACTUALIZAR.setEnabled(false);
         jTFprecioACTUALIZAR.setEnabled(false);
         jTFstockACTUALIZAR.setEnabled(false);
+        
+        SessionManager session = SessionManager.getInstance();
+        int sedeIndex = session.getSedeIndex();
+        String password = session.getPassword();
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = sedeIndex;
+        conexionSQL.password = password;
+        cargarProductosEnTabla(conexionSQL);
         
     }
 
@@ -82,7 +95,7 @@ public class JFproductos extends javax.swing.JFrame {
         jPregresar = new javax.swing.JPanel();
         jLregresar = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTProductos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -458,7 +471,7 @@ public class JFproductos extends javax.swing.JFrame {
 
         jPanel1.add(jPregresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, -1, 30));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -469,7 +482,7 @@ public class JFproductos extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTProductos);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 760, 250));
 
@@ -498,16 +511,72 @@ public class JFproductos extends javax.swing.JFrame {
 
     private void jLguardarREGISTRARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLguardarREGISTRARMouseClicked
         
-        // Limpiar los campos después de guardar
-        jTFnombreREGISTRAR.setText("");
-        jTFprecioREGISTRAR.setText("");
-        jTFstockREGISTRAR.setText("");
-        jCBsucursalREGISTRAR.setSelectedIndex(0);
+        try {
+        // Obtenemos los datos de sesión del SessionManager
+        SessionManager session = SessionManager.getInstance();
+        int sedeIndex = session.getSedeIndex();
+        String password = session.getPassword();
+        
+        // Validar que haya una sesión activa
+        if (sedeIndex == 0 || password == null || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay una sesión activa. Por favor, inicie sesión primero.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // Creamos la conexión usando los datos de sesión
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = sedeIndex;
+        conexionSQL.password = password;
+        
+        // Obtener y validar los valores ingresados
+        String nombre = jTFnombreREGISTRAR.getText().trim();
+        double precio = Double.parseDouble(jTFprecioREGISTRAR.getText().trim());
+        int stock = Integer.parseInt(jTFstockREGISTRAR.getText().trim());
+        int id_sucursal = jCBsucursalREGISTRAR.getSelectedIndex();
+
+        if (nombre.isEmpty() || id_sucursal == -1) {
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        // Usamos el CRUD con la conexión configurada
+        ProductosCRUD.crearProducto(nombre, precio, stock, id_sucursal, conexionSQL);
+
+        // Mensaje de éxito
+        JOptionPane.showMessageDialog(this, "Operacion Exitosa");
+        
+        // Recargar tabla
+        cargarProductosEnTabla(conexionSQL);
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al guardar Producto: " + e.getMessage(),
+            "Error", JOptionPane.ERROR_MESSAGE);
+    }
    
     }//GEN-LAST:event_jLguardarREGISTRARMouseClicked
 
     private void jLbuscarBUSCARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbuscarBUSCARMouseClicked
         
+    String id = jTFidproductoBUSCAR.getText().trim();
+    if (id.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Ingrese una cédula para buscar");
+        return;
+    }
+    int id_int = Integer.parseInt(id);
+
+    try {
+        SessionManager session = SessionManager.getInstance();
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = session.getSedeIndex();
+        conexionSQL.password = session.getPassword();
+
+        // No necesitas obtener Connection aquí, lo hace el método buscarClientePorId
+        ProductosCRUD.buscarProductoPorId(id_int, conexionSQL, jTProductos);
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+    }
     }//GEN-LAST:event_jLbuscarBUSCARMouseClicked
 
     private void jLbuscarACTUALIZARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbuscarACTUALIZARMouseClicked
@@ -515,30 +584,83 @@ public class JFproductos extends javax.swing.JFrame {
         jCBsucursalACTUALIZAR.setEnabled(true);
         jTFnombreACTUALIZAR.setEnabled(true);
         jTFprecioACTUALIZAR.setEnabled(true);
-        jTFstockACTUALIZAR.setEnabled(true);
-        
-        jTFnombreACTUALIZAR.setEditable(true);
-        jTFprecioACTUALIZAR.setEditable(true);
-        jTFstockACTUALIZAR.setEditable(true);
-        
-        
+        jTFstockACTUALIZAR.setEnabled(true);        
+                
+        String id = jTFidproductoACTUALIZAR.getText().trim();
+        if (id.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese una cédula para buscar");
+        } else {
+            buscarProductoPorIdYCargarCampos(id);
+        }
         
     }//GEN-LAST:event_jLbuscarACTUALIZARMouseClicked
 
     private void jLactualizarACTUALIZARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLactualizarACTUALIZARMouseClicked
+        String id_producto = jTFidproductoACTUALIZAR.getText().trim();
+        String nombre = jTFnombreACTUALIZAR.getText().trim();
+        String precio = jTFprecioACTUALIZAR.getText().trim();
+        String stock = jTFstockACTUALIZAR.getText().trim();
+        int id_sucursal = jCBsucursalACTUALIZAR.getSelectedIndex();
 
+        if (id_producto.isEmpty() || nombre.isEmpty() || precio.isEmpty() || stock.isEmpty() || id_sucursal == -1) {
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            SessionManager session = SessionManager.getInstance();
+            SqlConection conexionSQL = new SqlConection();
+            conexionSQL.index = session.getSedeIndex();
+            conexionSQL.password = session.getPassword();
+
+            ProductosCRUD.actualizarProducto(Integer.parseInt(id_producto), nombre, Double.parseDouble(precio), Integer.parseInt(stock), id_sucursal, conexionSQL);
+
+            // Si quieres, recarga la tabla para que muestre los datos actualizados
+            cargarProductosEnTabla(conexionSQL);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al actualizar Producto: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+       
         // Limpiar los campos después de actualizar
         jTFidproductoACTUALIZAR.setText("");
-        jTFnombreREGISTRAR.setText("");
-        jTFprecioREGISTRAR.setText("");
-        jTFstockREGISTRAR.setText("");
-        jCBsucursalREGISTRAR.setSelectedIndex(0);
-
+        jTFnombreACTUALIZAR.setText("");
+        jTFprecioACTUALIZAR.setText("");
+        jTFstockACTUALIZAR.setText("");
+        jCBsucursalACTUALIZAR.setSelectedIndex(0);
+        
     }//GEN-LAST:event_jLactualizarACTUALIZARMouseClicked
 
     private void jLeliminarELIMINARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLeliminarELIMINARMouseClicked
 
-        
+    String id_producto = jTFidproductoELIMINAR.getText().trim(); 
+
+    if (id_producto.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Ingrese el ID del producto a eliminar.");
+        return;
+    }
+
+    int confirm = JOptionPane.showConfirmDialog(this,
+        "¿Está seguro de eliminar el producto de ID: " + id_producto + "?",
+        "Confirmar eliminación",
+        JOptionPane.YES_NO_OPTION);
+
+    if (confirm == JOptionPane.YES_OPTION) {
+        try {
+            SessionManager session = SessionManager.getInstance();
+            SqlConection conexionSQL = new SqlConection();
+            conexionSQL.index = session.getSedeIndex();
+            conexionSQL.password = session.getPassword();
+
+            ProductosCRUD.eliminarProducto(Integer.parseInt(id_producto), conexionSQL);
+
+            // Recarga la tabla para mostrar los cambios
+            cargarProductosEnTabla(conexionSQL);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al eliminar Producto: " + e.getMessage());
+        }
+    }
     }//GEN-LAST:event_jLeliminarELIMINARMouseClicked
 
     private void jCBsucursalACTUALIZARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBsucursalACTUALIZARActionPerformed
@@ -627,6 +749,94 @@ public class JFproductos extends javax.swing.JFrame {
         });
     }
 
+    private void buscarProductoPorIdYCargarCampos(String id_producto) {
+    try {
+        SessionManager session = SessionManager.getInstance();
+        SqlConection conexionSQL = new SqlConection();
+        Connection con = conexionSQL.getConexion(session.getSedeIndex(), session.getPassword());
+
+        if (con == null) {
+            JOptionPane.showMessageDialog(this, "No se pudo conectar a la base de datos");
+            return;
+        }
+
+        String sql;
+        if (session.getSedeIndex() == 1) {
+            sql = "SELECT id_producto, nombre, precio, stock, id_sucursal FROM Producto_norte WHERE id_producto = ?";
+        } else {
+            sql = "SELECT id_producto, nombre, precio, stock, id_sucursal FROM Producto_Sur WHERE id_producto = ?";
+        }
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, id_producto);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    // Llenar la tabla (opcional)
+                    DefaultTableModel modelo = (DefaultTableModel) jTProductos.getModel();
+                    modelo.setRowCount(0);
+                    modelo.addRow(new Object[]{
+                        rs.getString("id_producto"),
+                        rs.getString("nombre"),
+                        rs.getString("precio"),
+                        rs.getString("stock"),
+                        rs.getInt("id_sucursal")
+                    });
+
+                    // Llenar campos de texto y combo
+                    jTFnombreACTUALIZAR.setText(rs.getString("nombre"));
+                    jTFprecioACTUALIZAR.setText(rs.getString("precio"));
+                    jTFstockACTUALIZAR.setText(rs.getString("stock"));
+                    jCBsucursalACTUALIZAR.setSelectedIndex(rs.getInt("id_sucursal"));
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se producto con esa ID");
+                }
+            }
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error al buscar Producto: " + e.getMessage());
+    }
+}
+    
+    private void cargarProductosEnTabla(SqlConection conexionSQL) {
+    try (Connection conn = conexionSQL.getConexion(conexionSQL.index, conexionSQL.password)) {
+        DefaultTableModel model = (DefaultTableModel) jTProductos.getModel();
+        model.setRowCount(0); // limpiar tabla
+
+        String sql;
+        switch (conexionSQL.index){
+            case 1:
+                sql = "SELECT id_producto, nombre, precio, stock, id_sucursal FROM Producto_norte";
+                break;
+            case 2:
+                sql = "SELECT id_producto, nombre, precio, stock, id_sucursal FROM Producto_Sur";
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Indice no valido: "+ conexionSQL.index);
+                return;
+        }
+        
+        try (PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    rs.getInt("id_producto"),
+                    rs.getString("nombre"),
+                    rs.getDouble("precio"),
+                    rs.getInt("stock"),
+                    rs.getInt("id_sucursal")
+                });
+            }
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error al cargar Productos: " + e.getMessage(),
+            "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+    
     private void soloNumeros(java.awt.event.KeyEvent evt, JTextField campo, int maxDigitos) {
     char c = evt.getKeyChar();
 
@@ -702,7 +912,7 @@ public class JFproductos extends javax.swing.JFrame {
     private javax.swing.JTextField jTFstockACTUALIZAR;
     private javax.swing.JTextField jTFstockREGISTRAR;
     private javax.swing.JTabbedPane jTPregistrar;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTProductos;
     private javax.swing.JLabel logo;
     // End of variables declaration//GEN-END:variables
 }
