@@ -1,9 +1,17 @@
 package Vista;
 
+import ConexionSQL.SessionManager;
+import ConexionSQL.SqlConection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 public class JFventas extends javax.swing.JFrame {
 
@@ -33,7 +41,7 @@ public class JFventas extends javax.swing.JFrame {
         LocalDate fechaActual = LocalDate.now();
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         jTFfechaCREAR.setText(fechaActual.format(formato));
-
+        this.cargarProductosEnCombo(jCBproductoCREAR);
     }
 
     /**
@@ -85,7 +93,7 @@ public class JFventas extends javax.swing.JFrame {
         jPagregarCREAR = new javax.swing.JPanel();
         jLagregarCREAR = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTVentas = new javax.swing.JTable();
         jTFsubtotalCREAR = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jPgenerarVentaCREAR = new javax.swing.JPanel();
@@ -113,7 +121,6 @@ public class JFventas extends javax.swing.JFrame {
         jLbuscarVentaBUSCAR = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jTFfechaBUSCAR = new javax.swing.JTextField();
-        jPactualizar = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -204,6 +211,11 @@ public class JFventas extends javax.swing.JFrame {
         jLbuscarCREAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLbuscarCREAR.setText("BUSCAR");
         jLbuscarCREAR.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLbuscarCREAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLbuscarCREARMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPbuscarCREARLayout = new javax.swing.GroupLayout(jPbuscarCREAR);
         jPbuscarCREAR.setLayout(jPbuscarCREARLayout);
@@ -274,6 +286,11 @@ public class JFventas extends javax.swing.JFrame {
         jPcrear.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 30));
 
         jCBsucursalCREAR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Sucursal Norte", "Sucursal Sur" }));
+        jCBsucursalCREAR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBsucursalCREARActionPerformed(evt);
+            }
+        });
         jPcrear.add(jCBsucursalCREAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 230, 30));
 
         jLabel3.setText("Datos del Cliente");
@@ -285,6 +302,33 @@ public class JFventas extends javax.swing.JFrame {
         jPcrear.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, 30));
 
         jCBproductoCREAR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "..." }));
+        jCBproductoCREAR.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jCBproductoCREARMouseDragged(evt);
+            }
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jCBproductoCREARMouseMoved(evt);
+            }
+        });
+        jCBproductoCREAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCBproductoCREARMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jCBproductoCREARMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jCBproductoCREARMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jCBproductoCREARMouseReleased(evt);
+            }
+        });
+        jCBproductoCREAR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBproductoCREARActionPerformed(evt);
+            }
+        });
         jPcrear.add(jCBproductoCREAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 230, 30));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -303,7 +347,15 @@ public class JFventas extends javax.swing.JFrame {
         jPcrear.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 240, -1, 30));
 
         jTFcantidadCREAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTFcantidadCREAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTFcantidadCREARMouseClicked(evt);
+            }
+        });
         jTFcantidadCREAR.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTFcantidadCREARKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTFcantidadCREARKeyTyped(evt);
             }
@@ -364,7 +416,7 @@ public class JFventas extends javax.swing.JFrame {
 
         jPcrear.add(jPagregarCREAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTVentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -375,7 +427,7 @@ public class JFventas extends javax.swing.JFrame {
                 "id_factura", "id_producto", "cantidad", "precio_unitario", "subtotal"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTVentas);
 
         jPcrear.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 760, 150));
 
@@ -522,10 +574,6 @@ public class JFventas extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("BUSCAR", jPbuscar);
 
-        jPactualizar.setBackground(new java.awt.Color(255, 255, 255));
-        jPactualizar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jTabbedPane1.addTab("ACTUALIZAR", jPactualizar);
-
         jPanel1.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 800, 620));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -552,39 +600,99 @@ public class JFventas extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jLregresarMouseClicked
 
-    private void jTFcedulaCREARKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFcedulaCREARKeyTyped
-        
-        soloNumeros(evt, jTFcedulaCREAR, 10);
-        
-    }//GEN-LAST:event_jTFcedulaCREARKeyTyped
-
-    private void jLcorregirCREARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLcorregirCREARMouseClicked
-        
-        jTFcedulaCREAR.setText("");
-        jTFnombresCREAR.setText("");
-        jTFtelefonoCREAR.setText("");
-        jTFdireccionCREAR.setText("");
-        
-    }//GEN-LAST:event_jLcorregirCREARMouseClicked
+    private void jTFcedulaBUSCARKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFcedulaBUSCARKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFcedulaBUSCARKeyTyped
 
     private void jLnuevoCREARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLnuevoCREARMouseClicked
-        
+
         jCBproductoCREAR.setSelectedIndex(0);
         jTFcantidadCREAR.setText("");
         jTFprecioUnitarioCREAR.setText("");
         jTFsubtotalCREAR.setText("");
-        
+
     }//GEN-LAST:event_jLnuevoCREARMouseClicked
 
     private void jTFcantidadCREARKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFcantidadCREARKeyTyped
-       
+        
         soloNumeros(evt, jTFcantidadCREAR, 10);
         
     }//GEN-LAST:event_jTFcantidadCREARKeyTyped
 
-    private void jTFcedulaBUSCARKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFcedulaBUSCARKeyTyped
+    private void jLcorregirCREARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLcorregirCREARMouseClicked
+
+        jTFcedulaCREAR.setText("");
+        jTFnombresCREAR.setText("");
+        jTFtelefonoCREAR.setText("");
+        jTFdireccionCREAR.setText("");
+
+    }//GEN-LAST:event_jLcorregirCREARMouseClicked
+
+    private void jTFcedulaCREARKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFcedulaCREARKeyTyped
+
+        soloNumeros(evt, jTFcedulaCREAR, 10);
+
+    }//GEN-LAST:event_jTFcedulaCREARKeyTyped
+
+    private void jCBsucursalCREARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBsucursalCREARActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFcedulaBUSCARKeyTyped
+    }//GEN-LAST:event_jCBsucursalCREARActionPerformed
+
+    private void jLbuscarCREARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbuscarCREARMouseClicked
+        String id = jTFcedulaCREAR.getText().trim();
+        if (id.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese una cédula para buscar");
+        } else {
+            buscarClientePorIdYCargarCampos(id);
+        }
+        
+    }//GEN-LAST:event_jLbuscarCREARMouseClicked
+
+    private void jCBproductoCREARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBproductoCREARActionPerformed
+        
+    }//GEN-LAST:event_jCBproductoCREARActionPerformed
+
+    private void jCBproductoCREARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCBproductoCREARMouseClicked
+        
+    }//GEN-LAST:event_jCBproductoCREARMouseClicked
+
+    private void jCBproductoCREARMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCBproductoCREARMouseExited
+        
+    }//GEN-LAST:event_jCBproductoCREARMouseExited
+
+    private void jCBproductoCREARMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCBproductoCREARMouseEntered
+        
+    }//GEN-LAST:event_jCBproductoCREARMouseEntered
+
+    private void jCBproductoCREARMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCBproductoCREARMouseReleased
+        
+    }//GEN-LAST:event_jCBproductoCREARMouseReleased
+
+    private void jTFcantidadCREARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFcantidadCREARMouseClicked
+        
+    }//GEN-LAST:event_jTFcantidadCREARMouseClicked
+
+    private void jCBproductoCREARMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCBproductoCREARMouseDragged
+        
+    }//GEN-LAST:event_jCBproductoCREARMouseDragged
+
+    private void jCBproductoCREARMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCBproductoCREARMouseMoved
+        int indice = this.jCBproductoCREAR.getSelectedIndex();
+        if (indice > 0){
+            this.buscarPrecioPorIdProd(indice);
+        }
+    }//GEN-LAST:event_jCBproductoCREARMouseMoved
+
+    private void jTFcantidadCREARKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFcantidadCREARKeyPressed
+        char c = evt.getKeyChar();
+        if ( c == '\n'){
+            evt.consume();
+            double precioUni = Double.parseDouble(this.jTFprecioUnitarioCREAR.getText());
+            int cantidadProd = Integer.parseInt(this.jTFcantidadCREAR.getText());
+            double subTotal = precioUni * cantidadProd;
+            this.jTFsubtotalCREAR.setText(String.valueOf(subTotal));
+        }
+    }//GEN-LAST:event_jTFcantidadCREARKeyPressed
 
     /**
      * @param args the command line arguments
@@ -639,8 +747,8 @@ public class JFventas extends javax.swing.JFrame {
         return;
     }
 
-    // Solo números y backspace
-    if (!Character.isDigit(c) && c != '\b') {
+    // Solo números, backspace y enter
+    if (!Character.isDigit(c) && c != '\b' && c != '\n') {
         evt.consume();
         JOptionPane.showMessageDialog(
             this,
@@ -650,7 +758,113 @@ public class JFventas extends javax.swing.JFrame {
         );
     }
 }
+    private void buscarClientePorIdYCargarCampos(String id_cliente) {
+    try {
+        SessionManager session = SessionManager.getInstance();
+        SqlConection conexionSQL = new SqlConection();
+        Connection con = conexionSQL.getConexion(session.getSedeIndex(), session.getPassword());
+
+        if (con == null) {
+            JOptionPane.showMessageDialog(this, "No se pudo conectar a la base de datos");
+            return;
+        }
+
+        String sql;
+        if (session.getSedeIndex() == 1) {
+            sql = "SELECT id_cliente, nombres, direccion, telefono FROM Cliente_informacion_norte WHERE id_cliente = ?";
+        } else {
+            sql = "SELECT id_cliente, nombres, direccion, telefono FROM Cliente_Info_Sur WHERE id_cliente = ?";
+        }
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, id_cliente);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    // Llenar campos de texto y combo
+                    jTFcedulaCREAR.setText(rs.getString("id_cliente"));
+                    jTFnombresCREAR.setText(rs.getString("nombres"));
+                    jTFdireccionCREAR.setText(rs.getString("direccion"));
+                    jTFtelefonoCREAR.setText(rs.getString("telefono"));
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se encontró cliente con esa cédula");
+                }
+            }
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error al buscar cliente: " + e.getMessage());
+    }
+}
     
+    private void buscarPrecioPorIdProd(int indiceProd) {
+    try {
+        SessionManager session = SessionManager.getInstance();
+        SqlConection conexionSQL = new SqlConection();
+        Connection con = conexionSQL.getConexion(session.getSedeIndex(), session.getPassword());
+
+        if (con == null) {
+            JOptionPane.showMessageDialog(this, "No se pudo conectar a la base de datos");
+            return;
+        }
+
+        String sql;
+        if (session.getSedeIndex() == 1) {
+            sql = "SELECT precio FROM Producto_norte WHERE id_producto = ?";
+        } else {
+            sql = "SELECT precio FROM Producto_Sur WHERE id_producto = ?";
+        }
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, indiceProd);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    // Llenar campos de texto
+                    jTFprecioUnitarioCREAR.setText(rs.getString("precio"));
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se producto con esa ID");
+                }
+            }
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error al buscar Producto: " + e.getMessage());
+    }
+}
+    private void cargarProductosEnCombo(JComboBox<String> comboBox) {
+    try {
+        SessionManager session = SessionManager.getInstance();
+        SqlConection conexionSQL = new SqlConection();
+        Connection con = conexionSQL.getConexion(session.getSedeIndex(), session.getPassword());
+
+        if (con == null) {
+            JOptionPane.showMessageDialog(this, "No se pudo conectar a la base de datos");
+            return;
+        }
+
+        String sql;
+        if (session.getSedeIndex() == 1) {
+            sql = "SELECT nombre FROM Producto_Sur";
+        } else {
+            sql = "SELECT nombre FROM Producto_Sur";
+        }
+
+        try (PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            comboBox.removeAllItems(); // Limpiar el combo antes de cargar
+
+            // Agregar primer índice "..."
+            comboBox.addItem("...");
+            while (rs.next()) {
+                comboBox.addItem(rs.getString("nombre"));
+            }
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error al cargar sucursales: " + e.getMessage());
+    }
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jCBproductoCREAR;
     private javax.swing.JComboBox<String> jCBsucursalBUSCAR;
@@ -685,7 +899,6 @@ public class JFventas extends javax.swing.JFrame {
     private javax.swing.JLabel jLgenerarVentaCREAR;
     private javax.swing.JLabel jLnuevoCREAR;
     private javax.swing.JLabel jLregresar;
-    private javax.swing.JPanel jPactualizar;
     private javax.swing.JPanel jPagregarCREAR;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
@@ -718,8 +931,8 @@ public class JFventas extends javax.swing.JFrame {
     private javax.swing.JTextField jTFtelefonoCREAR;
     private javax.swing.JTextField jTFtotalPagar;
     private javax.swing.JTextField jTFtotalPagarBUSCAR;
+    private javax.swing.JTable jTVentas;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }

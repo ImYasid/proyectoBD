@@ -584,11 +584,15 @@ public class JFproductos extends javax.swing.JFrame {
         jCBsucursalACTUALIZAR.setEnabled(true);
         jTFnombreACTUALIZAR.setEnabled(true);
         jTFprecioACTUALIZAR.setEnabled(true);
-        jTFstockACTUALIZAR.setEnabled(true);        
+        jTFstockACTUALIZAR.setEnabled(true);  
+        
+        jTFnombreACTUALIZAR.setEditable(true);
+        jTFprecioACTUALIZAR.setEditable(true);
+        jTFstockACTUALIZAR.setEditable(true);   
                 
         String id = jTFidproductoACTUALIZAR.getText().trim();
         if (id.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ingrese una cédula para buscar");
+            JOptionPane.showMessageDialog(this, "Ingrese el ID de Producto para buscar");
         } else {
             buscarProductoPorIdYCargarCampos(id);
         }
@@ -628,6 +632,11 @@ public class JFproductos extends javax.swing.JFrame {
         jTFprecioACTUALIZAR.setText("");
         jTFstockACTUALIZAR.setText("");
         jCBsucursalACTUALIZAR.setSelectedIndex(0);
+        
+        jCBsucursalACTUALIZAR.setEnabled(false);
+        jTFnombreACTUALIZAR.setEditable(false);
+        jTFprecioACTUALIZAR.setEditable(false);
+        jTFstockACTUALIZAR.setEditable(false);
         
     }//GEN-LAST:event_jLactualizarACTUALIZARMouseClicked
 
