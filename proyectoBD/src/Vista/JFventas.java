@@ -677,10 +677,38 @@ public class JFventas extends javax.swing.JFrame {
     }//GEN-LAST:event_jCBproductoCREARMouseDragged
 
     private void jCBproductoCREARMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCBproductoCREARMouseMoved
-        int indice = this.jCBproductoCREAR.getSelectedIndex();
-        if (indice > 0){
-            this.buscarPrecioPorIdProd(indice);
+        String nombre = this.jCBproductoCREAR.getSelectedItem().toString();
+
+        try {
+            SessionManager session = SessionManager.getInstance();
+            SqlConection conexionSQL = new SqlConection();
+            Connection con = conexionSQL.getConexion(session.getSedeIndex(), session.getPassword());
+
+            String sql;
+                if (session.getSedeIndex() == 1) {
+                    sql = "SELECT id_producto FROM Producto_norte WHERE nombre = ?";
+                } else {
+                    sql = "SELECT id_producto FROM Producto_Sur WHERE nombre = ?";
+                }
+
+            try (PreparedStatement ps = con.prepareStatement(sql)) {
+                ps.setString(1, nombre);
+
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        int indice = rs.getInt("id_producto");
+                        if (indice > 0) {
+                            this.buscarPrecioPorIdProd(indice);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "No se encontró el producto: " + nombre);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error al obtener ID de producto: " + e.getMessage());
         }
+
     }//GEN-LAST:event_jCBproductoCREARMouseMoved
 
     private void jTFcantidadCREARKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFcantidadCREARKeyPressed
@@ -844,7 +872,7 @@ public class JFventas extends javax.swing.JFrame {
 
         String sql;
         if (session.getSedeIndex() == 1) {
-            sql = "SELECT nombre FROM Producto_Sur";
+            sql = "SELECT nombre FROM Producto_norte";
         } else {
             sql = "SELECT nombre FROM Producto_Sur";
         }

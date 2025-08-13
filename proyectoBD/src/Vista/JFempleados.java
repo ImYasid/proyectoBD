@@ -35,7 +35,14 @@ public class JFempleados extends javax.swing.JFrame {
         jTFcorreoACTUALIZAR.setEnabled(false);
         jTFdireccionACTUALIZAR.setEnabled(false);
         
-        cargarEmpleadosEnTabla(jTempleados, jPanel1);
+        
+        SessionManager session = SessionManager.getInstance();
+        int sedeIndex = session.getSedeIndex();
+        String password = session.getPassword();
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = sedeIndex;
+        conexionSQL.password = password;
+        cargarEmpleadosEnTabla(conexionSQL);
         
     }
 
@@ -615,7 +622,7 @@ public class JFempleados extends javax.swing.JFrame {
         EmpleadosCRUD.crearEmpleado(id_empleado, nombres, cargo, id_sucursal, horario, telefono, correo, direccion, conexionSQL);
 
         // Recargar tabla de empleados
-        cargarEmpleadosEnTabla(jTempleados, jPanel1);
+        cargarEmpleadosEnTabla(conexionSQL);
 
         // Limpiar campos
         jTFcedulaREGISTRAR.setText("");
@@ -656,6 +663,7 @@ public class JFempleados extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Ingrese una cédula para buscar");
         } else {
             buscarEmpleadoPorIdYCargarCampos(id_empleado);
+            
         }
         
           
@@ -668,7 +676,7 @@ public class JFempleados extends javax.swing.JFrame {
         String idEmpleado = jTFcedulaACTUALIZAR.getText().trim();
         String nombres = jTFnombreACTUALIZAR.getText().trim();
         String cargo = jCBcargoACTUALIZAR.getSelectedItem().toString();
-        int idSucursal = Integer.parseInt(jCBsursalACTUALIZAR.getSelectedItem().toString()); // Ajusta si el combo guarda otro tipo
+        int idSucursal = jCBsursalACTUALIZAR.getSelectedIndex(); // Ajusta si el combo guarda otro tipo
         String horario = jCBhorarioACTUALIZAR.getSelectedItem().toString();
         String telefono = jTFtelefonoACTUALIZAR.getText().trim();
         String correo = jTFcorreoACTUALIZAR.getText().trim();
@@ -698,6 +706,8 @@ public class JFempleados extends javax.swing.JFrame {
             direccion,
             conexionSQL
         );
+        
+        this.cargarEmpleadosEnTabla(conexionSQL);
 
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this, "El ID de sucursal debe ser un número válido.");
@@ -734,9 +744,9 @@ public class JFempleados extends javax.swing.JFrame {
 
         // Llamar al método de búsqueda
         EmpleadosCRUD crud = new EmpleadosCRUD();
-        crud.buscarEmpleadoPorId(id_empleado,conexionSQL);
-
-        cargarEmpleadosEnTabla(jTempleados, jPanel1);
+        crud.buscarEmpleadoPorId(id_empleado,conexionSQL, jTempleados, this);
+ 
+        //cargarEmpleadosEnTabla(jTempleados, this);
 
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(this, "Error en la búsqueda: " + e.getMessage());
@@ -772,7 +782,7 @@ public class JFempleados extends javax.swing.JFrame {
         EmpleadosCRUD.eliminarEmpleado(idEmpleado, conexionSQL);
 
         // Actualizar tabla o interfaz
-        cargarEmpleadosEnTabla(jTempleados, jPanel1);
+        cargarEmpleadosEnTabla(conexionSQL);
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al eliminar cliente: " + e.getMessage());
@@ -890,28 +900,68 @@ public class JFempleados extends javax.swing.JFrame {
     }
 }
     
-     private void cargarEmpleadosEnTabla(javax.swing.JTable tablaEmpleados, java.awt.Component parent) {
-        SessionManager session = SessionManager.getInstance();
+//     private void cargarEmpleadosEnTabla(javax.swing.JTable tablaEmpleados, java.awt.Component parent) {
+//        SessionManager session = SessionManager.getInstance();
+//
+//        // Selección dinámica según sede
+//        String sql;
+//        if (session.getSedeIndex() == 1) { // Ejemplo: 1 = sede norte
+//            sql = "SELECT id_empleado, nombres, cargo, horario, telefono, correo, direccion, id_sucursal FROM Empleados";
+//        } else { // Otra sede: usar Linked Server
+//            sql = "SELECT id_empleado, nombres, cargo, horario, telefono, correo, direccion, id_sucursal " +
+//                  "FROM [IV4SH].Quito_Norte.dbo.Empleados";
+//        }
+//
+//        try (Connection con = new SqlConection().getConexion(session.getSedeIndex(), session.getPassword());
+//             PreparedStatement ps = con.prepareStatement(sql);
+//             ResultSet rs = ps.executeQuery()) {
+//
+//            EmpleadosCRUD.llenarTablaDesdeResultSet(rs, tablaEmpleados, parent);
+//
+//        } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(parent, "Error al cargar empleados: " + e.getMessage());
+//        }
+//    }
+    private void cargarEmpleadosEnTabla(SqlConection conexionSQL) {
+    try (Connection conn = conexionSQL.getConexion(conexionSQL.index, conexionSQL.password)) {
+        DefaultTableModel model = (DefaultTableModel) jTempleados.getModel();
+        model.setRowCount(0); // limpiar tabla
 
-        // Selección dinámica según sede
         String sql;
-        if (session.getSedeIndex() == 1) { // Ejemplo: 1 = sede norte
-            sql = "SELECT id_empleado, nombres, cargo, horario, telefono, correo, direccion, id_sucursal FROM Empleados";
-        } else { // Otra sede: usar Linked Server
-            sql = "SELECT id_empleado, nombres, cargo, horario, telefono, correo, direccion, id_sucursal " +
+        switch (conexionSQL.index){
+            case 1:
+                sql = "SELECT id_empleado, nombres, cargo, horario, telefono, correo, direccion, id_sucursal FROM Empleados";
+                break;
+            case 2:
+                sql = "SELECT id_empleado, nombres, cargo, horario, telefono, correo, direccion, id_sucursal " +
                   "FROM [IV4SH].Quito_Norte.dbo.Empleados";
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Indice no valido: "+ conexionSQL.index);
+                return;
         }
-
-        try (Connection con = new SqlConection().getConexion(session.getSedeIndex(), session.getPassword());
-             PreparedStatement ps = con.prepareStatement(sql);
+        
+        try (PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
-            EmpleadosCRUD.llenarTablaDesdeResultSet(rs, tablaEmpleados, parent);
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(parent, "Error al cargar empleados: " + e.getMessage());
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    rs.getString("id_empleado"),
+                    rs.getString("nombres"),
+                    rs.getString("cargo"),
+                    rs.getString("horario"),
+                    rs.getString("telefono"),
+                    rs.getString("correo"),
+                    rs.getString("direccion"),
+                    rs.getInt("id_sucursal")
+                });
+            }
         }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error al cargar Empleado en tabla: " + e.getMessage(),
+            "Error", JOptionPane.ERROR_MESSAGE);
     }
+}
 
     
      private void buscarEmpleadoPorIdYCargarCampos(String id_empleado) {
@@ -940,8 +990,8 @@ public class JFempleados extends javax.swing.JFrame {
                     // Llenar campos de texto y combo
                     jTFcedulaACTUALIZAR.setText(rs.getString("id_empleado"));
                     jTFnombreACTUALIZAR.setText(rs.getString("nombres"));
-                    jCBcargoACTUALIZAR.setSelectedIndex(rs.getInt("cargo"));
-                    jCBhorarioACTUALIZAR.setSelectedIndex(rs.getInt("horario"));
+                    jCBcargoACTUALIZAR.setSelectedItem((rs.getString("cargo")));
+                    jCBhorarioACTUALIZAR.setSelectedItem(rs.getString("horario"));
                     jTFtelefonoACTUALIZAR.setText(rs.getString("telefono"));
                     jTFcorreoACTUALIZAR.setText(rs.getString("correo"));
                     jTFdireccionACTUALIZAR.setText(rs.getString("direccion"));

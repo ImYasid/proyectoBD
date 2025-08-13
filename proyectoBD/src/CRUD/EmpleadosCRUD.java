@@ -20,10 +20,10 @@ public class EmpleadosCRUD {
             String sqlInfo;
             switch (conexionSQL.index) {
                 case 1: // Sede Norte - local
-                    sqlInfo = "INSERT INTO Empleado_informacion (id_empleado, horario, telefono, correo, direccion) VALUES (?, ?, ?, ?, ?)";
+                    sqlInfo = "SET XACT_ABORT ON; INSERT INTO Empleado_informacion (id_empleado, horario, telefono, correo, direccion) VALUES (?, ?, ?, ?, ?)";
                     break;
                 case 2: // Sede Sur - linked server hacia Norte
-                    sqlInfo = "INSERT INTO IV4SH.Quito_Norte.dbo.Empleado_informacion (id_empleado, horario, telefono, correo, direccion) VALUES (?, ?, ?, ?, ?)";
+                    sqlInfo = "SET XACT_ABORT ON; INSERT INTO IV4SH.Quito_Norte.dbo.Empleado_informacion (id_empleado, horario, telefono, correo, direccion) VALUES (?, ?, ?, ?, ?)";
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Índice de sede inválido.");
@@ -40,7 +40,7 @@ public class EmpleadosCRUD {
             }
 
             // Insertar en Empleado_General (vista que une las dos sedes)
-            String sqlGeneral = "INSERT INTO Empleado_General (id_empleado, nombres, cargo, id_sucursal) VALUES (?, ?, ?, ?)";
+            String sqlGeneral = "SET XACT_ABORT ON; INSERT INTO Empleado_General (id_empleado, nombres, cargo, id_sucursal) VALUES (?, ?, ?, ?)";
             try (PreparedStatement psGen = con.prepareStatement(sqlGeneral)) {
                 psGen.setString(1, id_empleado);
                 psGen.setString(2, nombres);
@@ -56,14 +56,37 @@ public class EmpleadosCRUD {
         }
     }
 
-    public ResultSet buscarEmpleadoPorId(String id_empleado, SqlConection conexionSQL) throws SQLException {
+    public static void buscarEmpleadoPorId(String id_empleado, SqlConection conexionSQL, javax.swing.JTable tablaEmpleado, java.awt.Component parent) throws SQLException {
         String sql = "SELECT id_empleado, nombres, cargo, horario, telefono, correo, direccion, id_sucursal " +
                      "FROM Empleados WHERE id_empleado = ?";
 
         Connection con = conexionSQL.getConexion(conexionSQL.index, conexionSQL.password);
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setString(1, id_empleado);
-        return ps.executeQuery(); 
+        ps.setString(1, id_empleado); 
+        try (ResultSet rs = ps.executeQuery()) {
+                DefaultTableModel modelo = (DefaultTableModel) tablaEmpleado.getModel();
+                modelo.setRowCount(0); // Limpiar tabla
+
+                while (rs.next()) {
+                    Object[] fila = new Object[8];
+                    fila[0] = rs.getString("id_empleado");
+                    fila[1] = rs.getString("nombres");
+                    fila[2] = rs.getString("cargo");
+                    fila[3] = rs.getString("horario");
+                    fila[4] = rs.getString("telefono");
+                    fila[5] = rs.getString("correo");
+                    fila[6] = rs.getString("direccion");
+                    fila[7] = rs.getInt("id_sucursal");
+                    modelo.addRow(fila);
+                }
+
+                if (modelo.getRowCount() == 0) {
+                    JOptionPane.showMessageDialog(null, "No se encontró producto con ese ID");
+                }
+            }
+        catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al buscar producto: " + e.getMessage());
+        }
     }
 
     public static void actualizarEmpleado(String id_empleado, String nombres, String cargo, int id_sucursal,
@@ -76,10 +99,10 @@ public class EmpleadosCRUD {
             String sqlInfo;
             switch (conexionSQL.index) {
                 case 1: // Norte
-                    sqlInfo = "UPDATE Empleado_informacion SET horario = ?, telefono = ?, correo = ?, direccion = ? WHERE id_empleado = ?";
+                    sqlInfo = "SET XACT_ABORT ON; UPDATE Empleado_informacion SET horario = ?, telefono = ?, correo = ?, direccion = ? WHERE id_empleado = ?";
                     break;
                 case 2: // Sur -> linked server a Norte
-                    sqlInfo = "UPDATE IV4SH.Quito_Norte.dbo.Empleado_informacion SET horario = ?, telefono = ?, correo = ?, direccion = ? WHERE id_empleado = ?";
+                    sqlInfo = "SET XACT_ABORT ON; UPDATE IV4SH.Quito_Norte.dbo.Empleado_informacion SET horario = ?, telefono = ?, correo = ?, direccion = ? WHERE id_empleado = ?";
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Índice de sede inválido.");
@@ -96,7 +119,7 @@ public class EmpleadosCRUD {
             }
 
             // Actualizar en Empleado_General (vista)
-            String sqlGeneral = "UPDATE Empleado_General SET nombres = ?, cargo = ?, id_sucursal = ? WHERE id_empleado = ?";
+            String sqlGeneral = "SET XACT_ABORT ON; UPDATE Empleado_General SET nombres = ?, cargo = ?, id_sucursal = ? WHERE id_empleado = ?";
             try (PreparedStatement psGen = con.prepareStatement(sqlGeneral)) {
                 psGen.setString(1, nombres);
                 psGen.setString(2, cargo);
@@ -116,7 +139,7 @@ public class EmpleadosCRUD {
         try (Connection con = conexionSQL.getConexion(conexionSQL.index, conexionSQL.password)) {
 
             // Eliminar de Empleado_General
-            String sqlGeneral = "DELETE FROM Empleado_General WHERE id_empleado = ?";
+            String sqlGeneral = "SET XACT_ABORT ON; DELETE FROM Empleado_General WHERE id_empleado = ?";
             try (PreparedStatement psGen = con.prepareStatement(sqlGeneral)) {
                 psGen.setString(1, id_empleado);
                 psGen.executeUpdate();
@@ -126,10 +149,10 @@ public class EmpleadosCRUD {
             String sqlInfo;
             switch (conexionSQL.index) {
                 case 1:
-                    sqlInfo = "DELETE FROM Empleado_informacion WHERE id_empleado = ?";
+                    sqlInfo = "SET XACT_ABORT ON; DELETE FROM Empleado_informacion WHERE id_empleado = ?";
                     break;
                 case 2:
-                    sqlInfo = "DELETE FROM IV4SH.Quito_Norte.dbo.Empleado_informacion WHERE id_empleado = ?";
+                    sqlInfo = "SET XACT_ABORT ON; DELETE FROM IV4SH.Quito_Norte.dbo.Empleado_informacion WHERE id_empleado = ?";
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Índice de sede inválido.");

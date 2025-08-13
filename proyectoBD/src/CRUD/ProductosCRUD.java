@@ -82,7 +82,23 @@ public class ProductosCRUD {
     
     
     public static void actualizarProducto(int id, String nombre, double precio, int stock, int idSucursal, SqlConection conexionSQL) {
-        String sql = "SET XACT_ABORT ON; UPDATE Producto_ALL SET nombre = ?, precio = ?, stock = ?, id_sucursal = ? WHERE id_producto = ?";
+        
+        String tablaDestino;
+
+        // Selecciona la tabla base según el índice de conexión
+        switch (conexionSQL.index) {
+            case 1:
+                tablaDestino = "Producto_norte";
+                break;
+            case 2:
+                tablaDestino = "Producto_Sur";
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Índice de sede no válido: " + conexionSQL.index);
+                return;
+        }
+        
+        String sql = "UPDATE "+ tablaDestino +" SET nombre = ?, precio = ?, stock = ?, id_sucursal = ? WHERE id_producto = ?";
         
         try (Connection con = conexionSQL.getConexion(conexionSQL.index, conexionSQL.password);
              PreparedStatement ps = con.prepareStatement(sql)) {
