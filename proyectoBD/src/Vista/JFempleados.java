@@ -5,6 +5,15 @@ import CRUD.EmpleadosCRUD;
 import ConexionSQL.SessionManager;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import ConexionSQL.SqlConection;
+import javax.swing.JOptionPane;
+import ConexionSQL.SessionManager;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class JFempleados extends javax.swing.JFrame {
 
@@ -25,6 +34,8 @@ public class JFempleados extends javax.swing.JFrame {
         jTFtelefonoACTUALIZAR.setEnabled(false);
         jTFcorreoACTUALIZAR.setEnabled(false);
         jTFdireccionACTUALIZAR.setEnabled(false);
+        
+        cargarEmpleadosEnTabla(jTempleados, jPanel1);
         
     }
 
@@ -99,7 +110,7 @@ public class JFempleados extends javax.swing.JFrame {
         jPregresar = new javax.swing.JPanel();
         jLregresar = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTempleados = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -520,7 +531,7 @@ public class JFempleados extends javax.swing.JFrame {
 
         jPanel1.add(jPregresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, -1, 30));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTempleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -531,7 +542,7 @@ public class JFempleados extends javax.swing.JFrame {
                 "id_empleado", "nombres", "cargo", "horario", "telefono", "correo", "direccion", "id_sucursal"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTempleados);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, 760, 240));
 
@@ -566,8 +577,47 @@ public class JFempleados extends javax.swing.JFrame {
 
     private void jLguardarREGISTRARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLguardarREGISTRARMouseClicked
         
-        
-        // Limpiar los campos después de guardar
+        try {
+        // Datos de sesión
+        SessionManager session = SessionManager.getInstance();
+        int sedeIndex = session.getSedeIndex();
+        String password = session.getPassword();
+
+        if (sedeIndex == 0 || password == null || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay una sesión activa. Por favor, inicie sesión primero.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = sedeIndex;
+        conexionSQL.password = password;
+
+        // Obtener datos del formulario
+        String id_empleado = jTFcedulaREGISTRAR.getText().trim();
+        String nombres = jTFnombreREGISTRAR.getText().trim();
+        String cargo = jCBcargoREGISTRAR.getSelectedItem().toString();
+        String horario = jCBhorarioREGISTRAR.getSelectedItem().toString();
+        String telefono = jTFtelefonoREGISTRAR.getText().trim();
+        String correo = jTFcorreoREGISTRAR.getText().trim();
+        String direccion = jTFdireccionREGISTRAR.getText().trim();
+        int id_sucursal = jCBsursalREGISTRAR.getSelectedIndex();
+
+        // Validar campos obligatorios
+        if (id_empleado.isEmpty() || nombres.isEmpty() || cargo.isEmpty() || horario.isEmpty() ||
+            telefono.isEmpty() || correo.isEmpty() || direccion.isEmpty() || id_sucursal == -1) {
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios",
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Crear empleado usando tu CRUD
+        EmpleadosCRUD.crearEmpleado(id_empleado, nombres, cargo, id_sucursal, horario, telefono, correo, direccion, conexionSQL);
+
+        // Recargar tabla de empleados
+        cargarEmpleadosEnTabla(jTempleados, jPanel1);
+
+        // Limpiar campos
         jTFcedulaREGISTRAR.setText("");
         jTFnombreREGISTRAR.setText("");
         jCBcargoREGISTRAR.setSelectedIndex(0);
@@ -576,6 +626,12 @@ public class JFempleados extends javax.swing.JFrame {
         jTFcorreoREGISTRAR.setText("");
         jTFdireccionREGISTRAR.setText("");
         jCBsursalREGISTRAR.setSelectedIndex(0);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al guardar empleado: " + e.getMessage(),
+                "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
  
     }//GEN-LAST:event_jLguardarREGISTRARMouseClicked
 
@@ -595,12 +651,60 @@ public class JFempleados extends javax.swing.JFrame {
         jTFcorreoACTUALIZAR.setEditable(true);
         jTFdireccionACTUALIZAR.setEditable(true);
         
+        String id_empleado = jTFcedulaACTUALIZAR.getText().trim();
+        if (id_empleado.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese una cédula para buscar");
+        } else {
+            buscarEmpleadoPorIdYCargarCampos(id_empleado);
+        }
+        
           
     }//GEN-LAST:event_jLbuscarACTUALIZARMouseClicked
 
     private void jLactualizarACTUALIZARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLactualizarACTUALIZARMouseClicked
-       
-        
+
+        try {
+        // Obtener valores de los campos
+        String idEmpleado = jTFcedulaACTUALIZAR.getText().trim();
+        String nombres = jTFnombreACTUALIZAR.getText().trim();
+        String cargo = jCBcargoACTUALIZAR.getSelectedItem().toString();
+        int idSucursal = Integer.parseInt(jCBsursalACTUALIZAR.getSelectedItem().toString()); // Ajusta si el combo guarda otro tipo
+        String horario = jCBhorarioACTUALIZAR.getSelectedItem().toString();
+        String telefono = jTFtelefonoACTUALIZAR.getText().trim();
+        String correo = jTFcorreoACTUALIZAR.getText().trim();
+        String direccion = jTFdireccionACTUALIZAR.getText().trim();
+
+        // Validación básica
+        if (idEmpleado.isEmpty() || nombres.isEmpty() || telefono.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor complete todos los campos obligatorios.");
+            return;
+        }
+
+        // Obtener datos de conexión desde la sesión
+        SessionManager session = SessionManager.getInstance();
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = session.getSedeIndex();
+        conexionSQL.password = session.getPassword();
+
+        // Llamar a la función para actualizar
+        EmpleadosCRUD.actualizarEmpleado(
+            idEmpleado,
+            nombres,
+            cargo,
+            idSucursal,
+            horario,
+            telefono,
+            correo,
+            direccion,
+            conexionSQL
+        );
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "El ID de sucursal debe ser un número válido.");
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al actualizar: " + e.getMessage());
+    }
+            
         // Limpiar los campos después de actualizar
         jTFcedulaREGISTRAR.setText("");
         jTFnombreREGISTRAR.setText("");
@@ -611,15 +715,70 @@ public class JFempleados extends javax.swing.JFrame {
         jTFdireccionREGISTRAR.setText("");
         jCBsursalREGISTRAR.setSelectedIndex(0);
    
-        
     }//GEN-LAST:event_jLactualizarACTUALIZARMouseClicked
 
     private void jLbuscarBUSCARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbuscarBUSCARMouseClicked
-        
+                                           
+    String id_empleado = jTFcedulaBUSCAR.getText().trim();
+    if (id_empleado.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Ingrese una cédula para buscar");
+        return;
+    }
+
+    try {
+        // Obtener la sesión activa
+        SessionManager session = SessionManager.getInstance();
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = session.getSedeIndex();
+        conexionSQL.password = session.getPassword();
+
+        // Llamar al método de búsqueda
+        EmpleadosCRUD crud = new EmpleadosCRUD();
+        crud.buscarEmpleadoPorId(id_empleado,conexionSQL);
+
+        cargarEmpleadosEnTabla(jTempleados, jPanel1);
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error en la búsqueda: " + e.getMessage());
+    }
+
     }//GEN-LAST:event_jLbuscarBUSCARMouseClicked
 
     private void jLeliminarELIMINARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLeliminarELIMINARMouseClicked
-        
+
+    // Obtener el id del empleado desde un campo de texto
+    String idEmpleado = jTFcedulaELIMINAR.getText().trim();
+
+    if (idEmpleado.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Debe ingresar o seleccionar un ID de empleado.");
+        return;
+    }
+
+    // Confirmar eliminación
+    int confirm = JOptionPane.showConfirmDialog(
+        this,
+        "¿Está seguro de eliminar al empleado con ID " + idEmpleado + "?",
+        "Confirmar eliminación",
+        JOptionPane.YES_NO_OPTION
+    );
+
+    if (confirm == JOptionPane.YES_OPTION) {
+        try {
+            SessionManager session = SessionManager.getInstance();
+        SqlConection conexionSQL = new SqlConection();
+        conexionSQL.index = session.getSedeIndex();
+        conexionSQL.password = session.getPassword();
+
+        EmpleadosCRUD.eliminarEmpleado(idEmpleado, conexionSQL);
+
+        // Actualizar tabla o interfaz
+        cargarEmpleadosEnTabla(jTempleados, jPanel1);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al eliminar cliente: " + e.getMessage());
+        }
+
+    }
     }//GEN-LAST:event_jLeliminarELIMINARMouseClicked
 
     private void jTFcedulaREGISTRARKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFcedulaREGISTRARKeyTyped
@@ -731,7 +890,75 @@ public class JFempleados extends javax.swing.JFrame {
     }
 }
     
+     private void cargarEmpleadosEnTabla(javax.swing.JTable tablaEmpleados, java.awt.Component parent) {
+        SessionManager session = SessionManager.getInstance();
+
+        // Selección dinámica según sede
+        String sql;
+        if (session.getSedeIndex() == 1) { // Ejemplo: 1 = sede norte
+            sql = "SELECT id_empleado, nombres, cargo, horario, telefono, correo, direccion, id_sucursal FROM Empleados";
+        } else { // Otra sede: usar Linked Server
+            sql = "SELECT id_empleado, nombres, cargo, horario, telefono, correo, direccion, id_sucursal " +
+                  "FROM [IV4SH].Quito_Norte.dbo.Empleados";
+        }
+
+        try (Connection con = new SqlConection().getConexion(session.getSedeIndex(), session.getPassword());
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            EmpleadosCRUD.llenarTablaDesdeResultSet(rs, tablaEmpleados, parent);
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(parent, "Error al cargar empleados: " + e.getMessage());
+        }
+    }
+
     
+     private void buscarEmpleadoPorIdYCargarCampos(String id_empleado) {
+    try {
+        SessionManager session = SessionManager.getInstance();
+        SqlConection conexionSQL = new SqlConection();
+        Connection con = conexionSQL.getConexion(session.getSedeIndex(), session.getPassword());
+
+        if (con == null) {
+            JOptionPane.showMessageDialog(this, "No se pudo conectar a la base de datos");
+            return;
+        }
+
+        String sql;
+        if (session.getSedeIndex() == 1) {
+            sql = "SELECT id_empleado, nombres, cargo, horario, telefono, correo, direccion, id_sucursal FROM Empleados WHERE id_empleado = ?";
+        } else {
+            sql = "SELECT id_empleado, nombres, cargo, horario, telefono, correo, direccion, id_sucursal FROM Empleados WHERE id_empleado = ?";
+        }
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, id_empleado);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+   
+                    // Llenar campos de texto y combo
+                    jTFcedulaACTUALIZAR.setText(rs.getString("id_empleado"));
+                    jTFnombreACTUALIZAR.setText(rs.getString("nombres"));
+                    jCBcargoACTUALIZAR.setSelectedIndex(rs.getInt("cargo"));
+                    jCBhorarioACTUALIZAR.setSelectedIndex(rs.getInt("horario"));
+                    jTFtelefonoACTUALIZAR.setText(rs.getString("telefono"));
+                    jTFcorreoACTUALIZAR.setText(rs.getString("correo"));
+                    jTFdireccionACTUALIZAR.setText(rs.getString("direccion"));
+                    jCBsursalACTUALIZAR.setSelectedIndex(rs.getInt("id_sucursal"));
+                    
+                    
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se encontró empleado con esa cédula");
+                }
+            }
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error al buscar empleado: " + e.getMessage());
+    }
+}
+     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jCBcargoACTUALIZAR;
     private javax.swing.JComboBox<String> jCBcargoREGISTRAR;
@@ -794,7 +1021,7 @@ public class JFempleados extends javax.swing.JFrame {
     private javax.swing.JTextField jTFtelefonoACTUALIZAR;
     private javax.swing.JTextField jTFtelefonoREGISTRAR;
     private javax.swing.JTabbedPane jTPregistrar;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTempleados;
     private javax.swing.JLabel logo;
     // End of variables declaration//GEN-END:variables
 }

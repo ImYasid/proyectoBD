@@ -148,7 +148,7 @@ public class EmpleadosCRUD {
         }
     }
     
-    public void llenarTablaDesdeResultSet(ResultSet rs, javax.swing.JTable tabla, java.awt.Component parent) {
+    public static void llenarTablaDesdeResultSet(ResultSet rs, javax.swing.JTable tabla, java.awt.Component parent) {
         try {
             DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
             modelo.setRowCount(0);
