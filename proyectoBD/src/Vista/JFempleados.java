@@ -934,7 +934,7 @@ public class JFempleados extends javax.swing.JFrame {
                 break;
             case 2:
                 sql = "SELECT id_empleado, nombres, cargo, horario, telefono, correo, direccion, id_sucursal " +
-                  "FROM [IV4SH].Quito_Norte.dbo.Empleados";
+                  "FROM Empleados";
                 break;
             default:
                 JOptionPane.showMessageDialog(null, "Indice no valido: "+ conexionSQL.index);

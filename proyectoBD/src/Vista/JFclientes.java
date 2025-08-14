@@ -836,7 +836,7 @@ public class JFclientes extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTcliente.getModel();
         model.setRowCount(0); // limpiar tabla
 
-        String sql = "SELECT id_cliente, nombres, direccion, telefono, id_sucursal FROM Cliente_Info";
+        String sql = "SELECT id_cliente, nombres, direccion, telefono, id_sucursal FROM IV4SH.Quito_Norte.dbo.Cliente_Info";
         try (PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
