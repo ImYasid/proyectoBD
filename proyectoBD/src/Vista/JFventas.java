@@ -4,12 +4,16 @@ import CRUD.DetalleFactura;
 import ConexionSQL.SessionManager;
 import ConexionSQL.SqlConection;
 import CRUD.VentasCR;
+import java.awt.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -18,11 +22,12 @@ import javax.swing.table.DefaultTableModel;
 
 public class JFventas extends javax.swing.JFrame {
     private int idFacturaActual = -1;
-    int idProd = 0;
-    int cantidad = Integer.parseInt(this.jTFcantidadCREAR.getText());
-    double precioUni = Double.parseDouble(this.jTFprecioUnitarioCREAR.getText());
-    double subTotal = Double.parseDouble(this.jTFsubtotalCREAR.getText());
-    DetalleFactura detalle = new DetalleFactura(idProd, cantidad, precioUni, subTotal);
+//    int idProd = 0;
+//    int cantidad = Integer.parseInt(this.jTFcantidadCREAR.getText());
+//    double precioUni = Double.parseDouble(this.jTFprecioUnitarioCREAR.getText());
+//    double subTotal = Double.parseDouble(this.jTFsubtotalCREAR.getText());
+//    DetalleFactura detalle = new DetalleFactura(idProd, cantidad, precioUni, subTotal);
+   
     public JFventas() {
         initComponents();
         this.setLocationRelativeTo(this);
@@ -442,10 +447,7 @@ public class JFventas extends javax.swing.JFrame {
 
         jTVentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "id_factura", "id_producto", "cantidad", "precio_unitario", "subtotal"
@@ -634,12 +636,28 @@ public class JFventas extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFcedulaBUSCARKeyTyped
 
     private void jLnuevoCREARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLnuevoCREARMouseClicked
+               
+        double total = Double.parseDouble(jTFtotalPagar.getText());
+        
+        SessionManager session = SessionManager.getInstance();
+        int sedeIndex = session.getSedeIndex();
+        String password = session.getPassword();
+        SqlConection conexionSQL = new SqlConection();
+
+        try {
+            actualizarTotalFactura(idFacturaActual,total, conexionSQL);
+        } catch (SQLException ex) {
+            Logger.getLogger(JFventas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         jCBproductoCREAR.setSelectedIndex(0);
         jTFcantidadCREAR.setText("");
         jTFprecioUnitarioCREAR.setText("");
         jTFsubtotalCREAR.setText("");
         jTFtotalPagar.setText("");
         idFacturaActual = -1;
+        
+        
 
     }//GEN-LAST:event_jLnuevoCREARMouseClicked
 
@@ -747,96 +765,38 @@ public class JFventas extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFcantidadCREARKeyPressed
 
     private void jLgenerarVentaCREARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLgenerarVentaCREARMouseClicked
-        String cedula = jTFcedulaCREAR.getText().trim();
-        String nombres = jTFnombresCREAR.getText().trim();
-        String direccion = jTFdireccionCREAR.getText().trim();
-        String telefono = jTFtelefonoCREAR.getText().trim();
-        String fecha = jTFfechaCREAR.getText().trim();
-        int sucursal = jCBsucursalCREAR.getSelectedIndex();
+            String cedula = jTFcedulaCREAR.getText().trim();
+    String nombres = jTFnombresCREAR.getText().trim();
+    String direccion = jTFdireccionCREAR.getText().trim();
+    String telefono = jTFtelefonoCREAR.getText().trim();
+    String fecha = jTFfechaCREAR.getText().trim();
+    int sucursal = jCBsucursalCREAR.getSelectedIndex();
 
-        // Validaciones
-        if (cedula.isEmpty() || nombres.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar un cliente antes de generar la venta.");
-            return;
-        }
-        if (idFacturaActual != -1) {
-            try {
-            SessionManager session = SessionManager.getInstance();
-            SqlConection conexionSQL = new SqlConection();
-            int idFactura;
-            idFactura = idFacturaActual;
+    if (cedula.isEmpty() || nombres.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Debe seleccionar un cliente antes de generar la venta.");
+        return;
+    }
 
-            
-            conexionSQL.index = session.getSedeIndex();
-            conexionSQL.password = session.getPassword();
+    SessionManager session = SessionManager.getInstance();
+    SqlConection conexionSQL = new SqlConection();
+    conexionSQL.index = session.getSedeIndex();
+    conexionSQL.password = session.getPassword();
 
-            DefaultTableModel modelo = (DefaultTableModel) jTVentas.getModel();
-            Connection con = conexionSQL.getConexion(session.getSedeIndex(), session.getPassword());
+    try (Connection con = conexionSQL.getConexion(session.getSedeIndex(), session.getPassword())) {
 
-            String sql;
-                if (session.getSedeIndex() == 1) {
-                    sql = "SELECT id_producto FROM Producto_norte WHERE nombre = ?";
-                } else {
-                    sql = "SELECT id_producto FROM Producto_Sur WHERE nombre = ?";
-                }
-            try (PreparedStatement ps = con.prepareStatement(sql)) {
-                ps.setString(1, this.jCBproductoCREAR.getSelectedItem().toString());
-
-                try (ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
-                        int indice = rs.getInt("id_producto");
-                        if (indice > 0) {
-                            idProd = indice;
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(this, "No se encontró el idproducto: " );
-                    }
-                }
-            }
-            
-                    
-            for (int i = 0; i < modelo.getRowCount(); i++) {
-                modelo.getValueAt(i, idFacturaActual);
-                idProd = ((int) modelo.getValueAt(i, 1)); // id_producto
-                cantidad = ((int) modelo.getValueAt(i, 2)); // cantidad
-                precioUni = ((double) modelo.getValueAt(i, 3)); // precio_unitario
-                subTotal = ((double) modelo.getValueAt(i, 4)); // subtotal
-
-                VentasCR.insertarDetalleFactura(idFactura, detalle, conexionSQL);
-            }
-
-            JOptionPane.showMessageDialog(this, "Venta generada con éxito");
-            // Aquí puedes limpiar la tabla y campos
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(this, "Error al generar venta: " + e.getMessage());
-            }
-            return;
-        }
-
-        try {
-            SessionManager session = SessionManager.getInstance();
-            SqlConection conexionSQL = new SqlConection();
-            Connection con = conexionSQL.getConexion(session.getSedeIndex(), session.getPassword());
-
-            if (con == null) {
-                JOptionPane.showMessageDialog(this, "No se pudo conectar a la base de datos");
-                return;
-            }
-
-            // SQL para insertar factura (total inicial = 0)
-            String sqlFactura;
-            if (session.getSedeIndex() == 1) {
-                sqlFactura = "INSERT INTO Factura_norte (fecha, total, id_cliente, id_sucursal) VALUES (?, ?, ?, ?)";
-            } else {
-                sqlFactura = "INSERT INTO Factura_Sur (fecha, total, id_cliente, id_sucursal) VALUES (?, ?, ?, ?)";
-            }
+        // Si no existe factura actual, la creamos
+        if (idFacturaActual == -1) {
+            String sqlFactura = (session.getSedeIndex() == 1)
+                ? "INSERT INTO Factura_norte (fecha, total, id_cliente, id_sucursal) VALUES (?, ?, ?, ?)"
+                : "INSERT INTO Factura_Sur (fecha, total, id_cliente, id_sucursal) VALUES (?, ?, ?, ?)";
 
             try (PreparedStatement ps = con.prepareStatement(sqlFactura, PreparedStatement.RETURN_GENERATED_KEYS)) {
-                ps.setString(1, fecha);// formato yyyy-MM-dd
+                ps.setString(1, fecha);
                 ps.setDouble(2, 0.0); 
                 ps.setString(3, cedula);
                 ps.setInt(4, sucursal);
                 int rows = ps.executeUpdate();
+
                 if (rows > 0) {
                     try (ResultSet rs = ps.getGeneratedKeys()) {
                         if (rs.next()) {
@@ -846,15 +806,62 @@ public class JFventas extends javax.swing.JFrame {
                     }
                 } else {
                     JOptionPane.showMessageDialog(this, "No se pudo generar la factura.");
+                    return;
                 }
             }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error al generar factura: " + e.getMessage());
         }
+
+        // Ahora insertar los detalles
+        DefaultTableModel modelo = (DefaultTableModel) jTVentas.getModel();
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            Object valIdProd = modelo.getValueAt(i, 1);
+            Object valCantidad = modelo.getValueAt(i, 2);
+            Object valPrecio = modelo.getValueAt(i, 3);
+            Object valSubtotal = modelo.getValueAt(i, 4);
+
+            if (valIdProd == null || valCantidad == null || valPrecio == null || valSubtotal == null) {
+                continue; // ignorar filas incompletas
+            }
+
+            int idProd = Integer.parseInt(String.valueOf(valIdProd));
+            int cantidad = Integer.parseInt(String.valueOf(valCantidad));
+            double precioUni = Double.parseDouble(String.valueOf(valPrecio));
+            double subTotal = Double.parseDouble(String.valueOf(valSubtotal));
+
+//            DetalleFactura detalle = new DetalleFactura(idProd, cantidad, precioUni, subTotal);
+            VentasCR.insertarDetalleFactura(idFacturaActual, idProd, cantidad,precioUni, subTotal, conexionSQL);
+        }
+
+        JOptionPane.showMessageDialog(this, "Venta generada con éxito");
+        // Aquí podrías limpiar tabla y campos si es necesario
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error al generar venta: " + e.getMessage());
+    }
     }//GEN-LAST:event_jLgenerarVentaCREARMouseClicked
 
     private void jLagregarCREARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLagregarCREARMouseClicked
-        // TODO add your handling code here:
+        try {
+        // 1️⃣ Leer datos desde los campos de la interfaz
+        int idProducto = obtenerIdProductoPorNombre(jCBproductoCREAR.getSelectedItem().toString());
+        String nombreProducto = jCBproductoCREAR.getSelectedItem().toString(); 
+        int cantidad = Integer.parseInt(jTFcantidadCREAR.getText());
+        double precioUnitario = Double.parseDouble(jTFprecioUnitarioCREAR.getText());
+        double subtotal = cantidad * precioUnitario;
+
+        // 2️⃣ Agregar a la tabla visual
+        DefaultTableModel model = (DefaultTableModel) jTVentas.getModel();
+        model.addRow(new Object[]{idFacturaActual, idProducto, cantidad, precioUnitario, subtotal});
+        
+        recalcularTotal();
+        // 3️⃣ Guardar en lista temporal (para luego usar en generarVenta)
+//        listaDetallesTemp.add(new Object[]{idProducto, cantidad, precioUnitario, subtotal});
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Error: Verifica que todos los campos tengan valores válidos.", "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al agregar detalle: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_jLagregarCREARMouseClicked
 
     /**
@@ -921,6 +928,53 @@ public class JFventas extends javax.swing.JFrame {
         );
     }
 }
+    private int obtenerIdProductoPorNombre(String nombre) throws SQLException {
+    SessionManager session = SessionManager.getInstance();
+    SqlConection conexionSQL = new SqlConection();
+    try (Connection con = conexionSQL.getConexion(session.getSedeIndex(), session.getPassword())) {
+        String sql;
+        if (session.getSedeIndex() == 1) {
+            sql = "SELECT id_producto FROM Producto_norte WHERE nombre = ?";
+        } else {
+            sql = "SELECT id_producto FROM Producto_Sur WHERE nombre = ?";
+        }
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, nombre);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("id_producto");
+                }
+            }
+        }
+    }
+    throw new SQLException("No se encontró producto: " + nombre);
+}
+    
+    private void actualizarTotalFactura(int idFactura, double total, SqlConection conexionSQL) throws SQLException {
+        SessionManager session = SessionManager.getInstance();
+        try (Connection con = conexionSQL.getConexion(session.getSedeIndex(), session.getPassword())) {
+            String sql;
+            if (session.getSedeIndex() == 1) {
+                sql = "UPDATE Factura_norte SET total = ? WHERE id_factura = ?";
+            } else {
+                sql = "UPDATE Factura_Sur SET total = ? WHERE id_factura = ?";
+            }
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setDouble(1, total);      // Primer parámetro: total
+            ps.setInt(2, idFactura);     // Segundo parámetro: id_factura
+
+            int filasActualizadas = ps.executeUpdate();
+            if (filasActualizadas > 0) {
+                System.out.println("Factura actualizada correctamente.");
+            } else {
+                System.out.println("No se encontró la factura con id: " + idFactura);
+            }
+        }
+    }}
+    
+    
     private void buscarClientePorIdYCargarCampos(String id_cliente) {
     try {
         SessionManager session = SessionManager.getInstance();
@@ -993,6 +1047,14 @@ public class JFventas extends javax.swing.JFrame {
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(this, "Error al buscar Producto: " + e.getMessage());
     }
+}
+    private void recalcularTotal() {
+    DefaultTableModel modelo = (DefaultTableModel) jTVentas.getModel();
+    double total = 0.0;
+    for (int i = 0; i < modelo.getRowCount(); i++) {
+        total += (double) modelo.getValueAt(i, 4); // Columna subtotal
+    }
+    jTFtotalPagar.setText(String.valueOf(total));
 }
     private void cargarProductosEnCombo(JComboBox<String> comboBox) {
     try {

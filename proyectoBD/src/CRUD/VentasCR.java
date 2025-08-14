@@ -41,7 +41,15 @@ public class VentasCR {
         }
     }
 
-    public static void insertarDetalleFactura(int idFactura, DetalleFactura detalle, SqlConection conexionSQL) throws SQLException {
+    public static void insertarDetalleFactura(
+            int idFactura,
+            int idProducto,
+            int cantidad,
+            double precioUnitario,
+            double subtotal,
+            SqlConection conexionSQL
+    ) throws SQLException {
+
         String tablaDetalle;
         switch (conexionSQL.index) {
             case 1: // Norte
@@ -61,13 +69,14 @@ public class VentasCR {
              PreparedStatement psDetalle = con.prepareStatement(sqlInsertDetalle)) {
 
             psDetalle.setInt(1, idFactura);
-            psDetalle.setInt(2, detalle.getIdProducto());
-            psDetalle.setInt(3, detalle.getCantidad());
-            psDetalle.setDouble(4, detalle.getPrecioUnitario());
-            psDetalle.setDouble(5, detalle.getSubtotal());
+            psDetalle.setInt(2, idProducto);
+            psDetalle.setInt(3, cantidad);
+            psDetalle.setDouble(4, precioUnitario);
+            psDetalle.setDouble(5, subtotal);
 
             psDetalle.executeUpdate();
         }
     }
+
     
 }
