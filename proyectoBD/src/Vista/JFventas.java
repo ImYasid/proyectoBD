@@ -44,7 +44,7 @@ public class JFventas extends javax.swing.JFrame {
         jTFfechaCREAR.setEnabled(false);
         jTFtotalPagar.setEnabled(false);
         jTFfechaBUSCAR.setEnabled(false);
-        jCBsucursalBUSCAR.setEnabled(false);
+        jCBsucursalBUSCAR.setEnabled(true);
         jTFcedulaBUSCAR.setEnabled(false);
         jTFnombresBUSCAR.setEnabled(false);
         jTFdireccionBUSCAR.setEnabled(false);
@@ -136,7 +136,7 @@ public class JFventas extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         jTFidFacturaBUSCAR = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTBuscarVentas = new javax.swing.JTable();
         jPbuscarVentaBUSCAR = new javax.swing.JPanel();
         jLbuscarVentaBUSCAR = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
@@ -544,6 +544,7 @@ public class JFventas extends javax.swing.JFrame {
         jLabel22.setText("id_factura");
         jPbuscar.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, -1, 30));
 
+        jCBsucursalBUSCAR.setEditable(true);
         jCBsucursalBUSCAR.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Sucursal Norte", "Sucursal Sur" }));
         jPbuscar.add(jCBsucursalBUSCAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, 230, 30));
 
@@ -558,7 +559,7 @@ public class JFventas extends javax.swing.JFrame {
         jTFidFacturaBUSCAR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jPbuscar.add(jTFidFacturaBUSCAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, 230, -1));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTBuscarVentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -569,7 +570,7 @@ public class JFventas extends javax.swing.JFrame {
                 "id_factura", "id_producto", "cantidad", "precio_unitario", "subtotal"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jTBuscarVentas);
 
         jPbuscar.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 760, 300));
 
@@ -578,6 +579,11 @@ public class JFventas extends javax.swing.JFrame {
         jLbuscarVentaBUSCAR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLbuscarVentaBUSCAR.setText("BUSCAR VENTA");
         jLbuscarVentaBUSCAR.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLbuscarVentaBUSCAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLbuscarVentaBUSCARMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPbuscarVentaBUSCARLayout = new javax.swing.GroupLayout(jPbuscarVentaBUSCAR);
         jPbuscarVentaBUSCAR.setLayout(jPbuscarVentaBUSCARLayout);
@@ -864,6 +870,10 @@ public class JFventas extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_jLagregarCREARMouseClicked
 
+    private void jLbuscarVentaBUSCARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbuscarVentaBUSCARMouseClicked
+        buscarFacturaYMostrar();        
+    }//GEN-LAST:event_jLbuscarVentaBUSCARMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1090,6 +1100,96 @@ public class JFventas extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Error al cargar sucursales: " + e.getMessage());
     }
 }
+    
+private void buscarFacturaYMostrar() {
+    String idFactura = jTFidFacturaBUSCAR.getText().trim();
+    
+    if (idFactura.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Ingrese un ID de factura", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+    int idFacturaINT = Integer.parseInt(idFactura);
+    SessionManager session = SessionManager.getInstance();
+    SqlConection sqlConection = new SqlConection();
+    
+    try (Connection con = sqlConection.getConexion(session.getSedeIndex(), session.getPassword())) {
+        if (con == null) {
+            throw new SQLException("No se pudo establecer conexión con la base de datos");
+        }
+
+        // Consulta SQL con parámetro nombrado
+        String sql = "EXECUTE sp_MostrarFacturaCompleta @id_factura = ?";
+        
+        if (jCBsucursalBUSCAR.getSelectedIndex() > 0) {
+            sql += ", @id_sucursal_deseado = ?";
+        }
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            // Primer parámetro: id_factura
+            ps.setInt(1, idFacturaINT);
+            
+            // Segundo parámetro opcional: sucursal (convertido a Integer)
+            if (sql.contains("@id_sucursal_deseado")) {
+                Object selectedItem = jCBsucursalBUSCAR.getSelectedIndex();
+                int idSucursal = (selectedItem instanceof Number) ? 
+                                 ((Number) selectedItem).intValue() : 
+                                 Integer.parseInt(selectedItem.toString());
+                ps.setInt(2, idSucursal);
+            }
+
+            // Ejecutar y procesar resultados
+            boolean tieneResultados = ps.execute();
+            
+            // 1. Procesar datos del cliente
+            if (tieneResultados) {
+                try (ResultSet rsCliente = ps.getResultSet()) {
+                    if (rsCliente.next()) {
+                        jTFcedulaBUSCAR.setText(rsCliente.getString("id_cliente"));
+                        jTFnombresBUSCAR.setText(rsCliente.getString("nombres"));
+                        jTFdireccionBUSCAR.setText(rsCliente.getString("direccion"));
+                        jTFtelefonoBUSCAR.setText(rsCliente.getString("telefono"));
+                    }
+                }
+                tieneResultados = ps.getMoreResults();
+            }
+
+            // 2. Procesar cabecera de factura
+            if (tieneResultados) {
+                try (ResultSet rsFactura = ps.getResultSet()) {
+                    if (rsFactura.next()) {
+                        jTFfechaBUSCAR.setText(rsFactura.getString("fecha"));
+                        jTFtotalPagarBUSCAR.setText(rsFactura.getString("total"));
+                        jCBsucursalBUSCAR.setSelectedIndex(Integer.parseInt(rsFactura.getString("id_sucursal")));
+                    }
+                }
+                tieneResultados = ps.getMoreResults();
+            }
+
+            // 3. Procesar detalles de factura
+            if (tieneResultados) {
+                DefaultTableModel modelo = (DefaultTableModel) jTBuscarVentas.getModel();
+                modelo.setRowCount(0);
+                
+                try (ResultSet rsDetalles = ps.getResultSet()) {
+                    while (rsDetalles.next()) {
+                        modelo.addRow(new Object[] {
+                            rsDetalles.getString("id_factura"),
+                            rsDetalles.getString("id_producto"),
+                            rsDetalles.getInt("cantidad"),
+                            rsDetalles.getDouble("precio_unitario"),
+                            rsDetalles.getDouble("subtotal")
+                        });
+                    }
+                }
+            }
+        }
+    } catch (SQLException | NumberFormatException ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(this, 
+            "Error al buscar factura: " + ex.getMessage(), 
+            "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jCBproductoCREAR;
     private javax.swing.JComboBox<String> jCBsucursalBUSCAR;
@@ -1140,6 +1240,7 @@ public class JFventas extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JTable jTBuscarVentas;
     private javax.swing.JTextField jTFcantidadCREAR;
     private javax.swing.JTextField jTFcedulaBUSCAR;
     private javax.swing.JTextField jTFcedulaCREAR;
@@ -1158,6 +1259,5 @@ public class JFventas extends javax.swing.JFrame {
     private javax.swing.JTextField jTFtotalPagarBUSCAR;
     private javax.swing.JTable jTVentas;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }
