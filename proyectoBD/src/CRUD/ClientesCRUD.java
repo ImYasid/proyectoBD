@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ClientesCRUD {
-public static void crearCliente(String id_cliente, String nombres, String direccion, String telefono, int id_sucursal, SqlConection conexionSQL) {
+public static void crearCliente(String id_cliente, String nombres, String direccion, String telefono, int id_sucursal, SqlConection conexionSQL) throws InterruptedException {
 
     try (Connection con = conexionSQL.getConexion(conexionSQL.index, conexionSQL.password)) {
         // Insertar en Cliente_id (si aplica)
@@ -18,7 +18,7 @@ public static void crearCliente(String id_cliente, String nombres, String direcc
             psClienteId.setString(1, id_cliente);
             psClienteId.executeUpdate();
         }
-
+        Thread.sleep(15000);
         // Insertar en tabla fragmentada según sede
         String sql = "SET XACT_ABORT ON; INSERT INTO " + "Cliente_Info" + " (id_cliente, nombres, direccion, telefono, id_sucursal) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
